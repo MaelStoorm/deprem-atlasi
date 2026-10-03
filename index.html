@@ -56,6 +56,7 @@ h1,h2,h3{margin:0;line-height:1.2;text-wrap:balance}
 p{margin:0}
 a{color:var(--vurgu);text-underline-offset:3px}
 :focus-visible{outline:3px solid var(--vurgu);outline-offset:2px}
+[tabindex="-1"]:focus{outline:none}  /* sayfa açılınca odaklanan başlıklarda çerçeve görünmesin */
 #uyg{position:relative;height:100%;overflow:hidden;overflow:clip}
 
 /* --- Harita --- */
@@ -763,7 +764,7 @@ function dahaFazlaSayfasi(el, odak){
         <li>Toplanma alanlarının tek tek yeri ve yol tarifi henüz yok; kendi alanınızı e-Devlet'ten sorgulayın.</li>
         <li>Tsunami bilgisi mahalle bazındadır; su basabilecek sokakları göstermez.</li>
       </ul></div>
-    <div class="kart"><h3>Uygulama hakkında</h3><p>Bu uygulama resmi bir rapor değildir. Gösterilen rakamlar mahalle geneli için yapılmış model tahminleridir; tek bir binanın durumunu göstermez. Binanız için yetkili mühendis incelemesi gerekir.</p></div>
+    <div class="kart"><h3>Uygulama hakkında</h3><p>Bu uygulama resmi bir rapor değildir ve hiçbir devlet kurumunu temsil etmez. Gösterilen rakamlar mahalle geneli için yapılmış model tahminleridir; tek bir binanın durumunu göstermez. Binanız için yetkili mühendis incelemesi gerekir.</p><p>Uygulama kişisel bilgi toplamaz; konumunuz yalnızca telefonunuzda kullanılır. <a href="gizlilik.html" target="_blank" rel="noopener">Gizlilik politikası</a></p></div>
   </div>`;
   bagla(el);
   el.querySelectorAll("[data-olcek]").forEach(b => b.onclick = () => { ayar.olcek=+b.dataset.olcek; depo.yaz("olcek",ayar.olcek); ayarUygula(); viewBoxYaz(); dahaFazlaSayfasi(el); });
