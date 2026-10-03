@@ -11,7 +11,7 @@
 <link rel="apple-touch-icon" href="ikon-180.png">
 <title>Kadıköy Deprem Atlası</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;600;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;600;800&display=swap" media="print" onload="this.media='all'">
 <style>
 /* Yerleşim: tam ekran harita (Cep Trafik düzeni). Üstte arama, sağda yüzen yuvarlak düğmeler,
    altta dört sekme; mahalle seçilince alttan kayan panel; diğer ekranlar haritanın üstüne kayar. */
@@ -26,6 +26,7 @@
   --h1:#f6e7cf; --h2:#ebc79a; --h3:#d99a5b; --h4:#b8692f; --h5:#7f3f17;      /* hasar: kum → kahve */
   --b1:#e3eef3; --b2:#b7d5e2; --b3:#7fb3cb; --b4:#3f86a9; --b5:#155a7c;      /* barınma: açık → koyu mavi */
   --sade:#ffffff;
+  --ilce-bant:rgba(120,135,150,.16); --ilce-cizgi:#a3adb5;
   --acil:#c62828; --acil-yazi:#ffffff; --acil-sekme:#ff8a80;
   --g1:#e9a36f; --g2:#f2cf9b; --g3:#ebe6bf; --g4:#a8d29c; --g5:#5d9f69;      /* toplanma: az (turuncu) → çok (yeşil) */
   --t1:#ffffff; --t2:#cfe6f5; --t3:#91c4e6; --t4:#4f93c9; --t5:#1d5a96;      /* tsunami: yok → çok */
@@ -38,13 +39,13 @@
   --deniz:#0f2a36;--kara:#1d2328;--kara-yazi:#8c99a3;--kontrol:#353c43;--kontrol-yazi:#ffffff;--kontrol-etkin:#6cc4e0;--onay:#4fb062;--onay-yazi:#08200d;
   --yuzey:#1a232b;--yuzey2:#131b21;--murekkep:#eef2f4;--soluk:#a9b6c0;--cizgi:#33424d;
   --vurgu:#6cc4e0;--vurgu-yazi:#08202a;--vurgu-zemin:#173643;--uyari-zemin:#2e2614;--uyari-cizgi:#d9a441;
-  --h1:#3d3226;--h2:#634528;--h3:#925e2d;--h4:#c27a3a;--h5:#f0a868;--b1:#1b3440;--b2:#21506a;--b3:#2f7194;--b4:#4f9cc2;--b5:#93d0ea;--sade:#2a3238;--g1:#a8643a;--g2:#8a6d45;--g3:#5b5a45;--g4:#3f6b46;--g5:#4f9a5f;--t1:#2a3238;--t2:#1f3b52;--t3:#24577c;--t4:#2f7cb3;--t5:#7fbde6;
+  --h1:#3d3226;--h2:#634528;--h3:#925e2d;--h4:#c27a3a;--h5:#f0a868;--b1:#1b3440;--b2:#21506a;--b3:#2f7194;--b4:#4f9cc2;--b5:#93d0ea;--sade:#2a3238;--ilce-bant:rgba(160,180,195,.12);--ilce-cizgi:#5d6b76;--g1:#a8643a;--g2:#8a6d45;--g3:#5b5a45;--g4:#3f6b46;--g5:#4f9a5f;--t1:#2a3238;--t2:#1f3b52;--t3:#24577c;--t4:#2f7cb3;--t5:#7fbde6;
   --golge:0 6px 24px rgba(0,0,0,.5);color-scheme:dark}}
 :root[data-theme="dark"]{
   --deniz:#0f2a36;--kara:#1d2328;--kara-yazi:#8c99a3;--kontrol:#353c43;--kontrol-yazi:#ffffff;--kontrol-etkin:#6cc4e0;--onay:#4fb062;--onay-yazi:#08200d;
   --yuzey:#1a232b;--yuzey2:#131b21;--murekkep:#eef2f4;--soluk:#a9b6c0;--cizgi:#33424d;
   --vurgu:#6cc4e0;--vurgu-yazi:#08202a;--vurgu-zemin:#173643;--uyari-zemin:#2e2614;--uyari-cizgi:#d9a441;
-  --h1:#3d3226;--h2:#634528;--h3:#925e2d;--h4:#c27a3a;--h5:#f0a868;--b1:#1b3440;--b2:#21506a;--b3:#2f7194;--b4:#4f9cc2;--b5:#93d0ea;--sade:#2a3238;--g1:#a8643a;--g2:#8a6d45;--g3:#5b5a45;--g4:#3f6b46;--g5:#4f9a5f;--t1:#2a3238;--t2:#1f3b52;--t3:#24577c;--t4:#2f7cb3;--t5:#7fbde6;
+  --h1:#3d3226;--h2:#634528;--h3:#925e2d;--h4:#c27a3a;--h5:#f0a868;--b1:#1b3440;--b2:#21506a;--b3:#2f7194;--b4:#4f9cc2;--b5:#93d0ea;--sade:#2a3238;--ilce-bant:rgba(160,180,195,.12);--ilce-cizgi:#5d6b76;--g1:#a8643a;--g2:#8a6d45;--g3:#5b5a45;--g4:#3f6b46;--g5:#4f9a5f;--t1:#2a3238;--t2:#1f3b52;--t3:#24577c;--t4:#2f7cb3;--t5:#7fbde6;
   --golge:0 6px 24px rgba(0,0,0,.5);color-scheme:dark}
 
 html,body{height:100%;overflow:hidden;overscroll-behavior:none}
@@ -73,7 +74,9 @@ a{color:var(--vurgu);text-underline-offset:3px}
 .mah.sonuk{opacity:.45}
 .mah.secili{stroke:var(--murekkep);stroke-opacity:1;stroke-width:4}
 .etk{font-family:var(--yazi);font-weight:800;fill:var(--murekkep);letter-spacing:.06em;paint-order:stroke;stroke:var(--yuzey);stroke-linejoin:round;pointer-events:none;transition:opacity .3s}
-.ilce-sinir{fill:none;stroke:var(--kara-yazi);stroke-width:1.6;stroke-dasharray:6 4;vector-effect:non-scaling-stroke;stroke-linejoin:round;stroke-linecap:round;opacity:.85;pointer-events:none}
+.ilce-sinir,.ilce-sinir-bant{fill:none;vector-effect:non-scaling-stroke;stroke-linejoin:round;stroke-linecap:round;pointer-events:none}
+.ilce-sinir-bant{stroke:var(--ilce-bant);stroke-width:7}
+.ilce-sinir{stroke:var(--ilce-cizgi);stroke-width:1.4}
 .atif{position:absolute;left:12px;bottom:calc(var(--sekme-h) + 22px + env(safe-area-inset-bottom,0px));z-index:2;font-size:.68rem;color:var(--soluk);background:color-mix(in srgb,var(--yuzey) 75%,transparent);padding:2px 6px;border-radius:6px;pointer-events:none}
 .cevre-etk{font-family:var(--yazi);font-weight:600;fill:var(--kara-yazi);letter-spacing:.22em;pointer-events:none}
 .konum-nokta{fill:var(--vurgu);stroke:var(--yuzey);stroke-width:3;vector-effect:non-scaling-stroke}
@@ -83,7 +86,8 @@ a{color:var(--vurgu);text-underline-offset:3px}
 .ust{position:absolute;left:12px;right:12px;top:calc(env(safe-area-inset-top,0px) + 12px);display:flex;flex-direction:column;gap:8px;z-index:4;pointer-events:none}
 .arama-dugme{pointer-events:auto;display:flex;align-items:center;gap:12px;min-height:60px;padding:0 16px;border-radius:30px;border:0;background:var(--yuzey);box-shadow:var(--golge);cursor:pointer;text-align:left;font-size:1.1rem;color:var(--soluk)}
 .arama-dugme svg{width:26px;height:26px;flex:none;color:var(--murekkep)}
-.arama-dugme .logo{width:34px;height:34px}
+.arama-dugme .logo{display:flex;align-items:center;justify-content:center;width:36px;height:36px;flex:none}
+.arama-dugme .logo svg{width:36px;height:36px;display:block}
 .lejant-serit{pointer-events:auto;align-self:flex-start;display:flex;align-items:center;gap:10px;padding:8px 12px;border-radius:14px;background:var(--yuzey);box-shadow:var(--golge);font-size:.85rem;font-weight:600;max-width:100%}
 .lejant-serit .renkler{display:flex}
 .lejant-serit .renkler i{width:22px;height:14px}
@@ -170,6 +174,12 @@ a{color:var(--vurgu);text-underline-offset:3px}
 .katman-sec .ornek i{width:12px;height:36px}
 .katman-sec b{display:block}
 .katman-sec small{color:var(--soluk);font-size:.85rem}
+.acilir{border-top:1px solid var(--cizgi);margin-top:2px}
+.acilir summary{list-style:none;cursor:pointer;min-height:52px;display:flex;align-items:center;justify-content:space-between;gap:12px;font-weight:800;color:var(--vurgu)}
+.acilir summary::-webkit-details-marker{display:none}
+.acilir summary svg{width:28px;height:28px;flex:none;transition:transform var(--hiz) var(--egri)}
+.acilir[open] summary svg{transform:rotate(180deg)}
+.acilir-ic{display:flex;flex-direction:column;gap:10px;padding-bottom:4px}
 .mini-lejant{display:flex;flex-direction:column;gap:6px;font-size:.95rem}
 .mini-lejant div{display:flex;align-items:center;gap:10px}
 .mini-lejant i{width:28px;height:18px;border-radius:4px;border:1px solid var(--cizgi);flex:none}
@@ -386,7 +396,7 @@ function haritaKur(){
     return `<text class="etk" data-m="${m.anahtar}" data-boy="${(13*k).toFixed(1)}" x="${x.toFixed(0)}" y="${y.toFixed(0)}" text-anchor="middle" dominant-baseline="middle">${m.ad.toLocaleUpperCase("tr-TR")}</text>`; }).join("");
   kap.innerHTML = `<svg id="hsvg" role="img" aria-label="Kadıköy mahalleleri"><defs><clipPath id="ilce-kirp">${kirp}</clipPath>
       <mask id="kapak-disi"><rect x="-1e5" y="-1e5" width="2e5" height="2e5" fill="white"/><path d="${yolStr(C.kapak_cerceve)}" fill="black"/></mask></defs>
-    <g mask="url(#kapak-disi)">${genel}</g><g>${kara}</g><g id="g-ilce">${C.ilce_sinir.map(h=>`<path class="ilce-sinir" d="M${h.map(p=>proj(p).map(v=>v.toFixed(1)).join(",")).join("L")}"/>`).join("")}</g><g id="g-cevre">${cevre}<text class="cevre-etk" data-boy="12" x="${proj([29.085,40.842])[0].toFixed(0)}" y="${proj([29.085,40.842])[1].toFixed(0)}" text-anchor="middle">ADALAR</text></g>
+    <g mask="url(#kapak-disi)">${genel}</g><g>${kara}</g><g id="g-ilce">${(() => { const d = C.ilce_sinir.map(h=>"M"+h.map(p=>proj(p).map(v=>v.toFixed(1)).join(",")).join("L")).join(""); return `<path class="ilce-sinir-bant" d="${d}"/><path class="ilce-sinir" d="${d}"/>`; })()}</g><g id="g-cevre">${cevre}<text class="cevre-etk" data-boy="12" x="${proj([29.085,40.842])[0].toFixed(0)}" y="${proj([29.085,40.842])[1].toFixed(0)}" text-anchor="middle">ADALAR</text></g>
     <g id="g-zemin" clip-path="url(#ilce-kirp)"><g id="g-zemin-yumusak">${yumusak}</g><g id="g-zemin-kare">${hucre}</g></g>
     <g id="g-mah">${mah}</g><g id="g-fay"><path class="fay-bant" d="${fayYol}" stroke-width="${KM*2}"/><path class="fay-kenar" d="${fayYol}"/><path class="fay" d="${fayYol}"/>${fayOklari()}<text class="fay-etk" data-boy="12" x="${fx.toFixed(0)}" y="${fy.toFixed(0)}" text-anchor="middle" dominant-baseline="middle" transform="rotate(${fAci.toFixed(1)} ${fx.toFixed(0)} ${fy.toFixed(0)})">ANA MARMARA FAYI</text></g>
     <g id="g-sec"></g><g id="g-etk">${etk}</g><g id="g-konum"></g></svg>`;
@@ -475,6 +485,8 @@ function lejantSerit(){ const L=KATMANLAR[ayar.katman];
     ? `<span>${L.ad}</span><span style="color:var(--soluk)">${uclar[0]}</span><span class="renkler" aria-hidden="true">${n.map(i=>`<i style="background:var(--${L.renk}${i});width:${L.hucre?12:22}px"></i>`).join("")}</span><span style="color:var(--soluk)">${uclar[1]}</span>`
     : `<span>${L.ad}</span>`; }
 $("#lejant-serit").onclick = () => sayfaAc("katman");
+// Açıklamalar kapalı gelir; "⌄" işaretine basınca açılır
+const acilir = (icerik, baslik="Açıklama") => `<details class="acilir"><summary><span>${baslik}</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary><div class="acilir-ic">${icerik}</div></details>`;
 const kaynakSatiri = (id, ek="") => { const k=V.kaynaklar.find(x=>x.id===id); return `<p class="kaynak">Kaynak: ${kaçış(k.yayinci)}, ${kaçış(k.yil)}. ${ek}<button data-kaynaklar>Bu bilgi nereden?</button></p>`; };
 function baglaKaynaklar(kok){ kok.querySelectorAll("[data-kaynaklar]").forEach(b => b.onclick = () => sayfaAc("dahafazla", "kaynaklar")); }
 
@@ -659,12 +671,12 @@ function katmanSayfasi(el){
       <div class="secenek" style="grid-template-columns:1fr 1fr" role="group" aria-label="Zemin görünümü">
         <button data-zg="yumusak" aria-pressed="${ayar.zeminGorunum==="yumusak"}">Yumuşak geçiş</button>
         <button data-zg="kare" aria-pressed="${ayar.zeminGorunum==="kare"}">Kaynak kareleri</button></div>
-      <p style="color:var(--soluk);font-size:.95rem">Yumuşak geçiş yalnızca görünüm içindir. Kaynak harita yaklaşık 420 × 555 m'lik karelerden oluşur; mahalle yüzdeleri bu karelerden hesaplanır.</p></div>
+      ${acilir(`<p style="color:var(--soluk);font-size:.95rem">Yumuşak geçiş yalnızca görünüm içindir. Kaynak harita yaklaşık 420 × 555 m'lik karelerden oluşur; mahalle yüzdeleri bu karelerden hesaplanır.</p>`)}</div>
     <div class="kart"><h3>Fay hattı</h3>
       <div class="secenek" style="grid-template-columns:1fr 1fr" role="group" aria-label="Fay hattı">
         <button data-fay="1" aria-pressed="${ayar.fayGoster}">Göster</button><button data-fay="0" aria-pressed="${!ayar.fayGoster}">Gizle</button></div>
-      <p>Kırmızı çizgi, İBB'nin hasar tahminlerinde kullandığı 7,5 büyüklüğündeki senaryo depreminin kırılacağı varsayılan Ana Marmara Fayı parçalarıdır. Çevresindeki açık kırmızı şerit konumun yaklaşık olduğunu gösterir (±1 km). Oklar fayın iki yakasının birbirine göre kayma yönüdür: kuzey yaka doğuya, güney yaka batıya. Görmek için haritayı uzaklaştırın.</p>
-      ${kaynakSatiri("ibb-fay")}</div>
+      ${acilir(`<p>Kırmızı çizgi, İBB'nin hasar tahminlerinde kullandığı 7,5 büyüklüğündeki senaryo depreminin kırılacağı varsayılan Ana Marmara Fayı parçalarıdır. Çevresindeki açık kırmızı şerit konumun yaklaşık olduğunu gösterir (±1 km). Oklar fayın iki yakasının birbirine göre kayma yönüdür: kuzey yaka doğuya, güney yaka batıya. Görmek için haritayı uzaklaştırın.</p>
+      ${kaynakSatiri("ibb-fay")}`)}</div>
     <p class="not">Sıvılaşma ve dere taşkını katmanları hazırlanıyor.</p></div>`;
   bagla(el);
   el.querySelectorAll("[data-zg]").forEach(b => b.onclick = () => { ayar.zeminGorunum=b.dataset.zg; depo.yaz("zeminGorunum",ayar.zeminGorunum);
@@ -674,11 +686,12 @@ function katmanSayfasi(el){
     if (ayar.fayGoster){ const [a,c]=proj([28.9,40.95]), [e,f]=proj([29.25,40.72]); tumSayfalariKapat(); paneliKapat(); uc(hedefKutu([Math.min(a,e),Math.min(c,f),Math.max(a,e),Math.max(c,f)])); } });
   const aciklama = () => { const L=KATMANLAR[ayar.katman];
     let lej = "";
-    if (L.hucre) lej = `<div class="mini-lejant">${V.vs30.siniflar.map((ad,i)=>`<div><i style="background:var(--z${i})"></i>${ad} m/s${i===0?" (en yumuşak)":i===9?" (en sert)":""}</div>`).join("")}</div>` + kaynakSatiri("ibb-vs30");
+    let kay = "";
+    if (L.hucre){ lej = `<div class="mini-lejant">${V.vs30.siniflar.map((ad,i)=>`<div><i style="background:var(--z${i})"></i>${ad} m/s${i===0?" (en yumuşak)":i===9?" (en sert)":""}</div>`).join("")}</div>`; kay = kaynakSatiri("ibb-vs30"); }
     else if (L.renk){ const f = x => L.ondalik ? x.toLocaleString("tr-TR",{minimumFractionDigits:1,maximumFractionDigits:1}) : sayi(Math.round(x));
-      lej = `<div class="mini-lejant">${[0,1,2,3,4].map(i=>{const a=i?L.es[i-1]:L.min, b=i<4?L.es[i]:L.max; return `<div><i style="background:var(--${L.renk}${i+1})"></i>${L.etiketler ? L.etiketler[i] : `${f(a)} – ${f(b)} ${L.birim}`}</div>`}).join("")}</div>`
-        + (ayar.katman==="toplanma" ? kaynakSatiri("kb-toplanma") : ayar.katman==="tsunami" ? kaynakSatiri("ibb-tsunami") : kaynakSatiri("ibb-kitapcik","Mahalle alanları yaklaşıktır. ")); }
-    $("#katman-aciklama").innerHTML = `<h3>${L.ad}</h3><p>${L.aciklama}</p>` + lej; baglaKaynaklar($("#katman-aciklama")); };
+      lej = `<div class="mini-lejant">${[0,1,2,3,4].map(i=>{const a=i?L.es[i-1]:L.min, b=i<4?L.es[i]:L.max; return `<div><i style="background:var(--${L.renk}${i+1})"></i>${L.etiketler ? L.etiketler[i] : `${f(a)} – ${f(b)} ${L.birim}`}</div>`}).join("")}</div>`;
+      kay = (ayar.katman==="toplanma" ? kaynakSatiri("kb-toplanma") : ayar.katman==="tsunami" ? kaynakSatiri("ibb-tsunami") : kaynakSatiri("ibb-kitapcik","Mahalle alanları yaklaşıktır. ")); }
+    $("#katman-aciklama").innerHTML = `<h3>${L.ad}</h3>` + lej + acilir(`<p>${L.aciklama}</p>${kay}`); baglaKaynaklar($("#katman-aciklama")); };
   el.querySelectorAll("[data-katman]").forEach(b => b.onclick = () => { ayar.katman=b.dataset.katman; depo.yaz("katman",ayar.katman);
     el.querySelectorAll("[data-katman]").forEach(x=>x.setAttribute("aria-pressed", x===b)); katmanBoya(); secimiCiz(); aciklama(); });
   aciklama();
