@@ -1,11 +1,11 @@
 // Kadıköy Deprem Atlası — internetsiz çalışma.
 // Uygulama HER ZAMAN önce telefondaki kopyadan açılır (internet beklemez, zayıf çekimde takılmaz).
 // İnternet varsa arka planda yeni sürüm indirilir; bir sonraki açılışta o gösterilir.
-const SURUM = "atlas-v8";
+const SURUM = "atlas-v9";
 const TEMEL = ["./", "./index.html", "./gizlilik.html", "./manifest.webmanifest", "./ikon-192.png", "./ikon-512.png", "./ikon-180.png"];
 
 self.addEventListener("install", e => {
-  e.waitUntil(caches.open(SURUM).then(c => c.addAll(TEMEL)).then(() => self.skipWaiting()));
+  e.waitUntil(caches.open(SURUM).then(c => c.addAll(TEMEL.map(u => new Request(u, { cache: "reload" })))).then(() => self.skipWaiting()));
 });
 self.addEventListener("activate", e => {
   e.waitUntil(caches.keys().then(a => Promise.all(a.filter(k => k !== SURUM).map(k => caches.delete(k)))).then(() => self.clients.claim()));
