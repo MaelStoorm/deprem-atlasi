@@ -3,8 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; script-src 'none'; object-src 'none'; base-uri 'none'">
+<meta name="referrer" content="no-referrer">
 <title>Gizlilik Politikası · Kadıköy Deprem Atlası</title>
 <style>
+@font-face{font-family:"Atkinson Hyperlegible Next";src:url(yazi.ttf) format("truetype");font-weight:400 800;font-display:swap}
 :root{--zemin:#f2f4f3;--yuzey:#fff;--murekkep:#17212b;--soluk:#4d5a66;--cizgi:#cfd6da;--vurgu:#0b5f7a;color-scheme:light}
 @media (prefers-color-scheme:dark){:root{--zemin:#131b21;--yuzey:#1a232b;--murekkep:#eef2f4;--soluk:#a9b6c0;--cizgi:#33424d;--vurgu:#6cc4e0;color-scheme:dark}}
 *{box-sizing:border-box}
@@ -22,7 +25,7 @@ a{color:var(--vurgu);overflow-wrap:anywhere}
 <body>
 <main>
   <h1>Gizlilik Politikası</h1>
-  <p class="soluk">Kadıköy Deprem Atlası · Son güncelleme: 3 Ekim 2026 (deprem bildirimleri eklendi)</p>
+  <p class="soluk">Kadıköy Deprem Atlası · Son güncelleme: 3 Ekim 2026</p>
 
   <div class="kart">
     <p><strong>Kısaca:</strong> Bu uygulama hesap açtırmaz, kişisel bilgi istemez ve reklam göstermez. Yalnızca deprem bildirimlerini açarsanız, bildirim gönderebilmek için kim olduğunuzu göstermeyen bir bildirim adresi saklanır. Konumunuz yalnızca telefonunuzda kullanılır.</p>
@@ -33,7 +36,7 @@ a{color:var(--vurgu);overflow-wrap:anywhere}
     <li><strong>Konum:</strong> Yalnızca "Konum" veya "İyiyim mesajı gönder" düğmesine bastığınızda, telefonunuz izin isterse ve siz izin verirseniz alınır. Bulunduğunuz mahalleyi göstermek için telefonunuzun içinde kullanılır; bize veya başka bir yere gönderilmez ve kaydedilmez.</li>
     <li><strong>"İyiyim" mesajı:</strong> Düğmeye bastığınızda telefonunuzun kendi mesaj uygulaması açılır. Mesajı kime göndereceğinizi siz seçersiniz; mesaj sizin telefonunuzdan gider. Mesajdaki konum linki Google Haritalar adresidir.</li>
     <li><strong>Deprem bildirimleri (isteğe bağlı):</strong> Bildirimleri açarsanız telefonunuzun bildirim adresi (tarayıcınızın ya da telefonunuzun ürettiği, kim olduğunuzu göstermeyen bir adres) ve seçtiğiniz büyüklük eşiği, bildirim gönderebilmek için Cloudflare üzerindeki sunucumuzda saklanır. Adınız, numaranız veya konumunuz saklanmaz. Bildirimleri kapattığınızda bu kayıt silinir.</li>
-    <li><strong>Son depremler listesi:</strong> Liste sunucumuzdan indirilir; bu sırada telefonunuzun internet adresi Cloudflare'e ulaşır, kaydedilmez.</li>
+    <li><strong>Son depremler listesi:</strong> Liste sunucumuzdan indirilir; bu sırada telefonunuzun internet adresi Cloudflare'e ulaşır. Biz bu adresi kaydetmeyiz; Cloudflare kendi güvenlik ve işletim kuralları gereği kısa süreli teknik kayıt tutabilir.</li>
     <li><strong>Ayarlarınız:</strong> Yazı boyutu, renk teması, seçtiğiniz harita katmanı ve deprem çantası işaretleriniz yalnızca telefonunuzda saklanır. Uygulamayı silince bunlar da silinir.</li>
   </ul>
 
@@ -41,11 +44,12 @@ a{color:var(--vurgu);overflow-wrap:anywhere}
   <ul>
     <li>Ad, telefon numarası, e-posta veya kimlik bilgisi istenmez.</li>
     <li>Kullanım istatistiği, reklam takibi veya çerez kullanılmaz.</li>
+    <li>Sunucumuz, bildirim adresi ve seçtiğiniz eşik dışında sizinle ilgili bir şey saklamaz.</li>
     <li>Hiçbir bilgi satılmaz veya başkalarıyla paylaşılmaz.</li>
   </ul>
 
   <h2>Dış bağlantılar</h2>
-  <p>Uygulama, yazı tipini Google Fonts'tan yükler; bu sırada telefonunuzun internet adresi Google'a ulaşır. Uygulamadaki e-Devlet, AFAD, İBB, Kadıköy Belediyesi ve İstanbul Eczacı Odası bağlantılarına dokunduğunuzda o sitelerin kendi gizlilik kuralları geçerli olur.</p>
+  <p>Uygulama yazı tipi dahil tüm dosyalarını kendi adresinden yükler; Google veya başka bir reklam/istatistik şirketine istek gitmez. Uygulamadaki e-Devlet, AFAD, İBB, Kadıköy Belediyesi ve İstanbul Eczacı Odası bağlantılarına dokunduğunuzda o sitelerin kendi gizlilik kuralları geçerli olur.</p>
 
   <h2>Çocuklar</h2>
   <p>Uygulama çocuklardan veya başka hiç kimseden kişisel bilgi toplamaz.</p>

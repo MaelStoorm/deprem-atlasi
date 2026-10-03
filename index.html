@@ -10,9 +10,11 @@
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="ikon-180.png">
 <title>Kadıköy Deprem Atlası</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;600;800&display=swap" media="print" onload="this.media='all'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self' https://deprem-atlasi.egementughan.workers.dev; manifest-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="no-referrer">
 <style>
+/* Yazı tipi uygulamanın kendi dosyasından gelir (Google'a istek gitmez). Atkinson Hyperlegible Next, SIL Açık Yazı Tipi Lisansı (yazi-lisans.txt) */
+@font-face{font-family:"Atkinson Hyperlegible Next";src:url(yazi.ttf) format("truetype");font-weight:400 800;font-style:normal;font-display:swap}
 /* Yerleşim: tam ekran harita (Cep Trafik düzeni). Üstte arama, sağda yüzen yuvarlak düğmeler,
    altta dört sekme; mahalle seçilince alttan kayan panel; diğer ekranlar haritanın üstüne kayar. */
 :root{
@@ -58,6 +60,9 @@ p{margin:0}
 a{color:var(--vurgu);text-underline-offset:3px}
 :focus-visible{outline:3px solid var(--vurgu);outline-offset:2px}
 [tabindex="-1"]:focus{outline:none}  /* sayfa açılınca odaklanan başlıklarda çerçeve görünmesin */
+#surum-serit{position:fixed;left:12px;right:12px;top:calc(env(safe-area-inset-top) + 10px);z-index:99;display:flex;align-items:center;gap:12px;background:var(--kontrol);color:var(--kontrol-yazi);border-radius:14px;padding:12px 14px;box-shadow:0 6px 20px rgba(0,0,0,.25);font-weight:600}
+#surum-serit span{flex:1}
+#surum-serit button{font:inherit;font-weight:800;border:0;border-radius:10px;padding:10px 16px;background:var(--kontrol-etkin);color:#06223a;min-height:44px}
 #uyg{position:relative;height:100%;overflow:hidden;overflow:clip}
 
 /* --- Harita --- */
@@ -915,7 +920,27 @@ haritaKur(); lejantSerit();
 if (new URLSearchParams(location.search).has("deprem")) setTimeout(()=>sayfaAc("acil","depremler"), 900);
 $("#uyg").addEventListener("scroll", e => { e.target.scrollTop = 0; e.target.scrollLeft = 0; });
 // İnternetsiz çalışma: uygulama bir kez açıldıktan sonra telefona kaydedilir
-if ("serviceWorker" in navigator && (location.protocol === "https:" || location.hostname === "localhost")) navigator.serviceWorker.register("sw.js").catch(()=>{});
+if ("serviceWorker" in navigator && (location.protocol === "https:" || location.hostname === "localhost")) {
+  navigator.serviceWorker.register("sw.js").catch(()=>{});
+  // Yeni sürüm indirildiğinde: açılışın ilk saniyelerinde ve ekrana dokunulmadıysa kendiliğinden yenile;
+  // kişi kullanmaya başladıysa üstte "Yeni sürüm hazır · Yenile" şeridi göster (yaptığı işi bölmeyelim).
+  const acildi = Date.now(); let dokundu = false;
+  ["pointerdown","keydown"].forEach(t => addEventListener(t, () => { dokundu = true; }, { once: true, capture: true }));
+  navigator.serviceWorker.addEventListener("message", e => {
+    if (e.data?.tip !== "yeni-surum") return;
+    let son = 0; try { son = +sessionStorage.getItem("surumYenile") || 0; } catch {}
+    if (!dokundu && Date.now() - acildi < 8000 && Date.now() - son > 60000) {
+      try { sessionStorage.setItem("surumYenile", String(Date.now())); } catch {}
+      location.reload(); return;
+    }
+    if (document.getElementById("surum-serit")) return;
+    const d = document.createElement("div"); d.id = "surum-serit"; d.setAttribute("role", "status");
+    d.innerHTML = '<span>Uygulamanın yeni sürümü hazır.</span><button type="button">Yenile</button>';
+    d.querySelector("button").onclick = () => location.reload();
+    document.body.appendChild(d);
+  });
+  navigator.serviceWorker.startMessages?.();
+}
 
 const acilis=$("#acilis");
 function acilisKapat(){ acilis.classList.add("git"); setTimeout(()=>acilis.hidden=true, 520); sigdir(false); }
