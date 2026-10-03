@@ -1,39 +1,63 @@
 // Kadıköy Deprem Atlası — internetsiz çalışma.
 // Uygulama HER ZAMAN önce telefondaki kopyadan açılır (internet beklemez, zayıf çekimde takılmaz).
-// İnternet varsa arka planda yeni sürüm indirilir; bir sonraki açılışta o gösterilir.
-const SURUM = "atlas-v9";
-const TEMEL = ["./", "./index.html", "./gizlilik.html", "./manifest.webmanifest", "./ikon-192.png", "./ikon-512.png", "./ikon-180.png"];
+// İnternet varsa arka planda yeni sürüm indirilir; farklıysa sayfaya haber verilir (sayfa kendini yeniler
+// ya da "Yeni sürüm hazır" şeridi gösterir).
+const SURUM = "atlas-v10";
+const TEMEL = ["./", "./index.html", "./gizlilik.html", "./manifest.webmanifest", "./ikon-192.png", "./ikon-512.png", "./ikon-180.png", "./yazi.ttf"];
 
 self.addEventListener("install", e => {
+  // cache: "reload" → tarayıcının kendi önbelleğini atla, sunucudaki güncel dosyayı al
   e.waitUntil(caches.open(SURUM).then(c => c.addAll(TEMEL.map(u => new Request(u, { cache: "reload" })))).then(() => self.skipWaiting()));
 });
 self.addEventListener("activate", e => {
   e.waitUntil(caches.keys().then(a => Promise.all(a.filter(k => k !== SURUM).map(k => caches.delete(k)))).then(() => self.clients.claim()));
 });
 
-// Arka planda güncelle: başarılı olursa kopyayı yeniler, hata olursa sessizce geçer
-function guncelle(istek, anahtar) {
-  return fetch(istek).then(y => {
-    if (y && (y.ok || y.type === "opaque")) { const k = y.clone(); caches.open(SURUM).then(c => c.put(anahtar || istek, k)); }
-    return y;
-  });
+const bekle = ms => new Promise(r => setTimeout(r, ms));
+
+// Sayfanın güncel halini indir; kopyadakinden farklıysa kaydet ve açık pencerelere haber ver
+async function sayfayiGuncelle(yeniPencereId) {
+  const y = await fetch(new URL("./", self.registration.scope).href, { cache: "no-cache" });
+  if (!y.ok) return;
+  const yeni = await y.clone().text();
+  const eskiYanit = await caches.match("./index.html");
+  const eski = eskiYanit ? await eskiYanit.text() : null;
+  if (eski === yeni) return;
+  const c = await caches.open(SURUM);
+  await c.put("./index.html", y.clone());
+  await c.put("./", y);
+  if (eski === null) return;  // ilk kurulum: haber verecek bir şey yok
+  // Yeni açılan pencere birkaç yüz milisaniye içinde oluşur; onu da bekle
+  for (let i = 0; i < 10 && yeniPencereId; i++) {
+    if (await self.clients.get(yeniPencereId)) break;
+    await bekle(300);
+  }
+  for (const p of await self.clients.matchAll({ type: "window" })) p.postMessage({ tip: "yeni-surum" });
 }
 
 self.addEventListener("fetch", e => {
   const r = e.request; if (r.method !== "GET") return;
-  // Deprem listesi ve bildirim sunucusu her zaman internetten gelsin (telefonda eski liste saklanmasın)
-  if (r.url.includes(".workers.dev")) return;
+  // Başka sitelere giden istekler (deprem listesi, bildirim sunucusu) her zaman doğrudan internetten
+  if (!r.url.startsWith(self.location.origin)) return;
+  if (r.mode === "navigate" && new URL(r.url).pathname.endsWith(".html") && !new URL(r.url).pathname.endsWith("/index.html")) {
+    // Ana sayfa dışındaki sayfalar (gizlilik): internet varsa güncel hali, yoksa kopya
+    e.respondWith(fetch(r).then(y => { if (y.ok) { const k = y.clone(); caches.open(SURUM).then(c => c.put(r, k)); } return y; })
+      .catch(() => caches.match(r, { ignoreSearch: true }).then(v => v || caches.match("./index.html"))));
+    return;
+  }
   if (r.mode === "navigate") {
-    // Sayfa: önce kopya; kopya yoksa (ilk açılış) internet
-    const ag = guncelle(r, "./index.html").catch(() => null);
-    e.waitUntil(ag);
-    e.respondWith(caches.match("./index.html").then(v => v || ag.then(y => y || caches.match("./"))));
+    // Ana sayfa: önce kopya; kopya yoksa (ilk açılış) internet
+    e.waitUntil(sayfayiGuncelle(e.resultingClientId).catch(() => {}));
+    e.respondWith(caches.match("./index.html").then(v => v || fetch(r).catch(() => caches.match("./"))));
     return;
   }
   // Diğer dosyalar (simgeler, yazı tipi): önce kopya, yoksa internet
-  e.respondWith(caches.match(r, { ignoreSearch: r.url.startsWith(self.location.origin) }).then(v => {
+  e.respondWith(caches.match(r, { ignoreSearch: true }).then(v => {
     if (v) return v;
-    return guncelle(r).catch(() => new Response("", { status: 504 }));
+    return fetch(r).then(y => {
+      if (y && y.ok) { const k = y.clone(); caches.open(SURUM).then(c => c.put(r, k)); }
+      return y;
+    }).catch(() => new Response("", { status: 504 }));
   }));
 });
 
