@@ -1,8 +1,8 @@
-// Kadıköy Deprem Atlası — internetsiz çalışma.
+// Kadıköy Deprem Atlası (Kadıköy, Üsküdar, Maltepe) — internetsiz çalışma.
 // Uygulama HER ZAMAN önce telefondaki kopyadan açılır (internet beklemez, zayıf çekimde takılmaz).
 // İnternet varsa arka planda yeni sürüm indirilir; farklıysa sayfaya haber verilir (sayfa kendini yeniler
 // ya da "Yeni sürüm hazır" şeridi gösterir).
-const SURUM = "atlas-v10";
+const SURUM = "atlas-v11";
 const TEMEL = ["./", "./index.html", "./gizlilik.html", "./manifest.webmanifest", "./ikon-192.png", "./ikon-512.png", "./ikon-180.png", "./yazi.ttf"];
 
 self.addEventListener("install", e => {
