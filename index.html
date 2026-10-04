@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-title" content="Deprem Atlası">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="ikon-180.png">
-<title>Kadıköy Deprem Atlası</title>
+<title>Deprem Atlası</title>
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self' https://deprem-atlasi.egementughan.workers.dev; manifest-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="no-referrer">
 <style>
@@ -774,7 +774,7 @@ async function bildirimAc(){
 }
 
 function iyiyimGonder(){
-  const ac = n => { const metin = "İyiyim." + (n ? ` Şu an buradayım: https://maps.google.com/?q=${n[1].toFixed(5)},${n[0].toFixed(5)}` : "") + " (Kadıköy Deprem Atlası)";
+  const ac = n => { const metin = "İyiyim." + (n ? ` Şu an buradayım: https://maps.google.com/?q=${n[1].toFixed(5)},${n[0].toFixed(5)}` : "") + " (Deprem Atlası)";
     location.href = "sms:?&body=" + encodeURIComponent(metin); };
   if (!navigator.geolocation) return ac(null);
   bildir("Konumunuz ekleniyor…", 9000);
@@ -1009,10 +1009,10 @@ if ("serviceWorker" in navigator && (location.protocol === "https:" || location.
 const acilis=$("#acilis");
 function acilisKapat(){ acilis.classList.add("git"); setTimeout(()=>acilis.hidden=true, 520); sigdir(false); }
 if (ayar.girildi){
-  acilis.innerHTML = `<div class="marka">${SVG.marka}<h1>Kadıköy Deprem Atlası</h1></div>`;
+  acilis.innerHTML = `<div class="marka">${SVG.marka}<h1>Deprem Atlası</h1></div>`;
   setTimeout(acilisKapat, hareketAz()?0:700);
 } else {
-  acilis.innerHTML = `<div class="kutu"><div class="marka">${SVG.marka}<h1>Kadıköy Deprem Atlası</h1></div>
+  acilis.innerHTML = `<div class="kutu"><div class="marka">${SVG.marka}<h1>Deprem Atlası</h1></div>
     <p>Kadıköy, Üsküdar ve Maltepe'nin ${V.mahalleler.length} mahallesine ait deprem bilgilerini resmi kaynaklardan derleyip harita üzerinde gösterir.</p>
     <p><strong>Resmi bir rapor değildir.</strong> Rakamlar mahalle geneli için yapılmış tahminlerdir; tek bir binanın durumunu göstermez.</p>
     <p class="not">Deneme sürümü. Mahalle sınırları yaklaşıktır.</p>
