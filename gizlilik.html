@@ -36,6 +36,7 @@ a{color:var(--vurgu);overflow-wrap:anywhere}
     <li><strong>Konum:</strong> Yalnızca "Konum" veya "İyiyim mesajı gönder" düğmesine bastığınızda, telefonunuz izin isterse ve siz izin verirseniz alınır. Bulunduğunuz mahalleyi göstermek için telefonunuzun içinde kullanılır; bize veya başka bir yere gönderilmez ve kaydedilmez.</li>
     <li><strong>"İyiyim" mesajı:</strong> Düğmeye bastığınızda telefonunuzun kendi mesaj uygulaması açılır. Mesajı kime göndereceğinizi siz seçersiniz; mesaj sizin telefonunuzdan gider. Mesajdaki konum linki Google Haritalar adresidir.</li>
     <li><strong>Deprem bildirimleri (isteğe bağlı):</strong> Bildirimleri açarsanız telefonunuzun bildirim adresi (tarayıcınızın ya da telefonunuzun ürettiği, kim olduğunuzu göstermeyen bir adres) ve seçtiğiniz büyüklük eşiği, bildirim gönderebilmek için Cloudflare üzerindeki sunucumuzda saklanır. Adınız, numaranız veya konumunuz saklanmaz. Bildirimleri kapattığınızda bu kayıt silinir.</li>
+    <li><strong>Adres arama (isteğe bağlı):</strong> "Adresi bul" düğmesine bastığınızda yazdığınız adres, konumunu bulmak için sunucumuza, oradan da OpenStreetMap Vakfı'nın adres servisine (Nominatim) gönderilir. Telefonunuzun internet adresi OpenStreetMap'e gitmez; adres metni bizim tarafımızda kaydedilmez. Aynı aramanın tekrarında OpenStreetMap'i yormamak için sonuç bir gün süreyle Cloudflare önbelleğinde tutulur. Yazdığınız metne adınızı veya kapı numaranızı eklemenize gerek yoktur.</li>
     <li><strong>Son depremler listesi:</strong> Liste sunucumuzdan indirilir; bu sırada telefonunuzun internet adresi Cloudflare'e ulaşır. Biz bu adresi kaydetmeyiz; Cloudflare kendi güvenlik ve işletim kuralları gereği kısa süreli teknik kayıt tutabilir.</li>
     <li><strong>Ayarlarınız:</strong> Yazı boyutu, renk teması, seçtiğiniz harita katmanı ve deprem çantası işaretleriniz yalnızca telefonunuzda saklanır. Uygulamayı silince bunlar da silinir.</li>
   </ul>
@@ -49,7 +50,7 @@ a{color:var(--vurgu);overflow-wrap:anywhere}
   </ul>
 
   <h2>Dış bağlantılar</h2>
-  <p>Uygulama yazı tipi dahil tüm dosyalarını kendi adresinden yükler; Google veya başka bir reklam/istatistik şirketine istek gitmez. Uygulamadaki e-Devlet, AFAD, İBB, Kadıköy Belediyesi ve İstanbul Eczacı Odası bağlantılarına dokunduğunuzda o sitelerin kendi gizlilik kuralları geçerli olur.</p>
+  <p>Uygulama yazı tipi dahil tüm dosyalarını kendi adresinden yükler; Google veya başka bir reklam/istatistik şirketine istek gitmez. Adres aramada OpenStreetMap'e giden istek sunucumuz üzerinden yapılır. Uygulamadaki e-Devlet, AFAD, İBB, Kadıköy Belediyesi ve İstanbul Eczacı Odası bağlantılarına dokunduğunuzda o sitelerin kendi gizlilik kuralları geçerli olur.</p>
 
   <h2>Çocuklar</h2>
   <p>Uygulama çocuklardan veya başka hiç kimseden kişisel bilgi toplamaz.</p>
