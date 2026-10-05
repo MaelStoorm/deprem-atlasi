@@ -1,22 +1,33 @@
 # Deprem Atlası
 
-İstanbul'un 39 ilçesindeki 958 mahalle için deprem bilgilerini resmi kaynaklardan derleyip sade bir harita üzerinde gösteren, telefonda internetsiz de çalışan web uygulaması.
+İstanbul'da deprem konuşulunca hep aynı sorular geliyor: "Bizim mahallenin zemini nasıl?", "Bir şey olursa nereye gideceğiz?" Bu bilgilerin çoğu İBB'nin ve diğer kurumların yayınladığı verilerde aslında var ama dağınık duruyor. Ben de bir harita teknikeri olarak hepsini tek bir haritada toplamak istedim.
 
-**Uygulama:** https://maelstoorm.github.io/deprem-atlasi/
+Deprem Atlası, İstanbul'un 39 ilçesindeki 958 mahalle için bu bilgileri sade bir harita üzerinde gösteriyor. Telefona bir kere açtıktan sonra internet olmadan da çalışıyor.
 
-- Zemin (Vs30), senaryo depreminde bina hasarı ve geçici barınma tahmini (İBB)
-- Tsunami su baskını alanları (İBB–ODTÜ)
-- Afet toplanma alanları, adres arama, son depremler ve deprem bildirimleri (Kandilli, AFAD)
-- Büyük yazı ve büyük düğmelerle, yaşlılar dahil herkesin kullanabileceği arayüz
+👉 **Uygulama:** https://maelstoorm.github.io/deprem-atlasi/
 
-Uygulama resmi bir rapor değildir ve hiçbir kurumu temsil etmez. Her bilginin kaynağı uygulamada belirtilir.
+## Neler var?
+
+- **Zemin bilgisi (Vs30):** Mahallenizin zemini yumuşak mı, sert mi?
+- **Senaryo depremi:** İBB'nin bina hasarı ve geçici barınma tahminleri
+- **Tsunami:** Su baskını riski olan kıyı alanları (İBB–ODTÜ çalışması)
+- **Toplanma alanları:** Size en yakın afet toplanma alanı, adres arama
+- **Son depremler ve bildirimler:** Kandilli ve AFAD verileriyle
+- **Acil durum ekranı:** Tek tuşla 112'yi arama, yakınlarınıza konumunuzla "İyiyim" mesajı
+- **Herkes için:** Büyüklerimiz de rahatça kullanabilsin diye yazılar ve düğmeler büyük, ekran sade
+
+## Bilmeniz gereken
+
+Bu resmi bir rapor değil ve hiçbir kurumu temsil etmiyor. Gösterilen rakamlar mahalle geneli için yapılmış tahminler, tek tek binaların durumunu göstermiyor. Her bilginin kaynağını uygulamanın içinde yazdım.
+
+Bir hata görürseniz ya da öneriniz varsa [Issues](https://github.com/MaelStoorm/deprem-atlasi/issues) kısmından yazabilirsiniz, çok sevinirim.
 
 ## Telif hakkı
 
 © 2026 Egemen Çalıkoğlu. **Tüm hakları saklıdır.**
 
-Bu depo herkese açık olsa da kod, tasarım ve içerik açık kaynak **değildir**. Yazılı izin olmadan kopyalanamaz, değiştirilemez, başka bir uygulamada veya sitede kullanılamaz ve dağıtılamaz. Ayrıntılar: [LICENSE](LICENSE).
+Depo herkese açık ama kod, tasarım ve içerik açık kaynak **değil**. Yazılı iznim olmadan kopyalanamaz, değiştirilemez, başka bir uygulamada ya da sitede kullanılamaz ve dağıtılamaz. Ayrıntılar [LICENSE](LICENSE) dosyasında.
 
-Üçüncü taraf içerik (yazı tipi, OpenStreetMap verisi, kurum verileri) kendi lisanslarına tabidir.
+Üçüncü taraf içerikler (yazı tipi, OpenStreetMap verisi, kurum verileri) kendi lisanslarına tabidir.
 
-İzin ve iş birliği için: [Issues](https://github.com/MaelStoorm/deprem-atlasi/issues)
+İzin ya da iş birliği için [Issues](https://github.com/MaelStoorm/deprem-atlasi/issues) üzerinden bana ulaşabilirsiniz.
