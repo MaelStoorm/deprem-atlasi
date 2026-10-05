@@ -1,0 +1,57 @@
+Deprem Atlası
+Telif Hakkı (c) 2026 Egemen Çalıkoğlu. Tüm hakları saklıdır.
+
+Bu depodaki yazılım, kaynak kodu, arayüz tasarımı, harita gösterimi, metinler ve
+derlenmiş veri düzeni Egemen Çalıkoğlu'na aittir ve 5846 sayılı Fikir ve Sanat
+Eserleri Kanunu ile uluslararası telif hakkı anlaşmaları kapsamında korunmaktadır.
+
+Hak sahibinin önceden yazılı izni olmadan bu yazılımın veya herhangi bir
+parçasının kopyalanması, çoğaltılması, değiştirilmesi, başka bir uygulamada veya
+sitede kullanılması, dağıtılması, yayımlanması, satılması ya da kiralanması
+yasaktır.
+
+İzin verilenler: uygulamayı https://maelstoorm.github.io/deprem-atlasi/ adresinden
+kişisel ve ticari olmayan amaçla kullanmak; kaynak kodunu GitHub üzerinde
+incelemek. Kaynak kodunun herkese açık olması, yukarıdaki haklardan herhangi
+birinin devredildiği anlamına gelmez.
+
+İzin ve iş birliği talepleri için:
+https://github.com/MaelStoorm/deprem-atlasi/issues
+
+ÜÇÜNCÜ TARAF İÇERİK
+Uygulamada kullanılan aşağıdaki içerikler hak sahiplerine aittir ve kendi
+lisanslarına tabidir; yukarıdaki hüküm bunları kapsamaz:
+- Atkinson Hyperlegible Next yazı tipi: SIL Open Font License 1.1 (yazi-lisans.txt)
+- OpenStreetMap verisi (mahalle/ilçe sınırları, kıyı, adres arama): © OpenStreetMap
+  katkıda bulunanlar, ODbL 1.0
+- İBB, İBB Açık Veri Portalı, İBB–ODTÜ raporları, AFAD, Kandilli Rasathanesi ve
+  ilçe belediyelerinden derlenen veriler: ilgili kurumların kullanım koşulları
+  (her kaynak uygulamada ayrıca belirtilmiştir)
+- Natural Earth verisi: kamu malı
+
+BU YAZILIM "OLDUĞU GİBİ" SUNULUR. Gösterilen bilgiler model tahminleri ve
+derlenmiş kamu verileridir; resmi bir rapor değildir. Bu bilgilerin kullanımından
+doğabilecek sonuçlardan hak sahibi sorumlu tutulamaz.
+
+-------------------------------------------------------------------------------
+
+Deprem Atlası
+Copyright (c) 2026 Egemen Çalıkoğlu. All rights reserved.
+
+This software, its source code, user interface design, map presentation, texts
+and compiled data structure are the property of Egemen Çalıkoğlu and are protected
+under Turkish Law No. 5846 on Intellectual and Artistic Works and international
+copyright treaties.
+
+No part of this software may be copied, reproduced, modified, used in another
+application or website, distributed, published, sold or rented without the prior
+written permission of the copyright holder.
+
+You may use the application at https://maelstoorm.github.io/deprem-atlasi/ for
+personal, non-commercial purposes and view the source code on GitHub. The source
+code being publicly visible does not grant any of the rights reserved above.
+
+Third-party content listed above (font, OpenStreetMap data, public institution
+data, Natural Earth) remains subject to its own licenses.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND.

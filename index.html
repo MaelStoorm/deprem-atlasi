@@ -10,6 +10,9 @@
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="ikon-180.png">
 <title>Deprem Atlası</title>
+<meta name="author" content="Egemen Çalıkoğlu">
+<meta name="copyright" content="© 2026 Egemen Çalıkoğlu. Tüm hakları saklıdır.">
+<!-- Deprem Atlası · © 2026 Egemen Çalıkoğlu. Tüm hakları saklıdır. İzinsiz kopyalanamaz, değiştirilemez, dağıtılamaz. Lisans: https://github.com/MaelStoorm/deprem-atlasi/blob/main/LICENSE -->
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self' https://deprem-atlasi.egementughan.workers.dev; manifest-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="no-referrer">
 <style>
@@ -1073,7 +1076,7 @@ function dahaFazlaSayfasi(el, odak){
         <li>Belediye toplanma alanı listeleri resmi atamanızın yerine geçmez; kendi alanınızı e-Devlet'ten sorgulayın.</li>
         <li>Tsunami bilgisi mahalle bazındadır; su basabilecek sokakları göstermez.</li>
       </ul></div>
-    <div class="kart"><h3>Uygulama hakkında</h3><p>Bu uygulama resmi bir rapor değildir ve hiçbir devlet kurumunu temsil etmez. Gösterilen rakamlar mahalle geneli için yapılmış model tahminleridir; tek bir binanın durumunu göstermez. Binanız için yetkili mühendis incelemesi gerekir.</p><p>Uygulama kişisel bilgi toplamaz; konumunuz yalnızca telefonunuzda kullanılır. <a href="gizlilik.html" target="_blank" rel="noopener">Gizlilik politikası</a></p></div>
+    <div class="kart"><h3>Uygulama hakkında</h3><p>Bu uygulama resmi bir rapor değildir ve hiçbir devlet kurumunu temsil etmez. Gösterilen rakamlar mahalle geneli için yapılmış model tahminleridir; tek bir binanın durumunu göstermez. Binanız için yetkili mühendis incelemesi gerekir.</p><p>Uygulama kişisel bilgi toplamaz; konumunuz yalnızca telefonunuzda kullanılır. <a href="gizlilik.html" target="_blank" rel="noopener">Gizlilik politikası</a></p><p style="color:var(--soluk);font-size:.95rem">© 2026 Egemen Çalıkoğlu. Tüm hakları saklıdır. Uygulamanın kodu, tasarımı ve içeriği izinsiz kopyalanamaz, değiştirilemez ve dağıtılamaz. Kullanılan veriler, yazı tipi ve harita sınırları kendi kaynaklarının lisanslarına tabidir.</p></div>
   </div>`;
   bagla(el);
   el.querySelectorAll("[data-olcek]").forEach(b => b.onclick = () => { ayar.olcek=+b.dataset.olcek; depo.yaz("olcek",ayar.olcek); ayarUygula(); viewBoxYaz(); dahaFazlaSayfasi(el); });
