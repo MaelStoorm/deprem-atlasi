@@ -1044,8 +1044,7 @@ function detaySayfasi(el, anahtar){
 function dahaFazlaSayfasi(el, odak){
   const ilceKarti = I => { const R=I.rapor, yy=I.yapim_yili, top=yy["1980_oncesi"]+yy["1980_2000"]+yy["2000_sonrasi"];
     const ms=V.mahalleler.filter(m=>m.ilce===I.kod), ou=ms.reduce((a,m)=>a+ortaUstu(m.senaryo),0), bar=ms.reduce((a,m)=>a+m.senaryo.gecici_barinma_hane,0);
-    return `<div class="kart"><p class="etiket">${I.ad} geneli</p><h3>İlçe özeti</h3>
-      <dl class="sayilar"><dt>Nüfus (TÜİK 2019)</dt><dd>${sayi(I.nufus_tuik_2019)}</dd><dt>Yüzölçümü</dt><dd>${I.alan_hesap?"yaklaşık ":""}${I.alan_km2.toLocaleString("tr-TR")} km²</dd><dt>Mahalle</dt><dd>${I.mahalle_sayisi}</dd>
+    return `<dl class="sayilar"><dt>Nüfus (TÜİK 2019)</dt><dd>${sayi(I.nufus_tuik_2019)}</dd><dt>Yüzölçümü</dt><dd>${I.alan_hesap?"yaklaşık ":""}${I.alan_km2.toLocaleString("tr-TR")} km²</dd><dt>Mahalle</dt><dd>${I.mahalle_sayisi}</dd>
         <dt>Orta veya ağır hasar görebilecek bina (tahmin)</dt><dd>${sayi(ou)}</dd><dt>Geçici barınma ihtiyacı (tahmin)</dt><dd>${sayi(bar)} hane</dd></dl>
       <p>İlçedeki ${sayi(top)} binanın yapım yılları (İBB, 2017):</p>
       <div class="serit" role="img" aria-label="Yapım yılı dağılımı"><i style="width:${100*yy["1980_oncesi"]/top}%;background:var(--h4)"></i><i style="width:${100*yy["1980_2000"]/top}%;background:var(--h3)"></i><i style="width:${100*yy["2000_sonrasi"]/top}%;background:var(--h1)"></i></div>
@@ -1054,18 +1053,22 @@ function dahaFazlaSayfasi(el, odak){
       <p style="color:var(--soluk);font-size:.95rem">Yapım yılı tek başına bir binanın sağlamlığını göstermez.</p>${kaynakSatiri("ibb-bina")}
       ${I.rapor ? `<dl class="sayilar"><dt>Kıyı uzunluğu</dt><dd>${R.kiyi_km.toLocaleString("tr-TR")} km</dd><dt>Denizden doldurulmuş alan</dt><dd>${R.dolgu_km2.toLocaleString("tr-TR")} km²</dd>
         <dt>Taşkından etkilenebilecek bina</dt><dd>${sayi(R.taskin_bina)}</dd><dt>Tsunami senaryosunda etkilenebilecek bina</dt><dd>${sayi(R.tsunami_bina)}</dd></dl>
-      <p style="color:var(--soluk);font-size:.95rem">Taşkın riski ${R.dereler.join(", ")} çevresinde öne çıkıyor. Tsunami rakamı ${R.tsunami_senaryo} içindir.</p>${kaynakSatiri("kb-rapor")}` : ""}</div>`; };
+      <p style="color:var(--soluk);font-size:.95rem">Taşkın riski ${R.dereler.join(", ")} çevresinde öne çıkıyor. Tsunami rakamı ${R.tsunami_senaryo} içindir.</p>${kaynakSatiri("kb-rapor")}` : ""}`; };
+  // Uzun listeler açılır-kapanır: yalnızca seçili mahallenin ilçesi açık gelir
+  const acik = (html, ac) => ac ? html.replace('<details class="acilir">', '<details class="acilir" open>') : html;
+  const aktif = aktifIlce().kod;
   el.innerHTML = `${ust("Daha Fazla","dahafazla")}<div class="icerik">
     <div class="kart"><h3>Yazı boyutu</h3>
       <div class="secenek" style="grid-template-columns:1fr 1fr" role="group" aria-label="Yazı boyutu">${[[0.88,"Küçük"],[1,"Normal"],[1.2,"Büyük"],[1.4,"Çok büyük"]].map(([v,a])=>`<button data-olcek="${v}" aria-pressed="${ayar.olcek===v}" style="font-size:${v}rem">${a}</button>`).join("")}</div>
       <p>Bu cümle seçtiğiniz boyutta görünür.</p></div>
     <div class="kart"><h3>Renkler</h3>
       <div class="secenek" role="group" aria-label="Tema">${[["oto","Telefonla aynı"],["light","Açık"],["dark","Koyu"]].map(([v,a])=>`<button data-tema="${v}" aria-pressed="${ayar.tema===v}">${a}</button>`).join("")}</div></div>
-    ${V.ilceler.map(ilceKarti).join("")}
-    <div class="kart" id="kaynak-baslik"><h3>Kaynaklar</h3><p>Güven seviyesi: A resmi kurum, B açık topluluk verisi (OpenStreetMap), C belediye teknik verisi.</p></div>
-    ${V.kaynaklar.map(k=>`<div class="kart"><p class="etiket">Güven: ${k.guven} · ${kaçış(k.yil)}</p><h3>${kaçış(k.baslik)}</h3><p>${kaçış(k.yayinci)}</p><p style="color:var(--soluk)">${kaçış(k.kullanim)}</p><a href="${k.url}" target="_blank" rel="noopener" style="overflow-wrap:anywhere">${kaçış(k.url)}</a></div>`).join("")}
+    <div class="kart"><p class="etiket">39 ilçe</p><h3>İlçe özetleri</h3><p style="color:var(--soluk);font-size:.95rem">Görmek istediğiniz ilçeye dokunun.</p>
+      ${[ILCE[aktif], ...V.ilceler.filter(I=>I.kod!==aktif)].map(I=>acik(acilir(ilceKarti(I), I.kod===aktif ? `${I.ad} (seçili ilçe)` : I.ad), I.kod===aktif)).join("")}</div>
+    <div class="kart" id="kaynak-baslik"><h3>Kaynaklar</h3><p>Güven seviyesi: A resmi kurum, B açık topluluk verisi (OpenStreetMap), C belediye teknik verisi.</p>
+      ${acik(acilir(V.kaynaklar.map(k=>`<div style="padding:10px 0;border-top:1px solid var(--cizgi)"><p class="etiket">Güven: ${k.guven} · ${kaçış(k.yil)}</p><p style="font-weight:800;margin:2px 0">${kaçış(k.baslik)}</p><p style="margin:2px 0">${kaçış(k.yayinci)}</p><p style="color:var(--soluk);margin:2px 0">${kaçış(k.kullanim)}</p><a href="${k.url}" target="_blank" rel="noopener" style="overflow-wrap:anywhere">${kaçış(k.url)}</a></div>`).join(""), `Tüm kaynaklar (${V.kaynaklar.length})`), odak==="kaynaklar")}</div>
     <div class="kart"><h3>Bu sürümdeki sınırlamalar</h3>
-      <ul style="margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:6px">
+      ${acilir(`<ul style="margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:6px">
         <li>Senaryo rakamları 2019 bina envanterine dayanır; sonradan yapılan veya yıkılan binaları içermez.</li>
         <li>Mahalle sınırları ve kıyı çizgisi OpenStreetMap'ten alındı; resmi sınırdan birkaç on metre farklı olabilir.</li>
         <li>Konut ve işyeri sayıları ile okul, sağlık, park listeleri şimdilik yalnızca Kadıköy için var. Bina sayıları ve yapım yılları İBB'nin 2017 kayıtlarıdır; sonrasında yıkılıp yeniden yapılan binaları göstermez. Toplanma alanlarının yeri Üsküdar ve Maltepe için var, Kadıköy için yok; Maltepe'de alan büyüklüğü bilgisi yok. Diğer 36 ilçe için toplanma alanı verisi henüz yok; e-Devlet'ten sorgulayabilirsiniz.</li><li>İBB'nin 2019 analizi 959 mahalle üzerinden yapılmıştır. Organize sanayi bölgeleri (Dudullu, İkitelli, Beylikdüzü) ve sonradan kurulan Esenler 15 Temmuz ile Eyüpsultan 5. Levent mahalleleri analizde yoktur; haritada çizgili gösterilir. Ümraniye'de Finanskent Site mahallesiyle birlikte sayılmıştır; Saray mahallesinin OpenStreetMap'te ayrı sınırı olmadığı için haritada gösterilemiyor. Bazı mahallelerin adı İBB tablosunda eskidir (örneğin Bağcılar'daki 15 Temmuz, İBB'de Evren adıyla geçer).</li><li>Zemin haritası 39 ilçe kitapçığındaki haritalardan ayrı ayrı sayısallaştırıldı. Eyüpsultan'ın güneyindeki birkaç mahallede ve Şile'nin bazı köylerinde haritada boşluk var; buralarda zemin yüzdesi mahallenin yalnızca bir kısmına dayanıyor.</li>
@@ -1075,7 +1078,7 @@ function dahaFazlaSayfasi(el, odak){
         <li>Fay hattı düşük çözünürlüklü bölge haritasından alındı; fay uzaklıkları ±1 km yaklaşıktır. Adalar ilçesinin verileri henüz eklenmedi; adalar haritada yalnızca görsel amaçlıdır.</li>
         <li>Belediye toplanma alanı listeleri resmi atamanızın yerine geçmez; kendi alanınızı e-Devlet'ten sorgulayın.</li>
         <li>Tsunami bilgisi mahalle bazındadır; su basabilecek sokakları göstermez.</li>
-      </ul></div>
+      </ul>`, "Listeyi göster")}</div>
     <div class="kart"><h3>Uygulama hakkında</h3><p>Bu uygulama resmi bir rapor değildir ve hiçbir devlet kurumunu temsil etmez. Gösterilen rakamlar mahalle geneli için yapılmış model tahminleridir; tek bir binanın durumunu göstermez. Binanız için yetkili mühendis incelemesi gerekir.</p><p>Uygulama kişisel bilgi toplamaz; konumunuz yalnızca telefonunuzda kullanılır. <a href="gizlilik.html" target="_blank" rel="noopener">Gizlilik politikası</a></p><p style="color:var(--soluk);font-size:.95rem">© 2026 Egemen Çalıkoğlu. Tüm hakları saklıdır. Uygulamanın kodu, tasarımı ve içeriği izinsiz kopyalanamaz, değiştirilemez ve dağıtılamaz. Kullanılan veriler, yazı tipi ve harita sınırları kendi kaynaklarının lisanslarına tabidir.</p></div>
   </div>`;
   bagla(el);
