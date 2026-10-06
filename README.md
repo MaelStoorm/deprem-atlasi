@@ -22,6 +22,15 @@ Bu resmi bir rapor değil ve hiçbir kurumu temsil etmiyor. Gösterilen rakamlar
 
 Bir hata görürseniz ya da öneriniz varsa [Issues](https://github.com/MaelStoorm/deprem-atlasi/issues) kısmından yazabilirsiniz, çok sevinirim.
 
+## Android uygulaması
+
+`android/` klasöründe Google Play için hazırlanan Android uygulaması var. Uygulama siteyi telefonun içindeki kopyasından açar (internet olmadan da çalışır); kök klasördeki site dosyaları her derlemede uygulamaya otomatik kopyalanır, yani ayrıca güncellemek gerekmez.
+
+- `main` dalına her gönderimde GitHub Actions **imzasız** bir AAB derler ve `builds` dalına koyar: `deprem-atlasi-unsigned.aab`, hangi commit'ten derlendiği `commit.txt` içinde. Derleme başarısız olursa hata kaydı `build-log.txt` olarak yazılır, son sağlam AAB yerinde kalır.
+- Paket adı: `com.maelstorm.deprematlasi`. Sürüm `android/app/build.gradle.kts` içinde; Play'e her yeni yüklemede `versionCode` bir artırılmalı.
+- Play'e yüklemeden önce AAB kendi yükleme anahtarınızla imzalanır, örneğin: `jarsigner -keystore yukleme.jks -signedjar deprem-atlasi.aab deprem-atlasi-unsigned.aab yukleme`. Anahtar dosyası ve şifreler depoya **konmaz**.
+- Uygulama simgeleri `ikon-maskable-512.png` dosyasından `python3 android/araclar/ikon_uret.py` ile üretilir.
+
 ## Telif hakkı
 
 © 2026 Egemen Çalıkoğlu. **Tüm hakları saklıdır.**

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Telefon koyu temadayken sayfa da kendi koyu renklerini kullanır -->
+    <style name="Tema" parent="android:Theme.Material.NoActionBar">
+        <item name="android:windowBackground">@color/sayfa_zemin</item>
+    </style>
+</resources>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Açık tema: sayfa prefers-color-scheme ile açık görünür -->
+    <style name="Tema" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:windowBackground">@color/sayfa_zemin</item>
+    </style>
+</resources>

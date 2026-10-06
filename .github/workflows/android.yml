@@ -1,0 +1,83 @@
+# Android uygulaması: her main güncellemesinde imzasız AAB derlenir ve "builds" dalına konur.
+# GitHub Pages'e dokunmaz (site main dalından yayınlanmaya devam eder).
+name: Android
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: android-aab
+  cancel-in-progress: false
+
+jobs:
+  aab:
+    name: İmzasız AAB
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - uses: gradle/actions/setup-gradle@v4
+
+      - name: AAB derle (imzasız)
+        working-directory: android
+        run: |
+          set -o pipefail
+          chmod +x gradlew
+          ./gradlew --no-daemon --stacktrace bundleRelease 2>&1 | tee "$RUNNER_TEMP/derleme.log"
+
+      - name: AAB'yi builds dalına koy
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          aab=android/app/build/outputs/bundle/release/app-release.aab
+          test -s "$aab"
+          out="$RUNNER_TEMP/builds"
+          rm -rf "$out" && mkdir -p "$out"
+          cp "$aab" "$out/deprem-atlasi-unsigned.aab"
+          echo "$GITHUB_SHA" > "$out/commit.txt"
+          cd "$out"
+          git init -q -b builds
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -q -m "Derleme ${GITHUB_SHA::7}"
+          git push -q -f "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" builds
+
+      - name: Hata günlüğünü builds dalına yaz (son başarılı AAB kalır)
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -eu
+          url="https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          out="$RUNNER_TEMP/builds-hata"
+          rm -rf "$out" && mkdir -p "$out" && cd "$out"
+          git init -q -b builds
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git fetch -q --depth 1 "$url" builds; then git checkout -q -B builds FETCH_HEAD; fi
+          {
+            echo "Derleme BAŞARISIZ"
+            echo "commit: $GITHUB_SHA"
+            echo "çalıştırma: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+            echo
+            if [ -f "$RUNNER_TEMP/derleme.log" ]; then
+              cat "$RUNNER_TEMP/derleme.log"
+            else
+              echo "(Derleme günlüğü yok: hata derlemeden önceki bir adımda oldu.)"
+            fi
+          } > build-log.txt
+          git add build-log.txt
+          git commit -q -m "Derleme hatası ${GITHUB_SHA::7}"
+          git push -q -f "$url" HEAD:builds

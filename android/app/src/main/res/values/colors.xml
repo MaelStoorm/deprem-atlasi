@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- manifest.webmanifest: background_color / theme_color -->
+    <color name="sayfa_zemin">#F2F4F3</color>
+    <color name="sistem_cubugu">#2B2F34</color>
+    <!-- Simgenin zemin rengi (ikon-maskable-512.png kenar rengi) -->
+    <color name="ic_launcher_background">#0B5F7A</color>
+</resources>

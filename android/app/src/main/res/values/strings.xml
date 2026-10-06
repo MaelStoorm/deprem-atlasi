@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Deprem Atlası</string>
+    <string name="uygulama_yok">Bu bağlantıyı açabilecek bir uygulama bulunamadı.</string>
+    <string name="mesaji_gonder">Mesajı gönder</string>
+</resources>
