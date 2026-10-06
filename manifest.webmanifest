@@ -1,14 +1,20 @@
 {
-  "name": "Deprem Atlası",
+  "id": "/deprem-atlasi/",
+  "name": "Deprem Atlası – İstanbul",
   "short_name": "Deprem Atlası",
+  "description": "İstanbul'un 958 mahallesinin zemin, deprem senaryosu, toplanma alanı ve tsunami bilgisi; resmi kaynaklardan.",
   "lang": "tr",
+  "dir": "ltr",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
+  "orientation": "portrait",
   "background_color": "#f2f4f3",
   "theme_color": "#2b2f34",
+  "categories": ["education", "navigation", "utilities"],
   "icons": [
-    { "src": "ikon-192.png", "sizes": "192x192", "type": "image/png" },
-    { "src": "ikon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+    { "src": "ikon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "ikon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "ikon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
   ]
 }
