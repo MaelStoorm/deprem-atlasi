@@ -728,7 +728,7 @@ function acilSayfasi(el, odak){
     <div class="kart" id="acil-bildirim">
       <p class="etiket">Bildirim</p><h3>Deprem olunca haber ver</h3>
       <div id="bildirim-kutu"></div>
-      ${acilir(`<p>Marmara bölgesinde seçtiğiniz büyüklüğün üstünde bir deprem olursa telefonunuza bildirim gelir. Kandilli ve AFAD listeleri dakikada bir kontrol edilir.</p>
+      ${acilir(`<p>Marmara bölgesinde seçtiğiniz büyüklüğün üstünde bir deprem olursa telefonunuza bildirim gelir. Kandilli ve AFAD listeleri dakikada bir kontrol edilir. Bildirimleri açtıktan sonra mobil veride de gelir. Bazı mobil operatörlerde bildirimleri açmak veya deneme göndermek şu an çalışmayabilir; bu durumda bir kez Wi-Fi'de açmanız yeterli.</p>
         <p class="not"><b>Bu bir erken uyarı değildir.</b> Bildirim, kurumlar depremi yayınladıktan sonra, yani sarsıntıdan birkaç dakika sonra gelir. Sarsıntıyı hissederseniz bildirimi beklemeden Çök-Kapan-Tutun.</p>
         <p>Android telefonlarda Google'ın kendi deprem uyarısını da açık tutmanızı öneririz: Ayarlar → Güvenlik ve acil durum → Deprem uyarıları.</p>`, "Nasıl çalışır?")}
     </div>
@@ -822,16 +822,21 @@ function depremSatiri(d){
   const kaynak=[d.mag.kandilli!=null?`Kandilli ${ondalik(d.mag.kandilli)}`:null, d.mag.afad!=null?`AFAD ${ondalik(d.mag.afad)}`:null].filter(Boolean).join(" · ");
   return `<li><span class="buyukluk ${sinif}">${ondalik(m)}</span><span><b>${kaçış(d.yerAfad||d.yerKandilli||"Marmara")}</b>
     <small>${ne_zaman(d.t)} · ${aktifIlce().e} ${Math.round(kmUzak(ILCE_MERKEZ[aktifIlce().kod],[d.lon,d.lat]))} km · derinlik ${ondalik(d.der)} km</small><small>${kaynak}</small></span></li>`; }
+// Sunucuya ulaşılamadığında: telefon çevrimdışıysa "internet yok"; çevrimiçiyse büyük ihtimalle operatör engeli
+// (Ekim 2026'dan beri bazı mobil operatörler workers.dev adreslerine erişimi kesiyor; Wi-Fi'de çalışıyor).
+const sunucuHatasi = islem => navigator.onLine === false
+  ? `İnternet yok; ${islem}.`
+  : `Sunucuya ulaşılamadı; ${islem}. Bazı mobil operatörler şu an bu adrese erişimi engelliyor: Wi-Fi'ye bağlanıp tekrar deneyin.`;
 async function depremleriGoster(){
   const kutu=$("#deprem-kutu"); if(!kutu) return;
   const ciz = (veri, eski) => { const l=(veri.depremler||[]).filter(d=>enBuyukMag(d)>=2.5);
     const ilk=l.slice(0,5), kalan=l.slice(5,20);
     kutu.innerHTML = (l.length ? `<ul class="deprem-liste">${ilk.map(depremSatiri).join("")}</ul>` + (kalan.length ? acilir(`<ul class="deprem-liste">${kalan.map(depremSatiri).join("")}</ul>`, `${kalan.length} deprem daha`) : "")
       : `<p>Son 7 günde Marmara'da 2,5 ve üstü deprem kaydı yok.</p>`)
-      + `<p style="color:var(--soluk);font-size:.85rem">${eski?"İnternet yok; son kaydedilen liste gösteriliyor. ":""}${veri.guncelleme?"Son kontrol: "+ne_zaman(veri.guncelleme):""}</p>`; };
+      + `<p style="color:var(--soluk);font-size:.85rem">${eski?(navigator.onLine===false?"İnternet yok; son kaydedilen liste gösteriliyor. ":"Liste yenilenemedi (mobil veride olabilir; Wi-Fi'de deneyin), son kaydedilen liste gösteriliyor. "):""}${veri.guncelleme?"Son kontrol: "+ne_zaman(veri.guncelleme):""}</p>`; };
   const kayitli = depo.oku("depremler", null); if (kayitli) ciz(kayitli, true);
   try { const y = await fetch(BILDIRIM_URL+"/depremler",{cache:"no-store"}); const v = await y.json(); depo.yaz("depremler", v); ciz(v, false); }
-  catch(e){ if(!kayitli) kutu.innerHTML = `<p>Liste için internet gerekiyor.</p>`; }
+  catch(e){ if(!kayitli) kutu.innerHTML = `<p>${sunucuHatasi("liste alınamadı")}</p>`; }
 }
 
 /* --- Deprem bildirimleri (Web Push) --- */
@@ -854,7 +859,7 @@ async function bildirimKutusu(){
     $("#bildirim-deneme").onclick = async () => { bildir("Deneme bildirimi gönderiliyor…");
       try { const y = await fetch(BILDIRIM_URL+"/deneme",{method:"POST",body:JSON.stringify({endpoint:abone.endpoint})}); const v = await y.json();
         bildir(y.ok ? "Gönderildi; birkaç saniye içinde bildirim gelmeli." : (v.hata ? "Gönderilemedi: "+v.hata : "Gönderilemedi."), 6000); }
-      catch(e){ bildir("İnternet yok; deneme gönderilemedi."); } };
+      catch(e){ bildir(sunucuHatasi("deneme gönderilemedi"), 9000); } };
     $("#bildirim-kapat").onclick = async () => { try{ await fetch(BILDIRIM_URL+"/iptal",{method:"POST",body:JSON.stringify({endpoint:abone.endpoint})}); }catch(e){} await abone.unsubscribe(); bildir("Bildirimler kapatıldı."); bildirimKutusu(); };
   } else if (Notification.permission==="denied"){
     kutu.innerHTML = `<p class="not">Bildirim izni kapalı. Açmak için telefonun Ayarlar bölümünden bu uygulamanın bildirim iznini açın.</p>`; return;
@@ -865,22 +870,23 @@ async function bildirimKutusu(){
   kutu.querySelectorAll("[data-esik]").forEach(b => b.onclick = async () => { const v=+b.dataset.esik; depo.yaz("bildirimEsik", v);
     kutu.querySelectorAll("[data-esik]").forEach(x=>x.setAttribute("aria-pressed", x===b));
     const a = await (await navigator.serviceWorker.ready).pushManager.getSubscription();
-    if (a) { try { await fetch(BILDIRIM_URL+"/abone",{method:"POST",body:JSON.stringify({abonelik:a.toJSON(),esik:v})}); bildir(`${ondalik(v)} ve üstü depremler bildirilecek.`); bildirimKutusu(); } catch(e){ bildir("İnternet yok; ayar kaydedilemedi."); } } });
+    if (a) { try { await fetch(BILDIRIM_URL+"/abone",{method:"POST",body:JSON.stringify({abonelik:a.toJSON(),esik:v})}); bildir(`${ondalik(v)} ve üstü depremler bildirilecek.`); bildirimKutusu(); } catch(e){ bildir(sunucuHatasi("ayar kaydedilemedi"), 9000); } } });
 }
 async function bildirimAc(){
   // iPhone izin penceresini yalnızca dokunuşun hemen ardından gösterir: önce izin, sonra internet
   const izin = await Notification.requestPermission();
   if (izin !== "granted"){ bildir("Bildirim izni verilmedi."); bildirimKutusu(); return; }
+  let ag = true;   // hata sunucuya ulaşırken mi, telefonun bildirim kaydında mı?
   try {
     bildir("Bildirimler açılıyor…", 6000);
-    const { anahtar } = await (await fetch(BILDIRIM_URL+"/vapid")).json();
+    const { anahtar } = await (await fetch(BILDIRIM_URL+"/vapid")).json(); ag = false;
     const kayit = await navigator.serviceWorker.ready;
     const abone = await kayit.pushManager.subscribe({ userVisibleOnly:true, applicationServerKey:b64uDiz(anahtar) });
-    const esik = depo.oku("bildirimEsik", 4);
+    const esik = depo.oku("bildirimEsik", 4); ag = true;
     const y = await fetch(BILDIRIM_URL+"/abone",{method:"POST",body:JSON.stringify({abonelik:abone.toJSON(),esik})});
     if (!y.ok) throw new Error("sunucu "+y.status);
     bildir(`Bildirimler açıldı: Marmara'da ${ondalik(esik)} ve üstü depremler.`, 6000);
-  } catch(e){ bildir("Bildirimler açılamadı. İnternet bağlantınızı kontrol edip tekrar deneyin."); }
+  } catch(e){ bildir(ag ? sunucuHatasi("bildirimler açılamadı") : "Bildirimler açılamadı: telefon bildirim kaydını kabul etmedi. Uygulamayı kapatıp açarak tekrar deneyin.", 10000); }
   bildirimKutusu();
 }
 
@@ -1103,7 +1109,7 @@ async function adresAra(q){
   adresAra.son=Date.now(); liste.innerHTML=`<li class="not">Aranıyor…</li>`;
   let v=null;
   try { const y=await fetch(`${BILDIRIM_URL}/adres?q=${encodeURIComponent(q.slice(0,120))}`, {cache:"no-store"}); v=await y.json(); if(!y.ok) throw new Error(v&&v.hata||y.status); }
-  catch(e){ liste.innerHTML=`<li class="not">Adres servisine ulaşılamadı. Biraz sonra tekrar deneyin veya mahallenizi yukarıdan seçin.</li>`; return; }
+  catch(e){ liste.innerHTML=`<li class="not">${sunucuHatasi("adres aranamadı")} İsterseniz mahallenizi yukarıdan seçin.</li>`; return; }
   const sonuc=(v.sonuclar||[]).map(r=>({...r, m:noktaMahalle([r.lon,r.lat])})).filter(r=>r.m);
   if (!sonuc.length){ liste.innerHTML=`<li class="not">"${kaçış(q)}" İstanbul'da bulunamadı. Cadde veya sokak adına mahalle ya da ilçe adını ekleyip deneyin.</li>`; return; }
   liste.innerHTML = sonuc.map((r,i)=>`<li><button data-adres="${i}"><span>${kaçış(r.ad)} <small>${r.m.ad} · ${ilceAd(r.m)}</small></span><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button></li>`).join("")
