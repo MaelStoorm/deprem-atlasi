@@ -60,6 +60,10 @@ struct ShellConfig {
     let incoming: String
     let geolocation: Bool
     let orientations: UIInterfaceOrientationMask
+    /// Sayfanın rahat sığdığı yükseklik (CSS piksel). Ekran daha alçaksa sayfa bu kadar uzaklaştırılır (0: kapalı)
+    let fitHeight: CGFloat
+    /// Uygulamaya özel ek CSS (ör. uygulamada anlamı olmayan bir kutuyu gizlemek için)
+    let extraCSS: String
 
     init() {
         let d = (Bundle.main.object(forInfoDictionaryKey: "Shell") as? [String: Any]) ?? [:]
@@ -72,6 +76,8 @@ struct ShellConfig {
         bridge = d["Bridge"] as? String ?? "none"
         incoming = d["Incoming"] as? String ?? "none"
         geolocation = d["Geolocation"] as? Bool ?? false
+        fitHeight = CGFloat((d["FitHeight"] as? NSNumber)?.doubleValue ?? 0)
+        extraCSS = d["ExtraCSS"] as? String ?? ""
         switch d["Orientation"] as? String ?? "portrait" {
         case "landscape": orientations = .landscape
         case "all": orientations = .allButUpsideDown

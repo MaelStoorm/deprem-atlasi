@@ -59,6 +59,15 @@ final class ShellViewController: UIViewController, WKNavigationDelegate, WKUIDel
         view.backgroundColor = config.background
     }
 
+    // Alçak ekranlarda (ör. yatay iPhone) sayfa, tasarlandığı yüksekliğe sığacak kadar uzaklaştırılır
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        guard config.fitHeight > 0, view.bounds.height > 0 else { return }
+        let usable = view.bounds.height - view.safeAreaInsets.top - view.safeAreaInsets.bottom
+        let zoom = max(0.7, min(1, usable / config.fitHeight))
+        if abs(web.pageZoom - zoom) > 0.01 { web.pageZoom = zoom }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         location.answer = { [weak self] args in self?.call("window.__shellLocation", args) }
@@ -77,6 +86,20 @@ final class ShellViewController: UIViewController, WKNavigationDelegate, WKUIDel
           window.addEventListener('DOMContentLoaded', function () { send('hazır', [location.href, document.title]); });
         })();
         """]
+        // Sayfa iki parmakla büyümesin: yakınlaştırmayı sayfanın kendisi (ör. harita) yapsın
+        let css = config.extraCSS.replacingOccurrences(of: "\\", with: "\\\\").replacingOccurrences(of: "`", with: "\\`")
+        list.append("""
+        document.addEventListener('DOMContentLoaded', function () {
+          var m = document.querySelector('meta[name=viewport]');
+          if (!m) { m = document.createElement('meta'); m.name = 'viewport'; document.head.appendChild(m); }
+          var c = (m.content || 'width=device-width,initial-scale=1,viewport-fit=cover')
+            .split(',').map(function (s) { return s.trim(); })
+            .filter(function (s) { return s && !/^(maximum-scale|minimum-scale|user-scalable)/.test(s); });
+          m.content = c.concat(['maximum-scale=1', 'minimum-scale=1', 'user-scalable=no']).join(',');
+          var css = `\(css)`;
+          if (css) { var st = document.createElement('style'); st.textContent = css; document.head.appendChild(st); }
+        });
+        """)
         if config.bridge == "files" {
             list.append("""
             window.AndroidBridge = {
