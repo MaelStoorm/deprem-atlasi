@@ -1,0 +1,1 @@
+[out:json][timeout:180];area["name"="Kadıköy"]["boundary"="administrative"]["admin_level"="6"]->.a;(rel(area.a)["boundary"="administrative"]["admin_level"~"^(8|9|10)$"];);out geom;

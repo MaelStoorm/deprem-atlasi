@@ -1,0 +1,22 @@
+21
+8 Kozyatağı Mahallesi
+8 Bostancı Mahallesi
+8 Suadiye Mahallesi
+8 Rasimpaşa Mahallesi
+8 Osmanağa Mahallesi
+8 Caferağa Mahallesi
+8 Koşuyolu Mahallesi
+8 Hasanpaşa Mahallesi
+8 Acıbadem Mahallesi
+8 Zühtüpaşa Mahallesi
+8 Eğitim Mahallesi
+8 Fikirtepe Mahallesi
+8 Feneryolu Mahallesi
+8 Fenerbahçe Mahallesi
+8 Dumlupınar Mahallesi
+8 Göztepe Mahallesi
+8 Merdivenköy Mahallesi
+8 Caddebostan Mahallesi
+8 Sahrayıcedit Mahallesi
+8 19 Mayıs Mahallesi
+8 Erenköy Mahallesi
