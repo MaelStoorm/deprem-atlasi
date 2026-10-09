@@ -30,6 +30,15 @@ jobs:
           done
           python3 -c "import json;d=json.load(open('osm.json'));print(len(d['elements']));[print(e['tags'].get('admin_level'),e['tags'].get('name')) for e in d['elements']]" > liste.txt 2>>hata.txt || true
           head -c 600 osm.json >> hata.txt || true
+      - uses: actions/checkout@v5
+        with:
+          path: depo
+      - name: Uygulamanın verisine uygula (önizleme)
+        env:
+          ILCE: ${{ github.event.inputs.ilce }}
+        run: |
+          pip install -q shapely matplotlib
+          python3 depo/araclar/osm_sinir.py out/osm.json depo/index.html "$(python3 -c "import os;print(os.environ['ILCE'].replace('i','İ').upper())")" out/sonuc 2>&1 | tee out/islem.txt || true
       - name: veri-osm dalına koy
         run: |
           cd out
