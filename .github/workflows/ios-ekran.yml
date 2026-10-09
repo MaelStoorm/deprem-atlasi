@@ -59,6 +59,7 @@ jobs:
             xcrun simctl io "$DEV" screenshot "$RUNNER_TEMP/ekran/$SCHEME-1.png"
             sleep 6
             xcrun simctl io "$DEV" screenshot "$RUNNER_TEMP/ekran/$SCHEME-2.png"
+            xcrun simctl spawn "$DEV" log show --last 3m --style compact --predicate 'eventMessage CONTAINS "[kabuk]"' > "$RUNNER_TEMP/ekran/$SCHEME-gunluk.txt" 2>&1 || true
             xcrun simctl terminate "$DEV" "$BID" || true
           done
           ls -la "$RUNNER_TEMP/ekran"

@@ -66,7 +66,17 @@ final class ShellViewController: UIViewController, WKNavigationDelegate, WKUIDel
     }
 
     private func userScripts() -> [String] {
-        var list: [String] = []
+        // Sayfa hataları cihaz günlüğüne yazılır ("[kabuk]" ile başlar); sorun ararken işe yarar
+        var list: [String] = ["""
+        (function () {
+          function send(k, a) { try { webkit.messageHandlers.shell.postMessage({ op: 'log', text: k + ': ' + Array.prototype.map.call(a, String).join(' ') }); } catch (e) {} }
+          window.addEventListener('error', function (e) { send('hata', [e.message, (e.filename || '') + ':' + (e.lineno || '')]); });
+          window.addEventListener('unhandledrejection', function (e) { send('söz', [e.reason]); });
+          document.addEventListener('securitypolicyviolation', function (e) { send('csp', [e.violatedDirective, e.blockedURI]); });
+          var ce = console.error; console.error = function () { send('console', arguments); return ce.apply(console, arguments); };
+          window.addEventListener('DOMContentLoaded', function () { send('hazır', [location.href, document.title]); });
+        })();
+        """]
         if config.bridge == "files" {
             list.append("""
             window.AndroidBridge = {
@@ -131,7 +141,16 @@ final class ShellViewController: UIViewController, WKNavigationDelegate, WKUIDel
         flushPendingFiles()
     }
 
+    func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
+        NSLog("[kabuk] yüklenemedi: %@", error.localizedDescription)
+    }
+
+    func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+        NSLog("[kabuk] sayfa hatası: %@", error.localizedDescription)
+    }
+
     func webViewWebContentProcessDidTerminate(_ webView: WKWebView) {
+        NSLog("[kabuk] sayfa motoru kapandı, yeniden açılıyor")
         // Sayfa motoru kapanırsa (bellek vb.) sayfayı yeniden aç; kayıtlar korunur
         webView.reload()
     }
@@ -205,6 +224,8 @@ final class ShellViewController: UIViewController, WKNavigationDelegate, WKUIDel
             UIPasteboard.general.string = body["text"] as? String ?? ""
         case "location":
             if let id = body["id"] as? Int { requestLocation(id) }
+        case "log":
+            NSLog("[kabuk] %@", body["text"] as? String ?? "")
         default:
             break
         }
