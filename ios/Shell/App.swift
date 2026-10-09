@@ -49,6 +49,8 @@ struct ShellConfig {
 
     let background: UIColor
     let lightStatusBar: Bool
+    /// Durum çubuğu telefonun açık/koyu temasına uysun (sayfa temaya göre renk değiştiriyorsa)
+    let autoStatusBar: Bool
     let startPage: String
     /// Sayfanın https ile çağırdığı sunucu (ör. https://ornek.workers.dev). İstekler uygulama üzerinden iletilir.
     let proxyOrigin: String?
@@ -63,6 +65,7 @@ struct ShellConfig {
         let d = (Bundle.main.object(forInfoDictionaryKey: "Shell") as? [String: Any]) ?? [:]
         background = UIColor(hex: d["Background"] as? String ?? "#000000")
         lightStatusBar = d["LightStatusBar"] as? Bool ?? true
+        autoStatusBar = d["AutoStatusBar"] as? Bool ?? false
         startPage = d["StartPage"] as? String ?? "index.html"
         let p = (d["ProxyOrigin"] as? String ?? "").trimmingCharacters(in: .whitespaces)
         proxyOrigin = p.isEmpty ? nil : p

@@ -23,7 +23,9 @@ final class ShellViewController: UIViewController, WKNavigationDelegate, WKUIDel
     private let location = CLLocationManager()
     private var locationWaiters: [Int] = []
 
-    override var preferredStatusBarStyle: UIStatusBarStyle { config.lightStatusBar ? .lightContent : .darkContent }
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        config.autoStatusBar ? .default : (config.lightStatusBar ? .lightContent : .darkContent)
+    }
     override var prefersHomeIndicatorAutoHidden: Bool { config.orientations == .landscape }
 
     // MARK: - Kurulum
