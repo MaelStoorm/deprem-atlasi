@@ -1,7 +1,7 @@
 name: iOS derleme
 
 # iOS sürümünü GitHub'ın Mac sunucusunda derler, imzalar ve App Store Connect'e (TestFlight) yükler.
-# Apple gizli değerleri (ASC_KEY_ID, ASC_ISSUER_ID, ASC_KEY_P8) girilmemişse yalnızca derlenip denetlenir.
+# Apple anahtarı (gizli değer ASC_KEY_P8) girilmemişse yalnızca derlenip denetlenir.
 # App Store Connect'te uygulama kaydı yoksa derlenir ama yüklenmez (IPA, çalışmanın "Artifacts" bölümüne konur).
 
 on:
@@ -36,8 +36,8 @@ jobs:
       SCHEME: ${{ matrix.scheme }}
       BUNDLE_ID: ${{ matrix.bundle }}
       APP_NAME: ${{ matrix.scheme }}
-      ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
-      ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
+      ASC_KEY_ID: ${{ secrets.ASC_KEY_ID || '9T56U9RA2U' }}
+      ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID || 'b5342a93-c449-4f20-bb30-9d03e0767ad6' }}
       ASC_KEY_P8: ${{ secrets.ASC_KEY_P8 }}
     steps:
       - uses: actions/checkout@v5
