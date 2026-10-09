@@ -64,6 +64,8 @@ struct ShellConfig {
     let fitHeight: CGFloat
     /// Uygulamaya özel ek CSS (ör. uygulamada anlamı olmayan bir kutuyu gizlemek için)
     let extraCSS: String
+    /// "pati": Pati oyunlarının ihtiyaç bildirimleri (izin sorulur, oyun kapanınca hatırlatma kurulur)
+    let reminders: String
 
     init() {
         let d = (Bundle.main.object(forInfoDictionaryKey: "Shell") as? [String: Any]) ?? [:]
@@ -78,6 +80,7 @@ struct ShellConfig {
         geolocation = d["Geolocation"] as? Bool ?? false
         fitHeight = CGFloat((d["FitHeight"] as? NSNumber)?.doubleValue ?? 0)
         extraCSS = d["ExtraCSS"] as? String ?? ""
+        reminders = d["Reminders"] as? String ?? ""
         switch d["Orientation"] as? String ?? "portrait" {
         case "landscape": orientations = .landscape
         case "all": orientations = .allButUpsideDown

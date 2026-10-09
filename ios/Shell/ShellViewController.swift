@@ -20,6 +20,8 @@ final class ShellViewController: UIViewController, WKNavigationDelegate, WKUIDel
     private var exportFile: URL?
 
     let location = ShellLocation()
+    private var reminders: ShellReminders?
+    private var askedReminders = false
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
         config.autoStatusBar ? .default : (config.lightStatusBar ? .lightContent : .darkContent)
@@ -59,6 +61,15 @@ final class ShellViewController: UIViewController, WKNavigationDelegate, WKUIDel
         view.backgroundColor = config.background
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        // Oyun açılırken bildirim izni bir kez sorulur (Android'deki gibi)
+        if let r = reminders, !askedReminders {
+            askedReminders = true
+            r.askPermission()
+        }
+    }
+
     // Alçak ekranlarda (ör. yatay iPhone) sayfa, tasarlandığı yüksekliğe sığacak kadar uzaklaştırılır
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -71,6 +82,7 @@ final class ShellViewController: UIViewController, WKNavigationDelegate, WKUIDel
     override func viewDidLoad() {
         super.viewDidLoad()
         location.answer = { [weak self] args in self?.call("window.__shellLocation", args) }
+        if config.reminders == "pati" { reminders = ShellReminders(web: web) }
         web.load(URLRequest(url: URL(string: "\(SiteScheme.scheme)://\(SiteScheme.host)/\(config.startPage)")!))
     }
 
