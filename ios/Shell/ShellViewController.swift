@@ -3,13 +3,12 @@
  * köprüleri iOS karşılıklarıyla tanımlar (dosya aç/kaydet, kopyala, konum, dış bağlantılar).
  * Telif Hakkı (c) 2026 Egemen Çalıkoğlu. Tüm hakları saklıdır.
  */
-import CoreLocation
 import UIKit
 import UniformTypeIdentifiers
 import WebKit
 
 final class ShellViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKScriptMessageHandler,
-                                 UIDocumentPickerDelegate, CLLocationManagerDelegate {
+                                 UIDocumentPickerDelegate {
 
     private let config = ShellConfig.shared
     private var web: WKWebView!
@@ -20,8 +19,7 @@ final class ShellViewController: UIViewController, WKNavigationDelegate, WKUIDel
     private var pickMode: PickMode = .textFiles
     private var exportFile: URL?
 
-    private let location = CLLocationManager()
-    private var locationWaiters: [Int] = []
+    let location = ShellLocation()
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
         config.autoStatusBar ? .default : (config.lightStatusBar ? .lightContent : .darkContent)
@@ -63,7 +61,7 @@ final class ShellViewController: UIViewController, WKNavigationDelegate, WKUIDel
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        location.delegate = self
+        location.answer = { [weak self] args in self?.call("window.__shellLocation", args) }
         web.load(URLRequest(url: URL(string: "\(SiteScheme.scheme)://\(SiteScheme.host)/\(config.startPage)")!))
     }
 
@@ -225,7 +223,7 @@ final class ShellViewController: UIViewController, WKNavigationDelegate, WKUIDel
         case "copy":
             UIPasteboard.general.string = body["text"] as? String ?? ""
         case "location":
-            if let id = body["id"] as? Int { requestLocation(id) }
+            if let id = body["id"] as? Int { location.request(id) }
         case "log":
             NSLog("[kabuk] %@", body["text"] as? String ?? "")
         default:
@@ -323,48 +321,10 @@ final class ShellViewController: UIViewController, WKNavigationDelegate, WKUIDel
 
     private func toast(_ message: String) { call("window.__toast", [message]) }
 
-    private func call(_ function: String, _ args: [Any]) {
+    func call(_ function: String, _ args: [Any]) {
         guard let json = try? JSONSerialization.data(withJSONObject: args),
               let list = String(data: json, encoding: .utf8) else { return }
         web.evaluateJavaScript("\(function) && \(function).apply(null, \(list))", completionHandler: nil)
-    }
-
-    // MARK: - Konum
-
-    private func requestLocation(_ id: Int) {
-        locationWaiters.append(id)
-        switch location.authorizationStatus {
-        case .notDetermined: location.requestWhenInUseAuthorization()
-        case .denied, .restricted: answerLocation(nil, code: 1, message: "Konum izni verilmedi.")
-        default: location.requestLocation()
-        }
-    }
-
-    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        guard !locationWaiters.isEmpty else { return }
-        switch manager.authorizationStatus {
-        case .authorizedWhenInUse, .authorizedAlways: manager.requestLocation()
-        case .denied, .restricted: answerLocation(nil, code: 1, message: "Konum izni verilmedi.")
-        default: break
-        }
-    }
-
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let l = locations.last { answerLocation(l, code: 0, message: "") }
-    }
-
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        let denied = (error as? CLError)?.code == .denied
-        answerLocation(nil, code: denied ? 1 : 2, message: denied ? "Konum izni verilmedi." : "Konum bulunamadı.")
-    }
-
-    private func answerLocation(_ l: CLLocation?, code: Int, message: String) {
-        let ids = locationWaiters
-        locationWaiters.removeAll()
-        for id in ids {
-            call("window.__shellLocation", [id, l?.coordinate.latitude ?? 0, l?.coordinate.longitude ?? 0,
-                                            l?.horizontalAccuracy ?? 0, code, message])
-        }
     }
 }
 
