@@ -1,0 +1,4 @@
+ios/*.xcodeproj/
+ios/gen/
+ios/*/Info.plist
+__pycache__/

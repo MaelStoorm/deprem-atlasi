@@ -1,0 +1,32 @@
+# DepremAtlasi iOS projesi. Xcode projesi bu dosyadan XcodeGen ile üretilir (GitHub Actions'ta).
+# Ortak kabuk: ios/Shell. Uygulamanın kendisi Android'deki ile aynı sayfa; ios/hazirla.sh site klasörünü hazırlar.
+name: DepremAtlasi
+options:
+  deploymentTarget:
+    iOS: "15.0"
+settings:
+  base:
+    MARKETING_VERSION: "1.0.0"
+    CURRENT_PROJECT_VERSION: "1"
+    SWIFT_VERSION: "5.0"
+targets:
+  DepremAtlasi:
+    type: application
+    platform: iOS
+    sources:
+      - path: Shell
+      - path: DepremAtlasi/Assets.xcassets
+      - path: gen/DepremAtlasi/site
+        type: folder
+        buildPhase: resources
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.maelstorm.deprematlasi
+        PRODUCT_NAME: DepremAtlasi
+        TARGETED_DEVICE_FAMILY: "1"
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        GENERATE_INFOPLIST_FILE: NO
+        INFOPLIST_FILE: DepremAtlasi/Info.plist
+    info:
+      path: DepremAtlasi/Info.plist
+      properties: {"CFBundleDisplayName": "Deprem Atlası", "CFBundleShortVersionString": "$(MARKETING_VERSION)", "CFBundleVersion": "$(CURRENT_PROJECT_VERSION)", "CFBundleDevelopmentRegion": "tr", "LSRequiresIPhoneOS": true, "ITSAppUsesNonExemptEncryption": false, "UIRequiresFullScreen": true, "UIStatusBarStyle": "UIStatusBarStyleLightContent", "UIViewControllerBasedStatusBarAppearance": true, "UISupportedInterfaceOrientations": ["UIInterfaceOrientationPortrait"], "UILaunchScreen": {"UIColorName": "LaunchBg"}, "UIApplicationSceneManifest": {"UIApplicationSupportsMultipleScenes": false, "UISceneConfigurations": {"UIWindowSceneSessionRoleApplication": [{"UISceneConfigurationName": "Default", "UISceneDelegateClassName": "$(PRODUCT_MODULE_NAME).SceneDelegate"}]}}, "Shell": {"Background": "#2B2F34", "LightStatusBar": true, "Orientation": "portrait", "ProxyOrigin": "https://deprem-atlasi.egementughan.workers.dev", "Geolocation": true}, "NSLocationWhenInUseUsageDescription": "Bulunduğunuz mahallenin deprem bilgilerini göstermek ve \"İyiyim\" mesajına konumunuzu eklemek için. Konumunuz yalnızca telefonunuzda kullanılır."}
