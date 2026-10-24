@@ -1,17 +1,10 @@
 /*
- * Konum köprüsü: sayfanın navigator.geolocation isteklerini telefonun konum servisine iletir.
- * Konum kullanmayan uygulamalarda SHELL_NO_LOCATION bayrağıyla derlenir ve konum kodu hiç eklenmez.
+ * Konum köprüsü: sayfanın navigator.geolocation isteklerini ("Konumum" düğmesi, "İyiyim" mesajı)
+ * telefonun konum servisine iletir. İzin, kullanıcı konum isteyen bir düğmeye ilk dokunduğunda sorulur.
  * Telif Hakkı (c) 2026 Egemen Çalıkoğlu. Tüm hakları saklıdır.
  */
-import Foundation
-
-#if SHELL_NO_LOCATION
-final class ShellLocation {
-    var answer: (([Any]) -> Void)?
-    func request(_ id: Int) { answer?([id, 0, 0, 0, 2, "Konum kullanılamıyor."]) }
-}
-#else
 import CoreLocation
+import Foundation
 
 final class ShellLocation: NSObject, CLLocationManagerDelegate {
     var answer: (([Any]) -> Void)?
@@ -58,4 +51,3 @@ final class ShellLocation: NSObject, CLLocationManagerDelegate {
         }
     }
 }
-#endif

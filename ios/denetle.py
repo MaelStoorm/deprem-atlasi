@@ -1,10 +1,13 @@
-"""iOS'a giden site kopyasını denetler (GitHub Actions'ta ios/hazirla.sh'den sonra çalışır).
+"""iOS'a giden site kopyasını, kabuk kodunu ve ayarları denetler (GitHub Actions'ta ios/hazirla.sh'den sonra çalışır).
 
-  python3 ios/denetle.py ios/gen/DepremAtlasi/site ios/project.yml
+  python3 ios/denetle.py ios/gen/DepremAtlasi/site ios/Shell ios/project.yml ios/DepremAtlasi/Info.plist
 
 Derlemeyi durdurur, eğer:
 - kopyada yalnızca web/Android'de olan deprem bildirimi bölümünden bir parça kaldıysa,
 - iOS ayarlarında sayfaya CSS ile bir şey gizleyen ek CSS (ExtraCSS) varsa,
+- kabukta ya da sayfada uygulamanın kullanmadığı bir özelliğin (bildirim, dosya, reklam, satın alma,
+  ayarla açılıp kapanan kabuk seçenekleri) izi varsa. Deprem Atlası telefondan yalnızca konumu
+  ("Konumum") ve kendi sunucusundan son depremler / adres arama (yalnızca GET) kullanır,
 - sayfadaki satır içi betiklerden biri JavaScript olarak okunamıyorsa (node --check).
 """
 import re
@@ -25,6 +28,24 @@ YASAK = [
     "android:start", "android:end",
 ]
 YASAK_AYAR = [re.compile(r"ExtraCSS"), re.compile(r"display\s*:\s*none")]
+# Hem sayfada hem kabukta olmaması gerekenler (büyük/küçük harfe duyarlı)
+YASAK_KOD = [re.compile(y) for y in [
+    r"AndroidBridge", r"android:start", r"android:end", r"[Aa]d[Mm]ob", r"[Rr]ewarded", r"[Pp]urchase", r"[Bb]illing",
+    r"StoreKit", r"GoogleMobileAds", r"ExtraCSS", r"ProxyOrigin", r"AutoStatusBar", r"FitHeight", r"\bGeolocation\b",
+    r'"Reminders"', r"ShellNoAsk", r"SHELL_NO_LOCATION", r"UNUserNotificationCenter", r"UserNotifications",
+    r"UIDocumentPicker", r"UIPasteboard",
+]]
+# Reklam sözcüğü gizlilik sayfasında "reklam göstermez" diye geçtiği için orada aranmaz
+YASAK_REKLAM = re.compile(r"[Rr]eklam")
+UZANTI = (".swift", ".yml", ".plist", ".html", ".js")
+
+
+def kod_denetle(f, metin):
+    for y in YASAK_KOD + ([] if f.name.startswith("gizlilik") else [YASAK_REKLAM]):
+        for m in y.finditer(metin):
+            satir = metin.count("\n", 0, m.start()) + 1
+            hatalar.append(f"{f}:{satir}: yasak ifade: {m.group(0)}")
+
 
 hatalar = []
 sayfalar = sorted(site.rglob("*.html"))
@@ -38,6 +59,7 @@ for f in sayfalar:
     for y in YASAK:
         if y in metin:
             hatalar.append(f"{f}: yasak ifade: {y}")
+    kod_denetle(f, metin)
     # Satır içi betikler JavaScript olarak okunabiliyor mu?
     for i, m in enumerate(re.finditer(r"<script\b([^>]*)>(.*?)</script>", metin, re.S)):
         nit, kod = m.group(1), m.group(2)
@@ -54,10 +76,15 @@ for f in sayfalar:
             print(f"{f.name}: {i + 1}. betik tamam ({len(kod)} karakter)")
 
 for a in ayarlar:
-    metin = a.read_text(encoding="utf-8", errors="replace")
-    for y in YASAK_AYAR:
-        if y.search(metin):
-            hatalar.append(f"{a}: yasak ayar: {y.pattern}")
+    if not a.exists():
+        hatalar.append(f"{a}: bulunamadı")
+        continue
+    for f in [a] if a.is_file() else sorted(x for x in a.rglob("*") if x.suffix in UZANTI):
+        metin = f.read_text(encoding="utf-8", errors="replace")
+        for y in YASAK_AYAR:
+            if y.search(metin):
+                hatalar.append(f"{f}: yasak ayar: {y.pattern}")
+        kod_denetle(f, metin)
 
 if hatalar:
     print("\n".join("HATA: " + h for h in hatalar))

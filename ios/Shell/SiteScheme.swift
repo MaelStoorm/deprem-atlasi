@@ -1,9 +1,10 @@
 /*
  * Uygulamanın içindeki site dosyalarını app://site/ adresinden sunar.
  * Gerçek bir web kaynağı gibi davrandığı için kayıtlar (localStorage, IndexedDB) kalıcıdır ve
- * sayfa kendi dosyalarını fetch ile okuyabilir. İstenirse belirli bir sunucuya giden istekler de
- * buradan iletilir (/__vekil__/...): sunucu, uygulamanın adresine izin vermese de yanıt sayfaya ulaşır.
- * Yalnızca GET (veri okuma) istekleri iletilir; başka istekler 405 ile reddedilir.
+ * sayfa kendi dosyalarını fetch ile okuyabilir.
+ * Sayfanın "Son depremler" listesi ve adres arama istekleri uygulamanın kendi sunucusuna buradan iletilir
+ * (/__vekil__/depremler, /__vekil__/adres): sunucu, uygulamanın adresine izin vermese de yanıt sayfaya ulaşır.
+ * Yalnızca bu iki adrese GET (veri okuma) istekleri iletilir; başka istekler reddedilir.
  * Telif Hakkı (c) 2026 Egemen Çalıkoğlu. Tüm hakları saklıdır.
  */
 import Foundation
@@ -13,26 +14,33 @@ final class SiteScheme: NSObject, WKURLSchemeHandler {
     static let scheme = "app"
     static let host = "site"
     static let proxyPrefix = "/__vekil__"
+    /// Uygulamanın sunucusu (sayfadaki SUNUCU_URL ile aynı)
+    static let server = "https://deprem-atlasi.egementughan.workers.dev"
+    /// Sunucuda sayfanın kullandığı adresler: son depremler listesi ve adres arama
+    static let serverPaths: Set<String> = ["/depremler", "/adres"]
 
     private let root: URL
-    private let proxyOrigin: String?
     private var stopped = Set<ObjectIdentifier>()
     private let lock = NSLock()
 
-    init(root: URL, proxyOrigin: String?) {
+    init(root: URL) {
         self.root = root.standardizedFileURL
-        self.proxyOrigin = proxyOrigin
     }
 
     func webView(_ webView: WKWebView, start task: WKURLSchemeTask) {
         guard let url = task.request.url else { return }
         var path = url.path
-        if let origin = proxyOrigin, path.hasPrefix(Self.proxyPrefix) {
+        if path.hasPrefix(Self.proxyPrefix) {
+            let target = String(path.dropFirst(Self.proxyPrefix.count))
+            guard Self.serverPaths.contains(target) else {
+                reply(task, url: url, status: 404, mime: "text/plain", data: Data())
+                return
+            }
             guard (task.request.httpMethod ?? "GET").uppercased() == "GET" else {
                 reply(task, url: url, status: 405, mime: "text/plain", data: Data())
                 return
             }
-            forward(task, to: origin + String(path.dropFirst(Self.proxyPrefix.count)), query: url.query)
+            forward(task, to: Self.server + target, query: url.query)
             return
         }
         if path.isEmpty || path.hasSuffix("/") { path += "index.html" }
