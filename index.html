@@ -63,9 +63,9 @@ p{margin:0}
 a{color:var(--vurgu);text-underline-offset:3px}
 :focus-visible{outline:3px solid var(--vurgu);outline-offset:2px}
 [tabindex="-1"]:focus{outline:none}  /* sayfa açılınca odaklanan başlıklarda çerçeve görünmesin */
-#surum-serit{position:fixed;left:12px;right:12px;top:calc(env(safe-area-inset-top) + 10px);z-index:99;display:flex;align-items:center;gap:12px;background:var(--kontrol);color:var(--kontrol-yazi);border-radius:14px;padding:12px 14px;box-shadow:0 6px 20px rgba(0,0,0,.25);font-weight:600}
+/*android:start*/#surum-serit{position:fixed;left:12px;right:12px;top:calc(env(safe-area-inset-top) + 10px);z-index:99;display:flex;align-items:center;gap:12px;background:var(--kontrol);color:var(--kontrol-yazi);border-radius:14px;padding:12px 14px;box-shadow:0 6px 20px rgba(0,0,0,.25);font-weight:600}
 #surum-serit span{flex:1}
-#surum-serit button{font:inherit;font-weight:800;border:0;border-radius:10px;padding:10px 16px;background:var(--kontrol-etkin);color:#06223a;min-height:44px}
+#surum-serit button{font:inherit;font-weight:800;border:0;border-radius:10px;padding:10px 16px;background:var(--kontrol-etkin);color:#06223a;min-height:44px}/*android:end*/
 #uyg{position:relative;height:100%;overflow:hidden;overflow:clip}
 
 /* --- Harita --- */
@@ -250,14 +250,14 @@ a{color:var(--vurgu);text-underline-offset:3px}
 .panel-bilgi{display:flex;flex-direction:column;gap:6px;margin-bottom:12px;font-size:.98rem}
 .panel-bilgi p{display:flex;gap:8px;align-items:flex-start}
 .panel-bilgi i{width:12px;height:12px;border-radius:3px;flex:none;margin-top:.35em}
-/* --- Son depremler ve bildirim --- */
+/* --- Son depremler --- */
 .deprem-liste{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
 .deprem-liste li{display:flex;gap:12px;align-items:center;padding:10px 12px;border-radius:12px;background:var(--yuzey2)}
 .buyukluk{flex:none;min-width:58px;height:58px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.35rem;font-variant-numeric:tabular-nums;background:var(--b2);color:var(--murekkep)}
 .buyukluk.b3{background:#f2cf9b;color:#3a2a10}.buyukluk.b4{background:#e9a36f;color:#2a1608}.buyukluk.b5{background:var(--acil);color:#fff}
 .deprem-liste b{display:block;font-size:1rem;line-height:1.3}
 .deprem-liste small{display:block;color:var(--soluk);font-size:.85rem;line-height:1.35}
-.durum-rozet{display:inline-flex;align-items:center;gap:6px;font-weight:800;color:var(--onay)}
+/*android:start*/.durum-rozet{display:inline-flex;align-items:center;gap:6px;font-weight:800;color:var(--onay)}/*android:end*/
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 
@@ -334,7 +334,7 @@ const topKonumlu = x => x.length > 2;
 const topToplamM2 = m => (m.toplanma_liste||[]).reduce((a,x)=>a+(x[1]||0),0);
 const topKaynaklar = m => [...new Set(["ist-toplanma", ...(m.toplanma_liste||[]).filter(topKonumlu).map(x=>TOP_KAYNAK[x[4]])])];
 const AFAD_URL = "https://www.turkiye.gov.tr/afet-ve-acil-durum-yonetimi-acil-toplanma-alani-sorgulama";
-const BILDIRIM_URL = "https://deprem-atlasi.egementughan.workers.dev";   // deprem listesi ve bildirim sunucusu
+const SUNUCU_URL = "https://deprem-atlasi.egementughan.workers.dev";   // sunucu: deprem listesi ve adres arama/*android:start*/, deprem bildirimleri/*android:end*/
 const ILCE = Object.fromEntries(V.ilceler.map(i => [i.kod, i]));
 const ilceAd = m => ILCE[m.ilce].ad;
 const tumMahAd = m => `${m.ad} (${ilceAd(m)})`;
@@ -725,13 +725,13 @@ function acilSayfasi(el, odak){
       <div id="deprem-kutu"><p style="color:var(--soluk)">Yükleniyor…</p></div>
       <p class="kaynak">Kaynak: Kandilli Rasathanesi (Boğaziçi Üniversitesi) ve AFAD. İki kurumun ölçtüğü büyüklük biraz farklı olabilir; ikisi de gösterilir. <button data-kaynaklar>Bu bilgi nereden?</button></p>
     </div>
-    <div class="kart" id="acil-bildirim">
+    <!--android:start--><div class="kart" id="acil-bildirim">
       <p class="etiket">Bildirim</p><h3>Deprem olunca haber ver</h3>
       <div id="bildirim-kutu"></div>
       ${acilir(`<p>Marmara bölgesinde seçtiğiniz büyüklüğün üstünde bir deprem olursa telefonunuza bildirim gelir. Kandilli ve AFAD listeleri dakikada bir kontrol edilir. Bildirimleri açtıktan sonra mobil veride de gelir. Bazı mobil operatörlerde bildirimleri açmak veya deneme göndermek şu an çalışmayabilir; bu durumda bir kez Wi-Fi'de açmanız yeterli.</p>
         <p class="not"><b>Bu bir erken uyarı değildir.</b> Bildirim, kurumlar depremi yayınladıktan sonra, yani sarsıntıdan birkaç dakika sonra gelir. Sarsıntıyı hissederseniz bildirimi beklemeden Çök-Kapan-Tutun.</p>
         <p>Android telefonlarda Google'ın kendi deprem uyarısını da açık tutmanızı öneririz: Ayarlar → Güvenlik ve acil durum → Deprem uyarıları.</p>`, "Nasıl çalışır?")}
-    </div>
+    </div><!--android:end-->
     <div class="kart">
       <p class="etiket">Sarsıntı sırasında</p><h3>Çök, Kapan, Tutun</h3>
       <ol class="adimlar"><li><b>Çök</b><span>Yere diz çökün</span></li><li><b>Kapan</b><span>Başınızı ve boynunuzu koruyun</span></li><li><b>Tutun</b><span>Sağlam bir eşyaya tutunun</span></li></ol>
@@ -800,7 +800,7 @@ function acilSayfasi(el, odak){
     </div>
   </div>`; bagla(el);
   $("#iyiyim").onclick = iyiyimGonder;
-  depremleriGoster(); bildirimKutusu();
+  depremleriGoster();/*android:start*/ bildirimKutusu();/*android:end*/
   const durum = () => { const n=el.querySelectorAll("[data-canta]:checked").length; $("#canta-durum").textContent = n===CANTA.length ? "Çantanız hazır." : `${CANTA.length} maddeden ${n} tanesi hazır.`; };
   el.querySelectorAll("[data-canta]").forEach(c => c.onchange = () => { depo.yaz("canta", [...el.querySelectorAll("[data-canta]:checked")].map(x=>+x.dataset.canta)); durum(); });
   durum();
@@ -835,10 +835,11 @@ async function depremleriGoster(){
       : `<p>Son 7 günde Marmara'da 2,5 ve üstü deprem kaydı yok.</p>`)
       + `<p style="color:var(--soluk);font-size:.85rem">${eski?(navigator.onLine===false?"İnternet yok; son kaydedilen liste gösteriliyor. ":"Liste yenilenemedi (mobil veride olabilir; Wi-Fi'de deneyin), son kaydedilen liste gösteriliyor. "):""}${veri.guncelleme?"Son kontrol: "+ne_zaman(veri.guncelleme):""}</p>`; };
   const kayitli = depo.oku("depremler", null); if (kayitli) ciz(kayitli, true);
-  try { const y = await fetch(BILDIRIM_URL+"/depremler",{cache:"no-store"}); const v = await y.json(); depo.yaz("depremler", v); ciz(v, false); }
+  try { const y = await fetch(SUNUCU_URL+"/depremler",{cache:"no-store"}); const v = await y.json(); depo.yaz("depremler", v); ciz(v, false); }
   catch(e){ if(!kayitli) kutu.innerHTML = `<p>${sunucuHatasi("liste alınamadı")}</p>`; }
 }
 
+/*android:start*/
 /* --- Deprem bildirimleri (Web Push) --- */
 const b64uDiz = s => { s=s.replace(/-/g,"+").replace(/_/g,"/"); while(s.length%4) s+="="; return Uint8Array.from(atob(s), c=>c.charCodeAt(0)); };
 function bildirimDestegi(){
@@ -857,10 +858,10 @@ async function bildirimKutusu(){
   if (abone && Notification.permission==="granted"){
     kutu.innerHTML = `<p class="durum-rozet">✓ Bildirimler açık · ${ondalik(esik)} ve üstü</p>${secenek}<div class="dugmeler"><button class="dugme" id="bildirim-deneme">Deneme bildirimi gönder</button><button class="dugme" id="bildirim-kapat">Bildirimleri kapat</button></div>`;
     $("#bildirim-deneme").onclick = async () => { bildir("Deneme bildirimi gönderiliyor…");
-      try { const y = await fetch(BILDIRIM_URL+"/deneme",{method:"POST",body:JSON.stringify({endpoint:abone.endpoint})}); const v = await y.json();
+      try { const y = await fetch(SUNUCU_URL+"/deneme",{method:"POST",body:JSON.stringify({endpoint:abone.endpoint})}); const v = await y.json();
         bildir(y.ok ? "Gönderildi; birkaç saniye içinde bildirim gelmeli." : (v.hata ? "Gönderilemedi: "+v.hata : "Gönderilemedi."), 6000); }
       catch(e){ bildir(sunucuHatasi("deneme gönderilemedi"), 9000); } };
-    $("#bildirim-kapat").onclick = async () => { try{ await fetch(BILDIRIM_URL+"/iptal",{method:"POST",body:JSON.stringify({endpoint:abone.endpoint})}); }catch(e){} await abone.unsubscribe(); bildir("Bildirimler kapatıldı."); bildirimKutusu(); };
+    $("#bildirim-kapat").onclick = async () => { try{ await fetch(SUNUCU_URL+"/iptal",{method:"POST",body:JSON.stringify({endpoint:abone.endpoint})}); }catch(e){} await abone.unsubscribe(); bildir("Bildirimler kapatıldı."); bildirimKutusu(); };
   } else if (Notification.permission==="denied"){
     kutu.innerHTML = `<p class="not">Bildirim izni kapalı. Açmak için telefonun Ayarlar bölümünden bu uygulamanın bildirim iznini açın.</p>`; return;
   } else {
@@ -870,7 +871,7 @@ async function bildirimKutusu(){
   kutu.querySelectorAll("[data-esik]").forEach(b => b.onclick = async () => { const v=+b.dataset.esik; depo.yaz("bildirimEsik", v);
     kutu.querySelectorAll("[data-esik]").forEach(x=>x.setAttribute("aria-pressed", x===b));
     const a = await (await navigator.serviceWorker.ready).pushManager.getSubscription();
-    if (a) { try { await fetch(BILDIRIM_URL+"/abone",{method:"POST",body:JSON.stringify({abonelik:a.toJSON(),esik:v})}); bildir(`${ondalik(v)} ve üstü depremler bildirilecek.`); bildirimKutusu(); } catch(e){ bildir(sunucuHatasi("ayar kaydedilemedi"), 9000); } } });
+    if (a) { try { await fetch(SUNUCU_URL+"/abone",{method:"POST",body:JSON.stringify({abonelik:a.toJSON(),esik:v})}); bildir(`${ondalik(v)} ve üstü depremler bildirilecek.`); bildirimKutusu(); } catch(e){ bildir(sunucuHatasi("ayar kaydedilemedi"), 9000); } } });
 }
 async function bildirimAc(){
   // iPhone izin penceresini yalnızca dokunuşun hemen ardından gösterir: önce izin, sonra internet
@@ -879,16 +880,17 @@ async function bildirimAc(){
   let ag = true;   // hata sunucuya ulaşırken mi, telefonun bildirim kaydında mı?
   try {
     bildir("Bildirimler açılıyor…", 6000);
-    const { anahtar } = await (await fetch(BILDIRIM_URL+"/vapid")).json(); ag = false;
+    const { anahtar } = await (await fetch(SUNUCU_URL+"/vapid")).json(); ag = false;
     const kayit = await navigator.serviceWorker.ready;
     const abone = await kayit.pushManager.subscribe({ userVisibleOnly:true, applicationServerKey:b64uDiz(anahtar) });
     const esik = depo.oku("bildirimEsik", 4); ag = true;
-    const y = await fetch(BILDIRIM_URL+"/abone",{method:"POST",body:JSON.stringify({abonelik:abone.toJSON(),esik})});
+    const y = await fetch(SUNUCU_URL+"/abone",{method:"POST",body:JSON.stringify({abonelik:abone.toJSON(),esik})});
     if (!y.ok) throw new Error("sunucu "+y.status);
     bildir(`Bildirimler açıldı: Marmara'da ${ondalik(esik)} ve üstü depremler.`, 6000);
   } catch(e){ bildir(ag ? sunucuHatasi("bildirimler açılamadı") : "Bildirimler açılamadı: telefon bildirim kaydını kabul etmedi. Uygulamayı kapatıp açarak tekrar deneyin.", 10000); }
   bildirimKutusu();
 }
+/*android:end*/
 
 function iyiyimGonder(){
   const ac = n => { const metin = "İyiyim." + (n ? ` Şu an buradayım: https://maps.google.com/?q=${n[1].toFixed(5)},${n[0].toFixed(5)}` : "") + " (Deprem Atlası)";
@@ -1108,7 +1110,7 @@ async function adresAra(q){
   if (adresAra.son && Date.now()-adresAra.son<1500) return;
   adresAra.son=Date.now(); liste.innerHTML=`<li class="not">Aranıyor…</li>`;
   let v=null;
-  try { const y=await fetch(`${BILDIRIM_URL}/adres?q=${encodeURIComponent(q.slice(0,120))}`, {cache:"no-store"}); v=await y.json(); if(!y.ok) throw new Error(v&&v.hata||y.status); }
+  try { const y=await fetch(`${SUNUCU_URL}/adres?q=${encodeURIComponent(q.slice(0,120))}`, {cache:"no-store"}); v=await y.json(); if(!y.ok) throw new Error(v&&v.hata||y.status); }
   catch(e){ liste.innerHTML=`<li class="not">${sunucuHatasi("adres aranamadı")} İsterseniz mahallenizi yukarıdan seçin.</li>`; return; }
   const sonuc=(v.sonuclar||[]).map(r=>({...r, m:noktaMahalle([r.lon,r.lat])})).filter(r=>r.m);
   if (!sonuc.length){ liste.innerHTML=`<li class="not">"${kaçış(q)}" İstanbul'da bulunamadı. Cadde veya sokak adına mahalle ya da ilçe adını ekleyip deneyin.</li>`; return; }
@@ -1145,8 +1147,9 @@ document.querySelectorAll(".sekme").forEach(b => b.onclick = () => {
   sayfaAc(ad);
 });
 haritaKur(); lejantSerit();
-if (new URLSearchParams(location.search).has("deprem")) setTimeout(()=>sayfaAc("acil","depremler"), 900);
+/*android:start*/if (new URLSearchParams(location.search).has("deprem")) setTimeout(()=>sayfaAc("acil","depremler"), 900);/*android:end*/
 $("#uyg").addEventListener("scroll", e => { e.target.scrollTop = 0; e.target.scrollLeft = 0; });
+/*android:start*/
 // İnternetsiz çalışma: uygulama bir kez açıldıktan sonra telefona kaydedilir
 if ("serviceWorker" in navigator && (location.protocol === "https:" || location.hostname === "localhost")) {
   navigator.serviceWorker.register("sw.js").catch(()=>{});
@@ -1169,6 +1172,7 @@ if ("serviceWorker" in navigator && (location.protocol === "https:" || location.
   });
   navigator.serviceWorker.startMessages?.();
 }
+/*android:end*/
 
 const acilis=$("#acilis");
 function acilisKapat(){ acilis.classList.add("git"); setTimeout(()=>acilis.hidden=true, 520); sigdir(false); }

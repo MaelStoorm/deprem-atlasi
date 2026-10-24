@@ -52,7 +52,7 @@ struct ShellConfig {
     /// Durum çubuğu telefonun açık/koyu temasına uysun (sayfa temaya göre renk değiştiriyorsa)
     let autoStatusBar: Bool
     let startPage: String
-    /// Sayfanın https ile çağırdığı sunucu (ör. https://ornek.workers.dev). İstekler uygulama üzerinden iletilir.
+    /// Sayfanın https ile çağırdığı sunucu (ör. https://ornek.workers.dev). GET istekleri uygulama üzerinden iletilir.
     let proxyOrigin: String?
     /// "files": Jalon/Pafta tarzı window.AndroidBridge (dosya aç/kaydet/kopyala)
     let bridge: String
@@ -62,8 +62,6 @@ struct ShellConfig {
     let orientations: UIInterfaceOrientationMask
     /// Sayfanın rahat sığdığı yükseklik (CSS piksel). Ekran daha alçaksa sayfa bu kadar uzaklaştırılır (0: kapalı)
     let fitHeight: CGFloat
-    /// Uygulamaya özel ek CSS (ör. uygulamada anlamı olmayan bir kutuyu gizlemek için)
-    let extraCSS: String
     /// "pati": Pati oyunlarının ihtiyaç bildirimleri (izin sorulur, oyun kapanınca hatırlatma kurulur)
     let reminders: String
 
@@ -79,7 +77,6 @@ struct ShellConfig {
         incoming = d["Incoming"] as? String ?? "none"
         geolocation = d["Geolocation"] as? Bool ?? false
         fitHeight = CGFloat((d["FitHeight"] as? NSNumber)?.doubleValue ?? 0)
-        extraCSS = d["ExtraCSS"] as? String ?? ""
         reminders = d["Reminders"] as? String ?? ""
         switch d["Orientation"] as? String ?? "portrait" {
         case "landscape": orientations = .landscape

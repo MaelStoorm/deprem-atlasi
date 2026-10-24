@@ -55,6 +55,13 @@ jobs:
           brew install xcodegen >/dev/null
           cd ios && xcodegen generate
 
+      # iOS kopyasında yalnızca web/Android'de olan deprem bildirimi bölümünden parça kalırsa,
+      # ayarlarda sayfaya ek CSS (ExtraCSS / display:none) varsa ya da bir betik bozuksa derleme durur.
+      - name: iOS kopyasını denetle
+        run: |
+          node --version
+          python3 ios/denetle.py ios/gen/DepremAtlasi/site ios/project.yml ios/DepremAtlasi/Info.plist
+
       - name: Apple gizli değerleri var mı?
         id: keys
         run: |

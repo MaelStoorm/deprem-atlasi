@@ -57,7 +57,7 @@ public class MainActivity extends ComponentActivity {
     static final String VARLIK_KOKU = "https://" + VARLIK_ALANI;
     static final String BASLANGIC = VARLIK_KOKU + "/index.html";
 
-    /** Deprem listesi ve adres arama sunucusu; index.html'deki BILDIRIM_URL ile aynı olmalı. */
+    /** Deprem listesi ve adres arama sunucusu; index.html'deki SUNUCU_URL ile aynı olmalı. */
     static final String SUNUCU_ALANI = "deprem-atlasi.egementughan.workers.dev";
 
     /** Sayfada açık bir ekran ya da mahalle paneli var mı? (1: var, 0: yok, -1: bilinmiyor) */

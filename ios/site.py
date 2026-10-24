@@ -5,6 +5,11 @@
 
 - Sayfa olduğu gibi kopyalanır; Google Fonts bağlantıları varsa kaldırılır ve uygulamanın
   kendi taşıdığı yazı tipleri (fonts.css + fonts/) bağlanır, böylece yazılar internetsiz de görünür.
+- Yalnızca web ve Android'de olan bölümler iOS kopyasından tamamen çıkarılır (index.html ve
+  kopyalanan .html dosyalarında). Bu bölümler şu işaretlerin arasındadır:
+      /*android:start*/ ... /*android:end*/        (CSS ve JavaScript içinde)
+      <!--android:start--> ... <!--android:end-->  (HTML içinde)
+  Bir bölüm hiç gizlenmez: iOS'a giden dosyada yer almaz. İşaretler eşleşmezse derleme durur.
 - --copy ile verilen dosyalar/klasörler de site klasörüne kopyalanır.
 """
 import argparse
@@ -20,12 +25,37 @@ ap.add_argument("--fonts-dir")
 ap.add_argument("--copy", nargs="*", default=[])
 a = ap.parse_args()
 
+ISARETLER = [("/*android:start*/", "/*android:end*/"), ("<!--android:start-->", "<!--android:end-->")]
+
+
+def ios_kopyasi(metin, ad):
+    """İşaretli bölümleri çıkarır; açılış/kapanış sayısı tutmazsa ya da iç içe ise hata verir."""
+    for bas, son in ISARETLER:
+        if metin.count(bas) != metin.count(son):
+            raise SystemExit(f"{ad}: {bas} ve {son} sayısı eşleşmiyor")
+        parcalar, i = [], 0
+        while True:
+            s = metin.find(bas, i)
+            if s < 0:
+                break
+            e = metin.find(son, s)
+            if e < 0 or metin.find(bas, s + len(bas), e) >= 0:
+                raise SystemExit(f"{ad}: {bas} bölümü düzgün kapanmıyor")
+            parcalar.append(metin[i:s])
+            i = e + len(son)
+        metin = "".join(parcalar) + metin[i:]
+    for bas, son in ISARETLER:
+        if bas in metin or son in metin:
+            raise SystemExit(f"{ad}: işaret kaldı")
+    return metin
+
+
 out = Path(a.out)
 if out.exists():
     shutil.rmtree(out)
 out.mkdir(parents=True)
 
-html = Path(a.html).read_text(encoding="utf-8")
+html = ios_kopyasi(Path(a.html).read_text(encoding="utf-8"), a.html)
 if a.fonts_css:
     links = re.compile(r'[ \t]*<link\b[^>]*fonts\.(?:googleapis|gstatic)\.com[^>]*>[ \t]*\r?\n?')
     found = links.search(html)
@@ -41,6 +71,8 @@ for item in a.copy:
     p = Path(item)
     if p.is_dir():
         shutil.copytree(p, out / p.name)
+    elif p.is_file() and p.suffix.lower() in (".html", ".htm"):
+        (out / p.name).write_text(ios_kopyasi(p.read_text(encoding="utf-8"), item), encoding="utf-8")
     elif p.exists():
         shutil.copy(p, out / p.name)
     else:

@@ -3,6 +3,7 @@
  * Gerçek bir web kaynağı gibi davrandığı için kayıtlar (localStorage, IndexedDB) kalıcıdır ve
  * sayfa kendi dosyalarını fetch ile okuyabilir. İstenirse belirli bir sunucuya giden istekler de
  * buradan iletilir (/__vekil__/...): sunucu, uygulamanın adresine izin vermese de yanıt sayfaya ulaşır.
+ * Yalnızca GET (veri okuma) istekleri iletilir; başka istekler 405 ile reddedilir.
  * Telif Hakkı (c) 2026 Egemen Çalıkoğlu. Tüm hakları saklıdır.
  */
 import Foundation
@@ -27,6 +28,10 @@ final class SiteScheme: NSObject, WKURLSchemeHandler {
         guard let url = task.request.url else { return }
         var path = url.path
         if let origin = proxyOrigin, path.hasPrefix(Self.proxyPrefix) {
+            guard (task.request.httpMethod ?? "GET").uppercased() == "GET" else {
+                reply(task, url: url, status: 405, mime: "text/plain", data: Data())
+                return
+            }
             forward(task, to: origin + String(path.dropFirst(Self.proxyPrefix.count)), query: url.query)
             return
         }
@@ -61,9 +66,8 @@ final class SiteScheme: NSObject, WKURLSchemeHandler {
         guard let pageURL = task.request.url,
               let url = URL(string: target + (query.map { "?" + $0 } ?? "")) else { return }
         var req = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 30)
-        req.httpMethod = task.request.httpMethod ?? "GET"
-        req.httpBody = task.request.httpBody
-        for h in ["Accept", "Accept-Language", "Content-Type"] {
+        req.httpMethod = "GET"
+        for h in ["Accept", "Accept-Language"] {
             if let v = task.request.value(forHTTPHeaderField: h) { req.setValue(v, forHTTPHeaderField: h) }
         }
         URLSession.shared.dataTask(with: req) { [weak self] data, response, error in

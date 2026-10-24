@@ -99,7 +99,6 @@ final class ShellViewController: UIViewController, WKNavigationDelegate, WKUIDel
         })();
         """]
         // Sayfa iki parmakla büyümesin: yakınlaştırmayı sayfanın kendisi (ör. harita) yapsın
-        let css = config.extraCSS.replacingOccurrences(of: "\\", with: "\\\\").replacingOccurrences(of: "`", with: "\\`")
         list.append("""
         document.addEventListener('DOMContentLoaded', function () {
           var m = document.querySelector('meta[name=viewport]');
@@ -108,8 +107,6 @@ final class ShellViewController: UIViewController, WKNavigationDelegate, WKUIDel
             .split(',').map(function (s) { return s.trim(); })
             .filter(function (s) { return s && !/^(maximum-scale|minimum-scale|user-scalable)/.test(s); });
           m.content = c.concat(['maximum-scale=1', 'minimum-scale=1', 'user-scalable=no']).join(',');
-          var css = `\(css)`;
-          if (css) { var st = document.createElement('style'); st.textContent = css; document.head.appendChild(st); }
         });
         """)
         if config.bridge == "files" {
@@ -124,7 +121,7 @@ final class ShellViewController: UIViewController, WKNavigationDelegate, WKUIDel
             """)
         }
         if let origin = config.proxyOrigin {
-            // Sunucuya giden fetch istekleri uygulamanın kendi adresi üzerinden iletilir
+            // Sunucuya giden fetch (GET) istekleri uygulamanın kendi adresi üzerinden iletilir
             let o = origin.replacingOccurrences(of: "\"", with: "")
             list.append("""
             (function () {
