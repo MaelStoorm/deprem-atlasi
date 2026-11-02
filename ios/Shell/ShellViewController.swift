@@ -100,8 +100,10 @@ final class ShellViewController: UIViewController, WKNavigationDelegate, WKUIDel
         list.append("""
         (function () {
           var waiting = {}, n = 0;
-          function ask(ok, fail) {
+          function ask(ok, fail, o) {
             var id = ++n; waiting[id] = { ok: ok, fail: fail };
+            // Telefondan yanıt gelmezse sayfa sonsuza dek beklemesin
+            setTimeout(function () { window.__shellLocation(id, 0, 0, 0, 3, 'Konum zamanında alınamadı.'); }, (o && o.timeout) || 20000);
             webkit.messageHandlers.shell.postMessage({ op: 'location', id: id });
             return id;
           }
@@ -111,8 +113,8 @@ final class ShellViewController: UIViewController, WKNavigationDelegate, WKUIDel
             if (w.ok) w.ok({ coords: { latitude: lat, longitude: lon, accuracy: acc, altitude: null, altitudeAccuracy: null, heading: null, speed: null }, timestamp: Date.now() });
           };
           var geo = {
-            getCurrentPosition: function (ok, fail) { ask(ok, fail); },
-            watchPosition: function (ok, fail) { return ask(ok, fail); },
+            getCurrentPosition: function (ok, fail, o) { ask(ok, fail, o); },
+            watchPosition: function (ok, fail, o) { return ask(ok, fail, o); },
             clearWatch: function () {}
           };
           try { Object.defineProperty(navigator, 'geolocation', { value: geo, configurable: true }); } catch (e) {}

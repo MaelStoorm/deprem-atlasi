@@ -728,7 +728,7 @@ function acilSayfasi(el, odak){
     <!--android:start--><div class="kart" id="acil-bildirim">
       <p class="etiket">Bildirim</p><h3>Deprem olunca haber ver</h3>
       <div id="bildirim-kutu"></div>
-      ${acilir(`<p>Marmara bölgesinde seçtiğiniz büyüklüğün üstünde bir deprem olursa telefonunuza bildirim gelir. Kandilli ve AFAD listeleri dakikada bir kontrol edilir. Bildirimleri açtıktan sonra mobil veride de gelir. Bazı mobil operatörlerde bildirimleri açmak veya deneme göndermek şu an çalışmayabilir; bu durumda bir kez Wi-Fi'de açmanız yeterli.</p>
+      ${acilir(`<p>Marmara bölgesinde seçtiğiniz büyüklüğün üstünde bir deprem olursa telefonunuza bildirim gelir. Kandilli ve AFAD listeleri düzenli olarak kontrol edilir (Android uygulamasında yaklaşık 15 dakikada bir; telefon uzun süre kullanılmazsa daha seyrek). Bildirimler mobil veride de gelir.</p>
         <p class="not"><b>Bu bir erken uyarı değildir.</b> Bildirim, kurumlar depremi yayınladıktan sonra, yani sarsıntıdan birkaç dakika sonra gelir. Sarsıntıyı hissederseniz bildirimi beklemeden Çök-Kapan-Tutun.</p>
         <p>Android telefonlarda Google'ın kendi deprem uyarısını da açık tutmanızı öneririz: Ayarlar → Güvenlik ve acil durum → Deprem uyarıları.</p>`, "Nasıl çalışır?")}
     </div><!--android:end-->
@@ -843,6 +843,7 @@ async function depremleriGoster(){
 /* --- Deprem bildirimleri (Web Push) --- */
 const b64uDiz = s => { s=s.replace(/-/g,"+").replace(/_/g,"/"); while(s.length%4) s+="="; return Uint8Array.from(atob(s), c=>c.charCodeAt(0)); };
 function bildirimDestegi(){
+  if (window.DepremAndroid) return "uygulama";   // Android uygulaması: bildirimi telefonun kendisi gösterir
   const ios = /iPhone|iPad|iPod/.test(navigator.userAgent), anaEkran = navigator.standalone === true || matchMedia("(display-mode: standalone)").matches;
   if (ios && !anaEkran) return "ios-ana-ekran";
   if (!("serviceWorker" in navigator) || !("PushManager" in window) || !("Notification" in window)) return "yok";
@@ -852,6 +853,7 @@ async function bildirimKutusu(){
   const destek=bildirimDestegi();
   if (destek==="ios-ana-ekran"){ kutu.innerHTML = `<p class="not">iPhone'da bildirim için uygulamayı önce ana ekrana ekleyin: Safari'de <b>Paylaş → Ana Ekrana Ekle</b>, sonra ana ekrandaki simgeden açıp buraya gelin.</p>`; return; }
   if (destek==="yok"){ kutu.innerHTML = `<p class="not">Bu tarayıcı bildirimleri desteklemiyor. Telefonunuzda Chrome veya Safari ile deneyin.</p>`; return; }
+  if (destek==="uygulama"){ uygulamaBildirimKutusu(kutu); return; }
   const kayit = await navigator.serviceWorker.ready; const abone = await kayit.pushManager.getSubscription();
   const esik = depo.oku("bildirimEsik", 4);
   const secenek = `<p style="font-weight:600">Hangi büyüklükten itibaren?</p><div class="secenek" role="group" aria-label="Bildirim eşiği">${[3.5,4,5].map(v=>`<button data-esik="${v}" aria-pressed="${esik===v}">${ondalik(v)} ve üstü</button>`).join("")}</div>`;
@@ -873,6 +875,29 @@ async function bildirimKutusu(){
     const a = await (await navigator.serviceWorker.ready).pushManager.getSubscription();
     if (a) { try { await fetch(SUNUCU_URL+"/abone",{method:"POST",body:JSON.stringify({abonelik:a.toJSON(),esik:v})}); bildir(`${ondalik(v)} ve üstü depremler bildirilecek.`); bildirimKutusu(); } catch(e){ bildir(sunucuHatasi("ayar kaydedilemedi"), 9000); } } });
 }
+function uygulamaBildirimKutusu(kutu){
+  let d; try { d = JSON.parse(DepremAndroid.bildirimDurum()); } catch(e){ d = {acik:false, izin:"var", esik:4}; }
+  const esik = d.esik || depo.oku("bildirimEsik", 4);
+  const secenek = `<p style="font-weight:600">Hangi büyüklükten itibaren?</p><div class="secenek" role="group" aria-label="Bildirim eşiği">${[3.5,4,5].map(v=>`<button data-esik="${v}" aria-pressed="${esik===v}">${ondalik(v)} ve üstü</button>`).join("")}</div>`;
+  if (d.acik && d.izin!=="yok"){
+    kutu.innerHTML = `<p class="durum-rozet">✓ Bildirimler açık · ${ondalik(esik)} ve üstü</p>${secenek}<div class="dugmeler"><button class="dugme" id="bildirim-deneme">Deneme bildirimi gönder</button><button class="dugme" id="bildirim-kapat">Bildirimleri kapat</button></div>`;
+    $("#bildirim-deneme").onclick = () => { DepremAndroid.bildirimDeneme(); bildir("Deneme bildirimi gönderildi; bildirim çubuğuna bakın.", 5000); };
+    $("#bildirim-kapat").onclick = () => { DepremAndroid.bildirimKapat(); bildir("Bildirimler kapatıldı."); bildirimKutusu(); };
+  } else if (d.izin==="kalici-yok"){
+    kutu.innerHTML = `<p class="not">Bildirim izni kapalı. Açmak için telefonun Ayarlar → Uygulamalar → Deprem Atlası → Bildirimler bölümünden izni açın.</p><button class="dugme" id="bildirim-ayar">Ayarları aç</button>`;
+    $("#bildirim-ayar").onclick = () => DepremAndroid.bildirimAyarlari();
+    return;
+  } else {
+    kutu.innerHTML = `${secenek}<button class="dugme ana" id="bildirim-ac" style="min-height:72px;font-size:1.2rem">🔔 Bildirimleri aç</button>`;
+    $("#bildirim-ac").onclick = () => { bildir("Bildirimler açılıyor…", 4000); DepremAndroid.bildirimAc(depo.oku("bildirimEsik", esik)); };
+  }
+  kutu.querySelectorAll("[data-esik]").forEach(b => b.onclick = () => { const v=+b.dataset.esik; depo.yaz("bildirimEsik", v); DepremAndroid.bildirimEsik(v);
+    kutu.querySelectorAll("[data-esik]").forEach(x=>x.setAttribute("aria-pressed", x===b));
+    if (d.acik) { bildir(`${ondalik(v)} ve üstü depremler bildirilecek.`); bildirimKutusu(); } });
+}
+// Uygulama bildirim iznini sorduktan sonra çağırır
+window.__bildirimSonuc = (ok, mesaj) => { bildir(mesaj, ok?6000:9000); bildirimKutusu(); };
+
 async function bildirimAc(){
   // iPhone izin penceresini yalnızca dokunuşun hemen ardından gösterir: önce izin, sonra internet
   const izin = await Notification.requestPermission();
@@ -1121,6 +1146,19 @@ async function adresAra(q){
 }
 
 /* ================= Konum ================= */
+/*android:start*/
+// Android uygulamasında konum, sayfa (WebView) yerine telefonun konum servisinden alınır: daha hızlı ve her telefonda çalışır
+if (window.DepremAndroid) (function(){
+  const bekleyen = {}; let sayac = 0;
+  window.__androidKonum = (id, lat, lon, acc, kod, mesaj) => { const w = bekleyen[id]; if (!w) return; delete bekleyen[id]; clearTimeout(w.sure);
+    if (kod) { if (w.fail) w.fail({ code: kod, message: mesaj, PERMISSION_DENIED: 1, POSITION_UNAVAILABLE: 2, TIMEOUT: 3 }); return; }
+    if (w.ok) w.ok({ coords: { latitude: lat, longitude: lon, accuracy: acc, altitude: null, altitudeAccuracy: null, heading: null, speed: null }, timestamp: Date.now() }); };
+  const iste = (ok, fail, o) => { const id = ++sayac;
+    bekleyen[id] = { ok, fail, sure: setTimeout(() => window.__androidKonum(id, 0, 0, 0, 3, "Konum zamanında alınamadı."), (o && o.timeout) || 20000) };
+    DepremAndroid.konum(id); return id; };
+  try { Object.defineProperty(navigator, "geolocation", { value: { getCurrentPosition: iste, watchPosition: iste, clearWatch(){} }, configurable: true }); } catch(e){}
+})();
+/*android:end*/
 function konumBul(){
   if (!navigator.geolocation){ bildir("Bu cihaz konum bilgisi vermiyor. Mahalleler sekmesinden seçebilirsiniz."); return; }
   bildir("Konumunuz alınıyor…", 15000);
@@ -1131,7 +1169,7 @@ function konumBul(){
     const [x,y]=proj(n); $("#g-konum").innerHTML=`<circle class="konum-hale" cx="${x}" cy="${y}"/><circle class="konum-nokta" cx="${x}" cy="${y}"/>`; viewBoxYaz();
     if (m){ mahalleSec(m.anahtar); bildir(`Bulunduğunuz yer ${ilceAd(m)}, ${m.ad} mahallesi. Senaryo fayına uzaklığı yaklaşık ${Math.round(fayUzaklik(n))} km.`, 6000); }
     else bildir(`Konumunuz İstanbul sınırlarının dışında görünüyor.`);
-  }, () => bildir("Konum izni verilmedi veya alınamadı. Mahalleler sekmesinden mahallenizi seçebilirsiniz."), {timeout:15000, maximumAge:60000});
+  }, h => bildir(h&&h.code===1 ? "Konum izni verilmedi. Telefonun ayarlarından bu uygulamaya konum izni verebilir ya da Mahalleler sekmesinden mahallenizi seçebilirsiniz." : ((h&&h.message&&h.code!==3 ? h.message+" " : "Konum alınamadı. ")+"Mahalleler sekmesinden mahallenizi seçebilirsiniz."), 8000), {timeout:15000, maximumAge:120000});
 }
 
 /* ================= Bağlantılar ve başlangıç ================= */

@@ -53,8 +53,8 @@ android {
         applicationId = "com.maelstorm.deprematlasi"
         minSdk = 24
         targetSdk = 36
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = (System.getenv("VERSION_CODE") ?: "2").toInt()
+        versionName = "1.1"
     }
 
     buildTypes {
@@ -83,4 +83,5 @@ dependencies {
     implementation("androidx.activity:activity:1.10.1")
     implementation("androidx.core:core:1.15.0")
     implementation("androidx.webkit:webkit:1.12.1")
+    implementation("androidx.work:work-runtime:2.10.0")
 }

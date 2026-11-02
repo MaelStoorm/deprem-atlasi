@@ -7,6 +7,8 @@
     <!-- Konum yalnızca "Konumum" ve "İyiyim" düğmelerine basılınca, sayfa isterse sorulur -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!-- Deprem bildirimleri (yalnızca kullanıcı "Bildirimleri aç"a basınca sorulur) -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <!-- GPS'i ya da telefon hattı olmayan tabletlere de kurulabilsin -->
     <uses-feature android:name="android.hardware.location" android:required="false" />
@@ -25,6 +27,7 @@
 
         <activity
             android:name=".MainActivity"
+            android:launchMode="singleTop"
             android:configChanges="orientation|screenSize|screenLayout|smallestScreenSize|keyboard|keyboardHidden|navigation|density|fontScale"
             android:exported="true"
             android:screenOrientation="portrait"

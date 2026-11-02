@@ -3,4 +3,8 @@
     <string name="app_name">Deprem Atlası</string>
     <string name="uygulama_yok">Bu bağlantıyı açabilecek bir uygulama bulunamadı.</string>
     <string name="mesaji_gonder">Mesajı gönder</string>
+    <string name="kanal_adi">Deprem bildirimleri</string>
+    <string name="kanal_aciklama">Marmara\'da seçtiğiniz büyüklüğün üstündeki depremler (Kandilli ve AFAD)</string>
+    <string name="deneme_baslik">Deneme bildirimi · Deprem Atlası</string>
+    <string name="deneme_metin">Bildirimler çalışıyor. Marmara\'da seçtiğiniz büyüklüğün üstünde bir deprem olursa böyle bir bildirim gelecek.</string>
 </resources>

@@ -7,6 +7,10 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.location.Location;
+import android.os.Build;
+import android.provider.Settings;
+import android.webkit.JavascriptInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.webkit.GeolocationPermissions;
@@ -37,13 +41,17 @@ import androidx.webkit.ServiceWorkerControllerCompat;
 import androidx.webkit.WebViewAssetLoader;
 import androidx.webkit.WebViewFeature;
 
+import org.json.JSONObject;
+
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -56,6 +64,8 @@ public class MainActivity extends ComponentActivity {
     static final String VARLIK_ALANI = WebViewAssetLoader.DEFAULT_DOMAIN;
     static final String VARLIK_KOKU = "https://" + VARLIK_ALANI;
     static final String BASLANGIC = VARLIK_KOKU + "/index.html";
+    /** Bildirime dokununca son depremler ekranı açılsın */
+    static final String DEPREM_EKRANI = "deprem";
 
     /** Deprem listesi ve adres arama sunucusu; index.html'deki SUNUCU_URL ile aynı olmalı. */
     static final String SUNUCU_ALANI = "deprem-atlasi.egementughan.workers.dev";
@@ -74,6 +84,10 @@ public class MainActivity extends ComponentActivity {
     @Nullable private GeolocationPermissions.Callback bekleyenKonum;
     @Nullable private String bekleyenKaynak;
 
+    /** Konum izni beklenirken gelen konum istekleri (sayfadaki istek kimlikleri) */
+    private final List<Integer> bekleyenKonumlar = new ArrayList<>();
+    private double bekleyenEsik = 4.0;
+
     private final ActivityResultLauncher<String[]> konumIzni = registerForActivityResult(
             new ActivityResultContracts.RequestMultiplePermissions(), sonuc -> {
                 boolean verildi = Boolean.TRUE.equals(sonuc.get(Manifest.permission.ACCESS_FINE_LOCATION))
@@ -82,7 +96,16 @@ public class MainActivity extends ComponentActivity {
                 if (bekleyenKonum != null) bekleyenKonum.invoke(bekleyenKaynak, verildi, false);
                 bekleyenKonum = null;
                 bekleyenKaynak = null;
+                List<Integer> idler = new ArrayList<>(bekleyenKonumlar);
+                bekleyenKonumlar.clear();
+                for (int id : idler) {
+                    if (verildi) konumuAl(id);
+                    else konumYanitla(id, null, 1, "Konum izni verilmedi.");
+                }
             });
+
+    private final ActivityResultLauncher<String> bildirimIzni = registerForActivityResult(
+            new ActivityResultContracts.RequestPermission(), verildi -> bildirimAcSonra());
 
     @Override
     protected void onCreate(@Nullable Bundle kayit) {
@@ -128,7 +151,9 @@ public class MainActivity extends ComponentActivity {
         });
 
         web = yeniSayfa();
-        if (kayit == null || web.restoreState(kayit) == null) web.loadUrl(BASLANGIC);
+        boolean depremEkrani = getIntent() != null && getIntent().getBooleanExtra(DEPREM_EKRANI, false);
+        if (depremEkrani) web.loadUrl(BASLANGIC + "?deprem=1");
+        else if (kayit == null || web.restoreState(kayit) == null) web.loadUrl(BASLANGIC);
 
         getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
             @Override
@@ -156,6 +181,8 @@ public class MainActivity extends ComponentActivity {
         a.setJavaScriptCanOpenWindowsAutomatically(false);
         a.setUserAgentString(a.getUserAgentString() + " DepremAtlasi-Android");
         tarayiciKimligi = a.getUserAgentString();
+        // Konum ve bildirim telefonun kendisinden: window.DepremAndroid
+        w.addJavascriptInterface(new Kopru(), "DepremAndroid");
 
         w.setWebViewClient(new WebViewClient() {
             @Override
@@ -402,6 +429,123 @@ public class MainActivity extends ComponentActivity {
                 Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION});
     }
 
+    /** Sayfa konum istedi: izin varsa telefonun konum servisinden al, yoksa izni sor. */
+    private void konumIste(int id) {
+        if (konumIzniVar()) {
+            konumuAl(id);
+            return;
+        }
+        bekleyenKonumlar.add(id);
+        if (bekleyenKonumlar.size() == 1) {
+            konumIzni.launch(new String[]{
+                    Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION});
+        }
+    }
+
+    private void konumuAl(int id) {
+        Konum.al(this, (l, kod, mesaj) -> konumYanitla(id, l, kod, mesaj));
+    }
+
+    private void konumYanitla(int id, @Nullable Location l, int kod, String mesaj) {
+        WebView w = web;
+        if (w == null) return;
+        String js = "window.__androidKonum&&window.__androidKonum(" + id + ","
+                + (l == null ? "0,0,0" : l.getLatitude() + "," + l.getLongitude() + "," + l.getAccuracy())
+                + "," + kod + "," + JSONObject.quote(mesaj == null ? "" : mesaj) + ")";
+        w.evaluateJavascript(js, null);
+    }
+
+    /* ---------------- Bildirimler ---------------- */
+
+    private String bildirimIzinDurumu() {
+        if (Bildirim.izinVar(this)) return "var";
+        if (Build.VERSION.SDK_INT >= 33) {
+            boolean soruldu = Bildirim.ayar(this).getBoolean("izinSoruldu", false);
+            if (soruldu && !shouldShowRequestPermissionRationale(Manifest.permission.POST_NOTIFICATIONS)) return "kalici-yok";
+            return "yok";
+        }
+        return "kalici-yok"; // eski Android: izin yalnızca Ayarlar'dan açılır
+    }
+
+    private void bildirimAcIste(double esik) {
+        bekleyenEsik = esik;
+        if (Bildirim.izinVar(this)) {
+            bildirimAcSonra();
+        } else if (Build.VERSION.SDK_INT >= 33) {
+            Bildirim.ayar(this).edit().putBoolean("izinSoruldu", true).apply();
+            bildirimIzni.launch(Manifest.permission.POST_NOTIFICATIONS);
+        } else {
+            bildirimSonucu(false, "Bildirimler telefonun ayarlarında kapalı. Ayarlar'dan bu uygulamanın bildirimlerini açın.");
+        }
+    }
+
+    private void bildirimAcSonra() {
+        if (!Bildirim.izinVar(this)) {
+            bildirimSonucu(false, "Bildirim izni verilmedi.");
+            return;
+        }
+        Bildirim.ac(this, bekleyenEsik);
+        bildirimSonucu(true, "Bildirimler açıldı: Marmara'da "
+                + String.format(new Locale("tr", "TR"), "%.1f", bekleyenEsik) + " ve üstü depremler.");
+    }
+
+    private void bildirimSonucu(boolean ok, String mesaj) {
+        WebView w = web;
+        if (w != null) w.evaluateJavascript("window.__bildirimSonuc&&window.__bildirimSonuc(" + ok + "," + JSONObject.quote(mesaj) + ")", null);
+    }
+
+    /** Sayfanın çağırdığı köprü: window.DepremAndroid */
+    private final class Kopru {
+        @JavascriptInterface
+        public void konum(int id) {
+            runOnUiThread(() -> konumIste(id));
+        }
+
+        @JavascriptInterface
+        public String bildirimDurum() {
+            try {
+                return new JSONObject()
+                        .put("acik", Bildirim.acik(MainActivity.this))
+                        .put("izin", bildirimIzinDurumu())
+                        .put("esik", Bildirim.esik(MainActivity.this)).toString();
+            } catch (Exception e) {
+                return "{}";
+            }
+        }
+
+        @JavascriptInterface
+        public void bildirimAc(double esik) {
+            runOnUiThread(() -> bildirimAcIste(esik));
+        }
+
+        @JavascriptInterface
+        public void bildirimKapat() {
+            Bildirim.kapat(MainActivity.this);
+        }
+
+        @JavascriptInterface
+        public void bildirimEsik(double esik) {
+            Bildirim.esikYaz(MainActivity.this, esik);
+        }
+
+        @JavascriptInterface
+        public void bildirimDeneme() {
+            Bildirim.goster(MainActivity.this, 1, getString(R.string.deneme_baslik), getString(R.string.deneme_metin));
+        }
+
+        @JavascriptInterface
+        public void bildirimAyarlari() {
+            runOnUiThread(() -> {
+                Intent i = Build.VERSION.SDK_INT >= 26
+                        ? new Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS).putExtra(Settings.EXTRA_APP_PACKAGE, getPackageName())
+                        : new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:" + getPackageName()));
+                try {
+                    startActivity(i);
+                } catch (ActivityNotFoundException ignored) { }
+            });
+        }
+    }
+
     /* ---------------- Geri tuşu ---------------- */
 
     /**
@@ -435,6 +579,15 @@ public class MainActivity extends ComponentActivity {
     }
 
     /* ---------------- Yaşam döngüsü ---------------- */
+
+    @Override
+    protected void onNewIntent(@NonNull Intent i) {
+        super.onNewIntent(i);
+        setIntent(i);
+        if (web != null && i.getBooleanExtra(DEPREM_EKRANI, false)) {
+            web.evaluateJavascript("(function(){try{sayfaAc('acil','depremler')}catch(e){}})()", null);
+        }
+    }
 
     @Override
     protected void onResume() {
