@@ -1,0 +1,31 @@
+name: Bağlantı testi (geçici)
+on:
+  push:
+    branches: [baglanti-testi]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Kaynak bağlantılarını yurt dışından dene
+        run: |
+          curl -s https://ipinfo.io/country || true; echo
+          for u in \
+            "https://depremzemin.ibb.istanbul/tr/olasi-deprem-kayip-tahminleri-ilce-kitapciklari" \
+            "https://depremzemin.ibb.istanbul/uploads/prefix-kadikoy-666ad5d8d1e4c.pdf" \
+            "https://data.ibb.gov.tr/dataset/deprem-senaryosu-analiz-sonuclari" \
+            "https://data.ibb.gov.tr/dataset/mahalle-bazli-bina-analiz-verisi" \
+            "https://deprem.afad.gov.tr/last-earthquakes" \
+            "https://deprem.afad.gov.tr/" \
+            "https://www.afad.gov.tr/deprem-oncesi-ani-ve-sonrasi-onlemini-al-guvende-kal" \
+            "https://www.afad.gov.tr/" \
+            "https://www.turkiye.gov.tr/afet-ve-acil-durum-yonetimi-acil-toplanma-alani-sorgulama" \
+            "http://www.koeri.boun.edu.tr/scripts/lst0.asp" \
+            "https://www.koeri.boun.edu.tr/scripts/lst0.asp" \
+            "http://www.koeri.boun.edu.tr/sismo/2/son-depremler/liste-halinde/" \
+            "https://www.koeri.boun.edu.tr/" \
+            "https://www.openstreetmap.org/copyright" \
+            "https://www.istanbuleczaciodasi.org.tr/nobetci-eczane/" \
+            "https://data.ibb.gov.tr/dataset/kentsel-acik-ve-yesil-alanlar" ; do
+            r=$(curl -s -o /dev/null -L --max-time 25 -A "Mozilla/5.0 (Linux; Android 14) AppleWebKit/537.36 Chrome/124 Mobile Safari/537.36" -w "%{http_code} %{time_total}s son:%{url_effective}" "$u" 2>&1) || r="HATA($?) $r"
+            echo "$r  <=  $u"
+          done
