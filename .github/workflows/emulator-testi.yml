@@ -4,9 +4,6 @@ name: Emülatör testi
 permissions:
   contents: write
 
-permissions:
-  contents: write
-
 on:
   push:
     branches: [emulator-testi]
