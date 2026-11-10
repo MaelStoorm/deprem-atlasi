@@ -1,0 +1,3 @@
+    mFocusedApp=Token{e43dc2f ActivityRecord{853aa0e u0 com.maelstorm.deprematlasi/.MainActivity t6}}
+  mCurrentFocus=Window{bd2aac1 u0 com.maelstorm.deprematlasi/com.maelstorm.deprematlasi.MainActivity}
+  mFocusedApp=AppWindowToken{b55423c token=Token{e43dc2f ActivityRecord{853aa0e u0 com.maelstorm.deprematlasi/.MainActivity t6}}}

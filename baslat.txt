@@ -1,0 +1,7 @@
+Starting: Intent { cmp=com.maelstorm.deprematlasi/.MainActivity }
+Status: ok
+Activity: com.maelstorm.deprematlasi/.MainActivity
+ThisTime: 1506
+TotalTime: 1506
+WaitTime: 1797
+Complete
