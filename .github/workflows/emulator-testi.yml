@@ -6,7 +6,7 @@ permissions:
 
 on:
   push:
-    branches: [emulator-testi]
+    branches: [emulator-testi-yok]
   workflow_dispatch:
 
 jobs:

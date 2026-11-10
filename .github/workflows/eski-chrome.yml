@@ -1,0 +1,33 @@
+name: Eski Chrome testi
+permissions:
+  contents: write
+on:
+  push:
+    branches: [emulator-testi]
+jobs:
+  dene:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 16
+      - name: Chrome 80 ve 85
+        run: |
+          mkdir -p cikti
+          for v in 2.1.1 5.2.1; do
+            rm -rf node_modules package-lock.json
+            npm i --no-save puppeteer@$v >/dev/null 2>&1
+            node eski.js cikti/p$v || echo "p$v hata" >> cikti/hata.txt
+          done
+      - name: Sonucu dala koy
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cd cikti
+          git init -q -b sonuc
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A && git commit -qm "eski chrome"
+          git push -q -f "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" sonuc:eski-chrome-sonuc
