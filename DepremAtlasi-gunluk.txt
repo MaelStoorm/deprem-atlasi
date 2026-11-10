@@ -1,0 +1,4 @@
+getpwuid_r did not find a match for uid 501
+Timestamp               Ty Process[PID:TID]
+2026-11-10 16:16:37.913 Df DepremAtlasi[8281:752c] (Foundation) [kabuk] hazır: app://site/index.html Deprem Atlası
+2026-11-10 16:16:56.896 Df log[10510:0] [com.apple.log:] log run noninteractively, parent: 1503 (launchd_sim), args: 'log' 'show' '--last' '3m' '--style' 'compact' '--predicate' 'eventMessage CONTAINS "[kabuk]"'
