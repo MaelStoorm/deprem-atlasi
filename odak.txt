@@ -1,0 +1,2 @@
+  mCurrentFocus=Window{a7ad285 u0 com.maelstorm.deprematlasi/com.maelstorm.deprematlasi.MainActivity}
+  mFocusedApp=ActivityRecord{612a087 u0 com.maelstorm.deprematlasi/.MainActivity t9}

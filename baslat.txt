@@ -1,0 +1,7 @@
+Starting: Intent { cmp=com.maelstorm.deprematlasi/.MainActivity }
+Status: ok
+LaunchState: COLD
+Activity: com.maelstorm.deprematlasi/.MainActivity
+TotalTime: 1130
+WaitTime: 1132
+Complete
