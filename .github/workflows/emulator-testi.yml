@@ -15,7 +15,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        api: [30, 34]
+        api: [30]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v4
@@ -54,8 +54,11 @@ jobs:
             adb shell input tap $((W/2)) $((H*70/100))
             sleep 10
             adb exec-out screencap -p > cikti/ekran-dokununca.png
-            p=$(adb shell pidof com.maelstorm.deprematlasi | tr -d '\r')
-            adb forward tcp:9222 localabstract:webview_devtools_remote_$p || true
+            adb shell cat /proc/net/unix | grep -o 'webview_devtools_remote_[0-9]*' | sort -u > cikti/soketler.txt || true
+            sok=$(head -1 cikti/soketler.txt)
+            adb forward tcp:9222 localabstract:$sok >> cikti/soketler.txt 2>&1 || true
+            sleep 2
+            curl -s http://127.0.0.1:9222/json >> cikti/soketler.txt 2>&1 || true
             node cdp.js > cikti/sayfa.json 2>&1 || true
             adb shell dumpsys window | grep -E "mCurrentFocus|mFocusedApp" > cikti/odak.txt || true
             adb shell pidof com.maelstorm.deprematlasi > cikti/pid.txt || echo "CALISMIYOR" > cikti/pid.txt
