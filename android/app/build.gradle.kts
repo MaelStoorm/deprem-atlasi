@@ -54,7 +54,7 @@ android {
         minSdk = 24
         targetSdk = 36
         versionCode = (System.getenv("VERSION_CODE") ?: "2").toInt()
-        versionName = "1.1"
+        versionName = "1.1.1"
     }
 
     buildTypes {

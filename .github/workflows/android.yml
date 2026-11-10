@@ -28,6 +28,11 @@ jobs:
 
       - uses: gradle/actions/setup-gradle@v4
 
+      - name: Eski Android WebView uyumluluğu (ES2019 sözdizimi)
+        run: |
+          npm i --no-save --prefix "$RUNNER_TEMP/js" acorn@8.14.0 >/dev/null
+          NODE_PATH="$RUNNER_TEMP/js/node_modules" node araclar/js-uyumluluk.js index.html 2019
+
       - name: AAB derle (imzasız)
         working-directory: android
         run: |
