@@ -1,0 +1,620 @@
+--------- beginning of main
+11-10 15:30:05.433  1900  1900 D CarrierSvcBindHelper: No carrier app for: 0
+11-10 15:30:05.441  1900  1900 D CarrierSvcBindHelper: No carrier app for: 0
+11-10 15:30:05.452  1900  1900 D CarrierSvcBindHelper: No carrier app for: 0
+11-10 15:30:05.476  1900  1900 D CarrierSvcBindHelper: No carrier app for: 0
+11-10 15:30:05.481  1900  1900 D CarrierConfigLoader: mHandler: 9 phoneId: 0
+11-10 15:30:05.484  1766  1766 D Backup  : [BackupScheduler] Setting backup scheduler enabled=true due to desired state 1
+11-10 15:30:05.484  1766  1766 V Backup  : [BackupTransportCS] no backup now
+11-10 15:30:05.487  1766  1766 D Backup  : [BackupScheduler] Setting backup scheduler enabled=true due to desired state 1
+11-10 15:30:05.487  1766  1766 V Backup  : [BackupTransportCS] no backup now
+11-10 15:30:05.487  1766  1766 V Backup  : [BackupTransportCS] Accounts changed
+11-10 15:30:05.488  1766  1766 I Backup  : [GmsBackupAccountManager] Backup account not found in gmscore.
+11-10 15:30:05.488  2298  2563 I Icing   : updateResources: need to parse acek{com.google.android.videos}
+11-10 15:30:05.494  1766  3464 V Backup  : [BackupAccountNotifier] Handling new intent. Show notification: true
+11-10 15:30:05.519  2298  3695 I Auth    : [SupervisedAccountIntentOperation] onHandleIntent(): android.intent.action.PACKAGE_ADDED
+--------- beginning of system
+11-10 15:30:05.522  1643  1780 W ActivityManager: Unable to start service Intent { act=com.google.android.gms.auth.key.retrieval.service.START pkg=com.google.android.gms } U=0: not found
+11-10 15:30:05.522  1643  2149 W ActivityManager: Unbind failed: could not find connection for android.os.BinderProxy@91810f
+11-10 15:30:05.522  2298  2514 E GmsClient: unable to connect to service: com.google.android.gms.auth.key.retrieval.service.START on com.google.android.gms
+11-10 15:30:05.523  2298  3695 I Auth    : [SupervisedAccountIntentOperation] This operation is disabled
+11-10 15:30:05.523  2298  3695 I ChromeSync: [Sync,SyncIntentOperation] Handling the intent: Intent { act=android.intent.action.PACKAGE_ADDED dat=package:com.maelstorm.deprematlasi flg=0x4000010 cmp=com.google.android.gms/.chimera.GmsIntentOperationService (has extras) }.
+11-10 15:30:05.524  1766  3849 W GCM     : Unexpected forwarded intent: Intent { act=android.intent.action.PACKAGE_ADDED dat=package:com.maelstorm.deprematlasi flg=0x4000010 cmp=com.google.android.gms/.chimera.PersistentIntentOperationService (has extras) }
+11-10 15:30:05.528  2298  3834 I FontLog : Package com.maelstorm.deprematlasi has no metadata [CONTEXT service_id=132 ]
+11-10 15:30:05.535  1766  3462 W GCM     : Unexpected forwarded intent: Intent { act=android.intent.action.PACKAGE_ADDED dat=package:com.maelstorm.deprematlasi flg=0x4000010 cmp=com.google.android.gms/.chimera.PersistentIntentOperationService (has extras) }
+11-10 15:30:05.540  2298  3695 I ChromeSync: [Persistence,AffiliationManager] One of affiliation or grouping data for android://MqHgN0vYM7sZzTuOIZrxNWV0v19YJpvzFvfBKTIeCvHuRgzzxxUz7HcnFCnpc1IfxETOPDNTWFGI43Aobscb3Q==@com.maelstorm.deprematlasi/ was not found. Marking affiliation data as stale...
+11-10 15:30:05.554  1643  1656 W InputMethodInfo: Duplicated subtype definition found: , voice
+11-10 15:30:05.576  1643  1643 V BackupManagerService: Connected to transport ComponentInfo{com.google.android.gms/com.google.android.gms.backup.BackupTransportService}
+11-10 15:30:05.576  1643  1643 V BackupManagerService: Registering transport com.google.android.gms/.backup.BackupTransportService::com.google.android.gms/.backup.BackupTransportService = com.android.internal.backup.IBackupTransport$Stub$Proxy@b75fb3d
+11-10 15:30:05.592  2270  3912 I UpdateIcingCorporaServi: Updating corpora: APPS=com.google.android.videos, CONTACTS=MAYBE
+11-10 15:30:05.636  3858  3860 W dex2oat : Compilation of int com.google.maps.api.android.lib6.impl.dm.f() took 268.703ms
+11-10 15:30:05.664  2270  3912 I UpdateIcingCorporaServi: UpdateCorporaTask done [took 72 ms] updated apps [took 72 ms] 
+11-10 15:30:05.665  2270  3912 I UpdateIcingCorporaServi: Updating corpora: APPS=com.android.vending, CONTACTS=MAYBE
+11-10 15:30:05.670  2270  3912 I UpdateIcingCorporaServi: UpdateCorporaTask done [took 4 ms] updated apps [took 4 ms] 
+11-10 15:30:05.716  2270  3912 I UpdateIcingCorporaServi: Updating corpora: APPS=com.maelstorm.deprematlasi, CONTACTS=MAYBE
+11-10 15:30:05.738  3858  3858 W dex2oat : Compilation of void com.google.maps.api.android.lib6.impl.ds.a(afo) took 455.398ms
+11-10 15:30:05.804  3939  3939 D AndroidRuntime: >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-10 15:30:05.806  3939  3939 D AndroidRuntime: CheckJNI is OFF
+11-10 15:30:05.810  2298  2799 I Icing   : IndexChimeraService.getServiceInterface callingPackage=com.google.android.googlequicksearchbox componentName=null serviceId=36
+11-10 15:30:05.824  3939  3939 W art     : Unexpected CPU variant for X86 using defaults: x86_64
+11-10 15:30:05.826  3939  3939 D ICU     : No timezone override file found: /data/misc/zoneinfo/current/icu/icu_tzdata.dat
+11-10 15:30:05.842  3939  3939 E memtrack: Couldn't load memtrack module (No such file or directory)
+11-10 15:30:05.842  3939  3939 E android.os.Debug: failed to load memtrack module: -2
+11-10 15:30:05.842  3939  3939 I Radio-JNI: register_android_hardware_Radio DONE
+11-10 15:30:05.850  3939  3939 D AndroidRuntime: Calling main entry com.android.commands.am.Am
+11-10 15:30:05.864  1643  3923 I ActivityManager: START u0 {flg=0x10000000 cmp=com.maelstorm.deprematlasi/.MainActivity} from uid 2000 on display 0
+11-10 15:30:05.883  3950  3950 I art     : Late-enabling -Xcheck:jni
+11-10 15:30:05.884  3950  3950 W art     : Unexpected CPU variant for X86 using defaults: x86_64
+11-10 15:30:05.889  1643  2148 I ActivityManager: Start proc 3950:com.maelstorm.deprematlasi/u0a78 for activity com.maelstorm.deprematlasi/.MainActivity
+11-10 15:30:05.918  3950  3950 W System  : ClassLoader referenced unknown path: /data/app/com.maelstorm.deprematlasi-1/lib/x86_64
+11-10 15:30:05.922  3950  3950 D WM-WrkMgrInitializer: Initializing WorkManager with default configuration.
+11-10 15:30:05.928  1312  1747 D gralloc_ranchu: gralloc_alloc: Creating ashmem region of size 819200
+11-10 15:30:05.933  2298  2563 I Icing   : Not indexing corpus from package com.google.android.videos as it has never connected
+11-10 15:30:05.933  2298  2563 E Icing   : Aborting indexing of corpus movies
+11-10 15:30:05.938  2298  2563 W Icing   : No valid account for uploading user actions
+11-10 15:30:05.943  3794  3965 I MS_RegisterService: RegisterService intent:Intent { act=register_intent_action flg=0x14 cmp=com.google.android.talk/com.google.android.libraries.matchstick.net.SilentRegisterService (has extras) } isPeriodic:false
+11-10 15:30:05.947  2452  2522 D EGL_emulation: eglMakeCurrent: 0x716a6a8887a0: ver 3 0 (tinfo 0x716a6a9254e0)
+11-10 15:30:05.950  3794  3965 E GmsNativeLibraryLoader: Unable to locate conscrypt_gmscore_jni in dalvik.system.PathClassLoader[DexPathList[[zip file "/system/framework/com.android.location.provider.jar", zip file "/system/framework/com.android.media.remotedisplay.jar", zip file "/system/priv-app/PrebuiltGmsCore/PrebuiltGmsCore.apk"],nativeLibraryDirectories=[/system/priv-app/PrebuiltGmsCore/lib/x86_64, /system/priv-app/PrebuiltGmsCore/PrebuiltGmsCore.apk!/lib/x86_64, /system/lib, /vendor/lib, /system/lib, /vendor/lib]]]
+11-10 15:30:05.950  3794  3965 E GmsNativeLibraryLoader: java.lang.UnsatisfiedLinkError: dlopen failed: "/system/priv-app/PrebuiltGmsCore/PrebuiltGmsCore.apk!/lib/x86_64/libconscrypt_gmscore_jni.so" is 64-bit instead of 32-bit
+11-10 15:30:05.950  3794  3965 E GmsNativeLibraryLoader: 	at java.lang.Runtime.loadLibrary0(Runtime.java:977)
+11-10 15:30:05.950  3794  3965 E GmsNativeLibraryLoader: 	at java.lang.System.loadLibrary(System.java:1530)
+11-10 15:30:05.950  3794  3965 E GmsNativeLibraryLoader: 	at ssl.b(:com.google.android.gms@202414023@20.24.14 (040800-319035315):63)
+11-10 15:30:05.950  3794  3965 E GmsNativeLibraryLoader: 	at com.google.android.gms.common.security.ProviderInstallerImpl.a(:com.google.android.gms@202414023@20.24.14 (040800-319035315):8)
+11-10 15:30:05.950  3794  3965 E GmsNativeLibraryLoader: 	at com.google.android.gms.common.security.ProviderInstallerImpl.insertProvider(:com.google.android.gms@202414023@20.24.14 (040800-319035315):3)
+11-10 15:30:05.950  3794  3965 E GmsNativeLibraryLoader: 	at java.lang.reflect.Method.invoke(Native Method)
+11-10 15:30:05.950  3794  3965 E GmsNativeLibraryLoader: 	at hnk.a(Unknown Source)
+11-10 15:30:05.950  3794  3965 E GmsNativeLibraryLoader: 	at com.google.android.libraries.matchstick.net.SilentRegisterService.onHandleIntent(SourceFile:216)
+11-10 15:30:05.950  3794  3965 E GmsNativeLibraryLoader: 	at android.app.IntentService$ServiceHandler.handleMessage(IntentService.java:68)
+11-10 15:30:05.950  3794  3965 E GmsNativeLibraryLoader: 	at android.os.Handler.dispatchMessage(Handler.java:102)
+11-10 15:30:05.950  3794  3965 E GmsNativeLibraryLoader: 	at android.os.Looper.loop(Looper.java:154)
+11-10 15:30:05.950  3794  3965 E GmsNativeLibraryLoader: 	at android.os.HandlerThread.run(HandlerThread.java:61)
+11-10 15:30:05.950  3794  3965 E ProviderInstaller: Failed to install provider: null
+11-10 15:30:05.950  3794  3965 E MS_RegisterService: Google play services not available
+11-10 15:30:05.950  3794  3965 E MS_RegisterService: fux
+11-10 15:30:05.950  3794  3965 E MS_RegisterService: 	at hnk.a(Unknown Source)
+11-10 15:30:05.950  3794  3965 E MS_RegisterService: 	at com.google.android.libraries.matchstick.net.SilentRegisterService.onHandleIntent(SourceFile:216)
+11-10 15:30:05.950  3794  3965 E MS_RegisterService: 	at android.app.IntentService$ServiceHandler.handleMessage(IntentService.java:68)
+11-10 15:30:05.950  3794  3965 E MS_RegisterService: 	at android.os.Handler.dispatchMessage(Handler.java:102)
+11-10 15:30:05.950  3794  3965 E MS_RegisterService: 	at android.os.Looper.loop(Looper.java:154)
+11-10 15:30:05.950  3794  3965 E MS_RegisterService: 	at android.os.HandlerThread.run(HandlerThread.java:61)
+11-10 15:30:05.951  3950  3950 D WM-PackageManagerHelper: androidx.work.impl.background.systemjob.SystemJobService enabled
+11-10 15:30:05.951  3950  3950 D WM-Schedulers: Created SystemJobScheduler and enabled SystemJobService
+11-10 15:30:05.955  3950  3966 D WM-ForceStopRunnable: The default process name was not specified.
+11-10 15:30:05.955  3950  3966 D WM-ForceStopRunnable: Performing cleanup operations.
+11-10 15:30:05.958  3794  3965 W MS_WakeLockHelper: Call to release wakelock: register_service_start_wakelock, but not held.
+11-10 15:30:05.987  3950  3966 D WM-ForceStopRunnable: Application was force-stopped, rescheduling.
+11-10 15:30:06.005  3950  3966 D WM-PackageManagerHelper: Skipping component enablement for androidx.work.impl.background.systemalarm.RescheduleReceiver
+11-10 15:30:06.005  3950  3950 W System  : ClassLoader referenced unknown path: /system/app/Chrome/lib/x86_64
+11-10 15:30:06.006  3950  3950 I WebViewFactory: Loading com.android.chrome version 69.0.3497.100 (code 349710067)
+11-10 15:30:06.030  2298  2563 E native  : document-store.cc:1218 Failed to update per-doc-data with usage report
+11-10 15:30:06.030  2298  2563 I Icing   : Usage reports ok 0, Failed Usage reports 1, indexed 0, rejected 0
+11-10 15:30:06.045  2270  3912 I UpdateIcingCorporaServi: UpdateCorporaTask done [took 329 ms] updated apps [took 329 ms] 
+11-10 15:30:06.047  3950  3950 I art     : Rejecting re-init on previously-failed class java.lang.Class<uJ>: java.lang.NoClassDefFoundError: Failed resolution of: Landroid/webkit/TracingController;
+11-10 15:30:06.047  3950  3950 I art     :   at java.lang.Class java.lang.Class.classForName!(java.lang.String, boolean, java.lang.ClassLoader) (Class.java:-2)
+11-10 15:30:06.047  3950  3950 I art     :   at java.lang.Class java.lang.Class.forName(java.lang.String, boolean, java.lang.ClassLoader) (Class.java:400)
+11-10 15:30:06.047  3950  3950 I art     :   at java.lang.Class android.webkit.WebViewFactory.getProviderClass() (WebViewFactory.java:349)
+11-10 15:30:06.047  3950  3950 I art     :   at android.webkit.WebViewFactoryProvider android.webkit.WebViewFactory.getProvider() (WebViewFactory.java:194)
+11-10 15:30:06.047  3950  3950 I art     :   at android.webkit.WebViewFactoryProvider android.webkit.WebView.getFactory() (WebView.java:2325)
+11-10 15:30:06.047  3950  3950 I art     :   at void android.webkit.WebView.setWebContentsDebuggingEnabled(boolean) (WebView.java:1943)
+11-10 15:30:06.047  3950  3950 I art     :   at void com.maelstorm.deprematlasi.MainActivity.onCreate(android.os.Bundle) (MainActivity.java:116)
+11-10 15:30:06.047  3950  3950 I art     :   at void android.app.Activity.performCreate(android.os.Bundle) (Activity.java:6662)
+11-10 15:30:06.047  3950  3950 I art     :   at void android.app.Instrumentation.callActivityOnCreate(android.app.Activity, android.os.Bundle) (Instrumentation.java:1118)
+11-10 15:30:06.047  3950  3950 I art     :   at android.app.Activity android.app.ActivityThread.performLaunchActivity(android.app.ActivityThread$ActivityClientRecord, android.content.Intent) (ActivityThread.java:2599)
+11-10 15:30:06.047  3950  3950 I art     :   at void android.app.ActivityThread.handleLaunchActivity(android.app.ActivityThread$ActivityClientRecord, android.content.Intent, java.lang.String) (ActivityThread.java:2707)
+11-10 15:30:06.047  3950  3950 I art     :   at void android.app.ActivityThread.-wrap12(android.app.ActivityThread, android.app.ActivityThread$ActivityClientRecord, android.content.Intent, java.lang.String) (ActivityThread.java:-1)
+11-10 15:30:06.047  3950  3950 I art     :   at void android.app.ActivityThread$H.handleMessage(android.os.Message) (ActivityThread.java:1460)
+11-10 15:30:06.047  3950  3950 I art     :   at void android.os.Handler.dispatchMessage(android.os.Message) (Handler.java:102)
+11-10 15:30:06.047  3950  3950 I art     :   at void android.os.Looper.loop() (Looper.java:154)
+11-10 15:30:06.047  3950  3950 I art     :   at void android.app.ActivityThread.main(java.lang.String[]) (ActivityThread.java:6077)
+11-10 15:30:06.047  3950  3950 I art     :   at java.lang.Object java.lang.reflect.Method.invoke!(java.lang.Object, java.lang.Object[]) (Method.java:-2)
+11-10 15:30:06.047  3950  3950 I art     :   at void com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run() (ZygoteInit.java:866)
+11-10 15:30:06.047  3950  3950 I art     :   at void com.android.internal.os.ZygoteInit.main(java.lang.String[]) (ZygoteInit.java:756)
+11-10 15:30:06.047  3950  3950 I art     : Caused by: java.lang.ClassNotFoundException: Didn't find class "android.webkit.TracingController" on path: DexPathList[[zip file "/system/app/Chrome/Chrome.apk"],nativeLibraryDirectories=[/system/app/Chrome/lib/x86_64, /system/app/Chrome/Chrome.apk!/lib/x86_64, /system/lib64, /vendor/lib64, /system/lib64, /vendor/lib64]]
+11-10 15:30:06.047  3950  3950 I art     :   at java.lang.Class dalvik.system.BaseDexClassLoader.findClass(java.lang.String) (BaseDexClassLoader.java:56)
+11-10 15:30:06.047  3950  3950 I art     :   at java.lang.Class java.lang.ClassLoader.loadClass(java.lang.String, boolean) (ClassLoader.java:380)
+11-10 15:30:06.047  3950  3950 I art     :   at java.lang.Class java.lang.ClassLoader.loadClass(java.lang.String) (ClassLoader.java:312)
+11-10 15:30:06.047  3950  3950 I art     :   at java.lang.Class java.lang.Class.classForName!(java.lang.String, boolean, java.lang.ClassLoader) (Class.java:-2)
+11-10 15:30:06.047  3950  3950 I art     :   at java.lang.Class java.lang.Class.forName(java.lang.String, boolean, java.lang.ClassLoader) (Class.java:400)
+11-10 15:30:06.047  3950  3950 I art     :   at java.lang.Class android.webkit.WebViewFactory.getProviderClass() (WebViewFactory.java:349)
+11-10 15:30:06.047  3950  3950 I art     :   at android.webkit.WebViewFactoryProvider android.webkit.WebViewFactory.getProvider() (WebViewFactory.java:194)
+11-10 15:30:06.047  3950  3950 I art     :   at android.webkit.WebViewFactoryProvider android.webkit.WebView.getFactory() (WebView.java:2325)
+11-10 15:30:06.047  3950  3950 I art     :   at void android.webkit.WebView.setWebContentsDebuggingEnabled(boolean) (WebView.java:1943)
+11-10 15:30:06.047  3950  3950 I art     :   at void com.maelstorm.deprematlasi.MainActivity.onCreate(android.os.Bundle) (MainActivity.java:116)
+11-10 15:30:06.047  3950  3950 I art     :   at void android.app.Activity.performCreate(android.os.Bundle) (Activity.java:6662)
+11-10 15:30:06.047  3950  3950 I art     :   at void android.app.Instrumentation.callActivityOnCreate(android.app.Activity, android.os.Bundle) (Instrumentation.java:1118)
+11-10 15:30:06.047  3950  3950 I art     :   at android.app.Activity android.app.ActivityThread.performLaunchActivity(android.app.ActivityThread$ActivityClientRecord, android.content.Intent) (ActivityThread.java:2599)
+11-10 15:30:06.047  3950  3950 I art     :   at void android.app.ActivityThread.handleLaunchActivity(android.app.ActivityThread$ActivityClientRecord, android.content.Intent, java.lang.String) (ActivityThread.java:2707)
+11-10 15:30:06.047  3950  3950 I art     :   at void android.app.ActivityThread.-wrap12(android.app.ActivityThread, android.app.ActivityThread$ActivityClientRecord, android.content.Intent, java.lang.String) (ActivityThread.java:-1)
+11-10 15:30:06.047  3950  3950 I art     :   at void android.app.ActivityThread$H.handleMessage(android.os.Message) (ActivityThread.java:1460)
+11-10 15:30:06.047  3950  3950 I art     :   at void android.os.Handler.dispatchMessage(android.os.Message) (Handler.java:102)
+11-10 15:30:06.047  3950  3950 I art     :   at void android.os.Looper.loop() (Looper.java:154)
+11-10 15:30:06.047  3950  3950 I art     :   at void android.app.ActivityThread.main(java.lang.String[]) (ActivityThread.java:6077)
+11-10 15:30:06.047  3950  3950 I art     :   at java.lang.Object java.lang.reflect.Method.invoke!(java.lang.Object, java.lang.Object[]) (Method.java:-2)
+11-10 15:30:06.047  3950  3950 I art     :   at void com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run() (ZygoteInit.java:866)
+11-10 15:30:06.047  3950  3950 I art     :   at void com.android.internal.os.ZygoteInit.main(java.lang.String[]) (ZygoteInit.java:756)
+11-10 15:30:06.047  3950  3950 I art     : 
+11-10 15:30:06.048  2298  2563 I Icing   : Not indexing corpus from package com.google.android.videos as it has never connected
+11-10 15:30:06.048  2298  2563 E Icing   : Aborting indexing of corpus shows
+11-10 15:30:06.077  3950  3950 I cr_LibraryLoader: Time to load native libraries: 1 ms (timestamps 4332-4333)
+11-10 15:30:06.080  3950  3950 I chromium: [INFO:library_loader_hooks.cc(36)] Chromium logging enabled: level = 0, default verbosity = 0
+11-10 15:30:06.080  3950  3950 I cr_LibraryLoader: Expected native library version number "69.0.3497.100", actual native library version number "69.0.3497.100"
+11-10 15:30:06.085  3950  3972 E cr_VariationsUtils: Failed reading seed file "/data/user/0/com.maelstorm.deprematlasi/app_webview/variations_seed_new": /data/user/0/com.maelstorm.deprematlasi/app_webview/variations_seed_new (No such file or directory)
+11-10 15:30:06.085  3950  3972 E cr_VariationsUtils: Failed reading seed file "/data/user/0/com.maelstorm.deprematlasi/app_webview/variations_seed": /data/user/0/com.maelstorm.deprematlasi/app_webview/variations_seed (No such file or directory)
+11-10 15:30:06.086  3950  3972 W System  : ClassLoader referenced unknown path: 
+11-10 15:30:06.086  3950  3972 W System  : ClassLoader referenced unknown path: /system/app/Chrome/lib/x86_64
+11-10 15:30:06.090  3973  3973 W art     : Unexpected CPU variant for X86 using defaults: x86
+11-10 15:30:06.098  1643  1655 I ActivityManager: Start proc 3973:com.android.chrome:webview_service/u0a37 for service com.android.chrome/org.chromium.android_webview.services.VariationsSeedServer
+11-10 15:30:06.102  3973  3973 W System  : ClassLoader referenced unknown path: /system/app/Chrome/lib/x86
+11-10 15:30:06.124  3950  3950 I cr_BrowserStartup: Initializing chromium process, singleProcess=true
+11-10 15:30:06.126  3950  3950 W ResourceType: Failure getting entry for 0x7f1204b0 (t=17 e=1200) (error -2147483647)
+11-10 15:30:06.207  1312  1326 E SurfaceFlinger: ro.sf.lcd_density must be defined as a build property
+11-10 15:30:06.209  3950  3950 D         : HostConnection::get() New Host Connection established 0x716a6a5d4260, tid 3950
+11-10 15:30:06.224  3950  4008 E libEGL  : validate_display:99 error 3008 (EGL_BAD_DISPLAY)
+11-10 15:30:06.230  3950  4008 D         : HostConnection::get() New Host Connection established 0x716a6a4c6160, tid 4008
+11-10 15:30:06.235  3950  4008 D EGL_emulation: eglCreateContext: 0x716a6a5b3340: maj 3 min 0 rcv 3
+11-10 15:30:06.235  3950  3996 W cr_media: Requires BLUETOOTH permission
+11-10 15:30:06.236  3950  4008 D EGL_emulation: eglMakeCurrent: 0x716a6a5b3340: ver 3 0 (tinfo 0x716a6a5bef00)
+11-10 15:30:06.236  3950  4008 E eglCodecCommon: glUtilsParamSize: unknow param 0x00008cdf
+11-10 15:30:06.236  3950  4008 E eglCodecCommon: glUtilsParamSize: unknow param 0x00008824
+11-10 15:30:06.241  3950  4008 E eglCodecCommon: glUtilsParamSize: unknow param 0x000087fe
+11-10 15:30:06.258  3950  4008 I VideoCapabilities: Unsupported profile 4 for video/mp4v-es
+11-10 15:30:06.259  3950  4008 W cr_MediaCodecUtil: HW encoder for video/avc is not available on this device.
+11-10 15:30:06.262  3950  4008 D EGL_emulation: eglCreateContext: 0x716a66309640: maj 3 min 0 rcv 3
+11-10 15:30:06.262  3950  4008 D EGL_emulation: eglMakeCurrent: 0x716a66309640: ver 3 0 (tinfo 0x716a6a5bef00)
+11-10 15:30:06.262  3950  4008 E eglCodecCommon: glUtilsParamSize: unknow param 0x00008cdf
+11-10 15:30:06.262  3950  4008 E eglCodecCommon: glUtilsParamSize: unknow param 0x00008824
+11-10 15:30:06.275  3950  4008 E eglCodecCommon: glUtilsParamSize: unknow param 0x00008a34
+11-10 15:30:06.275  3950  4008 E eglCodecCommon: glUtilsParamSize: unknow param 0x00008073
+11-10 15:30:06.275  3950  4008 E eglCodecCommon: glUtilsParamSize: unknow param 0x000088ff
+11-10 15:30:06.290  3950  4008 E eglCodecCommon: glUtilsParamSize: unknow param 0x000088ff
+11-10 15:30:06.300  3950  4012 I OpenGLRenderer: Initialized EGL, version 1.4
+11-10 15:30:06.300  3950  4012 D OpenGLRenderer: Swap behavior 1
+11-10 15:30:06.300  3950  4012 D         : HostConnection::get() New Host Connection established 0x716a6a5d4500, tid 4012
+11-10 15:30:06.304  3950  4012 D EGL_emulation: eglCreateContext: 0x716a6a5b2620: maj 3 min 0 rcv 3
+11-10 15:30:06.304  3950  4012 D EGL_emulation: eglMakeCurrent: 0x716a6a5b2620: ver 3 0 (tinfo 0x716a6621e4c0)
+11-10 15:30:06.305  3950  4012 E eglCodecCommon: glUtilsParamSize: unknow param 0x00008cdf
+11-10 15:30:06.305  3950  4012 E eglCodecCommon: glUtilsParamSize: unknow param 0x00008824
+11-10 15:30:06.315  3950  4012 D EGL_emulation: eglMakeCurrent: 0x716a6a5b2620: ver 3 0 (tinfo 0x716a6621e4c0)
+11-10 15:30:06.324  1766  2617 W Conscrypt: Could not set socket write timeout: java.net.SocketException: Socket closed
+11-10 15:30:06.326  1766  2617 W Conscrypt: 	at com.google.android.gms.org.conscrypt.Platform.setSocketWriteTimeout(:com.google.android.gms@202414023@20.24.14 (040800-319035315):2)
+11-10 15:30:06.326  1766  2617 W Conscrypt: 	at com.google.android.gms.org.conscrypt.ConscryptFileDescriptorSocket.setSoWriteTimeout(:com.google.android.gms@202414023@20.24.14 (040800-319035315):0)
+11-10 15:30:06.347  3973  3990 W acm     : copyMemory is missing from platform - proto runtime falling back to safer methods.
+11-10 15:30:06.356  1766  2617 W Conscrypt: Could not set socket write timeout: java.net.SocketException: Socket closed
+11-10 15:30:06.357  1766  2617 W Conscrypt: 	at com.google.android.gms.org.conscrypt.Platform.setSocketWriteTimeout(:com.google.android.gms@202414023@20.24.14 (040800-319035315):2)
+11-10 15:30:06.357  1766  2617 W Conscrypt: 	at com.google.android.gms.org.conscrypt.ConscryptFileDescriptorSocket.setSoWriteTimeout(:com.google.android.gms@202414023@20.24.14 (040800-319035315):0)
+11-10 15:30:06.406  3950  4012 E eglCodecCommon: glUtilsParamSize: unknow param 0x000085b5
+11-10 15:30:06.411  3950  4012 E eglCodecCommon: glUtilsParamSize: unknow param 0x00008a34
+11-10 15:30:06.411  3950  4012 E eglCodecCommon: glUtilsParamSize: unknow param 0x00008073
+11-10 15:30:06.411  3950  4012 E eglCodecCommon: glUtilsParamSize: unknow param 0x000088ff
+11-10 15:30:06.468  3950  4012 E eglCodecCommon: glUtilsParamSize: unknow param 0x000085b5
+11-10 15:30:06.469  1643  1667 I ActivityManager: Displayed com.maelstorm.deprematlasi/.MainActivity: +591ms
+11-10 15:30:06.470  3939  3939 D AndroidRuntime: Shutting down VM
+11-10 15:30:06.485  3950  4012 E eglCodecCommon: glUtilsParamSize: unknow param 0x000085b5
+11-10 15:30:06.485  3950  3969 W cr_CrashFileManager: /data/user/0/com.maelstorm.deprematlasi/cache/WebView/Crash Reports does not exist or is not a directory
+11-10 15:30:06.494  1643  1667 I WindowManager: Destroying surface Surface(name=Starting com.maelstorm.deprematlasi) called by com.android.server.wm.WindowStateAnimator.destroySurface:2016 com.android.server.wm.WindowStateAnimator.destroySurfaceLocked:882 com.android.server.wm.WindowState.destroyOrSaveSurface:2100 com.android.server.wm.AppWindowToken.destroySurfaces:363 com.android.server.wm.WindowStateAnimator.finishExit:565 com.android.server.wm.WindowStateAnimator.stepAnimationLocked:491 com.android.server.wm.WindowAnimator.updateWindowsLocked:303 com.android.server.wm.WindowAnimator.animateLocked:704 
+11-10 15:30:06.505  3950  4012 E eglCodecCommon: glUtilsParamSize: unknow param 0x000085b5
+11-10 15:30:06.518  3950  4012 E eglCodecCommon: glUtilsParamSize: unknow param 0x000085b5
+11-10 15:30:06.536  3950  4012 E eglCodecCommon: glUtilsParamSize: unknow param 0x000085b5
+11-10 15:30:06.551  3950  4012 E eglCodecCommon: glUtilsParamSize: unknow param 0x000085b5
+11-10 15:30:06.570  3950  4012 E eglCodecCommon: glUtilsParamSize: unknow param 0x000085b5
+11-10 15:30:06.579  1643  3918 I WindowManager: Destroying surface Surface(name=com.android.launcher3/com.android.launcher3.Launcher) called by com.android.server.wm.WindowStateAnimator.destroySurface:2016 com.android.server.wm.WindowStateAnimator.destroySurfaceLocked:882 com.android.server.wm.WindowState.destroyOrSaveSurface:2100 com.android.server.wm.AppWindowToken.destroySurfaces:363 com.android.server.wm.AppWindowToken.notifyAppStopped:389 com.android.server.wm.WindowManagerService.notifyAppStopped:4463 com.android.server.am.ActivityStack.activityStoppedLocked:1252 com.android.server.am.ActivityManagerService.activityStopped:6903 
+11-10 15:30:06.587  3950  4012 E eglCodecCommon: glUtilsParamSize: unknow param 0x000085b5
+11-10 15:30:06.602  3950  4012 E eglCodecCommon: glUtilsParamSize: unknow param 0x000085b5
+11-10 15:30:06.619  3950  4012 E eglCodecCommon: glUtilsParamSize: unknow param 0x000085b5
+11-10 15:30:06.640  3950  4012 E eglCodecCommon: glUtilsParamSize: unknow param 0x000085b5
+11-10 15:30:06.651  3950  4012 E eglCodecCommon: glUtilsParamSize: unknow param 0x000085b5
+11-10 15:30:06.673  3950  4012 E eglCodecCommon: glUtilsParamSize: unknow param 0x000085b5
+11-10 15:30:06.687  3950  4012 E eglCodecCommon: glUtilsParamSize: unknow param 0x000085b5
+11-10 15:30:06.703  3950  4012 E eglCodecCommon: glUtilsParamSize: unknow param 0x000085b5
+11-10 15:30:06.719  3950  4012 E eglCodecCommon: glUtilsParamSize: unknow param 0x000085b5
+11-10 15:30:06.735  3950  4012 E eglCodecCommon: glUtilsParamSize: unknow param 0x000085b5
+11-10 15:30:06.752  3950  4012 E eglCodecCommon: glUtilsParamSize: unknow param 0x000085b5
+11-10 15:30:06.927  2298  2516 I Icing   : Indexing com.google.android.gms-internal.3p:MobileApplication from com.google.android.gms
+11-10 15:30:06.967  2298  2516 I Icing   : Indexing com.google.android.gms-apps from com.google.android.gms
+11-10 15:30:07.027  1766  2617 I aopq    : Scheduling adaptive one off task with window [14400, 604800] in seconds [CONTEXT service_id=51 ]
+11-10 15:30:07.073  1766  3464 I Auth    : [AuthManaged,PasswordComplexityHelperImpl] Updating password complexity components state.
+11-10 15:30:07.074  1766  3464 I Auth    : [AuthManaged,PasswordComplexityHelperImpl] Disabling com.google.android.gms.auth.managed.admin.DeviceAdminReceiver
+11-10 15:30:07.074  1766  3464 I Auth    : [AuthManaged,PasswordComplexityHelperImpl] Disabling com.google.android.gms.auth.managed.ui.SetNewPasswordActivity
+11-10 15:30:07.076  2298  3693 I ChromeSync: [Sync,SyncIntentOperation] Handling the intent: Intent { act=com.google.android.gms.phenotype.COMMITTED flg=0x10 pkg=com.google.android.gms cmp=com.google.android.gms/.chimera.GmsIntentOperationService (has extras) }.
+11-10 15:30:07.076  1643  3923 W ActivityManager: Unable to start service Intent { act=com.google.android.gms.auth.key.retrieval.service.START pkg=com.google.android.gms } U=0: not found
+11-10 15:30:07.077  2298  3693 I MdiSyncModule: flag handling is skipping irrelevant intent.
+11-10 15:30:07.078  2298  3834 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+11-10 15:30:07.078  1766  3459 I PTCommittedOperation: Receive new configuration for com.google.android.gms.clearcut.public
+11-10 15:30:07.082  1643  3021 W ActivityManager: Unbind failed: could not find connection for android.os.BinderProxy@cbacaec
+11-10 15:30:07.082  2298  2514 E GmsClient: unable to connect to service: com.google.android.gms.auth.key.retrieval.service.START on com.google.android.gms
+11-10 15:30:07.083  1766  3464 I Auth    : [AuthManaged,PasswordComplexityHelperImpl] Updating password complexity components state.
+11-10 15:30:07.083  1766  3464 I Auth    : [AuthManaged,PasswordComplexityHelperImpl] Disabling com.google.android.gms.auth.managed.admin.DeviceAdminReceiver
+11-10 15:30:07.083  1766  3464 I Auth    : [AuthManaged,PasswordComplexityHelperImpl] Disabling com.google.android.gms.auth.managed.ui.SetNewPasswordActivity
+11-10 15:30:07.094  2298  2516 I Icing   : Indexing done com.google.android.gms-internal.3p:MobileApplication
+11-10 15:30:07.100  2298  2516 I Icing   : Indexing done com.google.android.gms-apps
+11-10 15:30:07.100  2298  2516 I Icing   : Indexing com.google.android.googlequicksearchbox-applications_uri from com.google.android.googlequicksearchbox
+11-10 15:30:07.128  2298  2516 I Icing   : Indexing com.google.android.gms-internal.3p:MobileApplication from com.google.android.gms
+11-10 15:30:07.130  2298  2516 I Icing   : Indexing done com.google.android.gms-internal.3p:MobileApplication
+11-10 15:30:07.136  2298  2516 I Icing   : Indexing done com.google.android.googlequicksearchbox-applications_uri
+11-10 15:30:07.136  2298  2516 I Icing   : Indexing com.google.android.gms-apps from com.google.android.gms
+11-10 15:30:07.137  2298  2516 I Icing   : Indexing done com.google.android.gms-apps
+11-10 15:30:07.172  2298  2516 I Icing   : Indexing com.google.android.gms-apps from com.google.android.gms
+11-10 15:30:07.173  2298  2516 I Icing   : Indexing done com.google.android.gms-apps
+11-10 15:30:07.455  3858  3858 I dex2oat : dex2oat took 6.685s (threads: 2) arena alloc=5MB (5695880B) java alloc=3MB (3308864B) native alloc=10MB (10533160B) free=6MB (7292632B)
+11-10 15:30:07.473  2837  3593 W MediaScanner: Error opening directory '/oem/media/', skipping: No such file or directory.
+11-10 15:30:07.474  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ui; assuming invalid
+11-10 15:30:07.477  4022  4022 W dex2oat : Unexpected CPU variant for X86 using defaults: x86_64
+11-10 15:30:07.477  4022  4022 I dex2oat : /system/bin/dex2oat --dex-file=/data/user_de/0/com.google.android.gms/app_chimera/m/00000000/AdsDynamite.apk --oat-fd=93 --oat-location=/data/user_de/0/com.google.android.gms/app_chimera/m/00000000/oat/x86_64/AdsDynamite.dex --compiler-filter=speed
+11-10 15:30:07.478  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/Andromeda.ogg; assuming invalid
+11-10 15:30:07.479  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/Aquila.ogg; assuming invalid
+11-10 15:30:07.480  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/ArgoNavis.ogg; assuming invalid
+11-10 15:30:07.482  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/Atria.ogg; assuming invalid
+11-10 15:30:07.483  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/BOOTES.ogg; assuming invalid
+11-10 15:30:07.484  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/Backroad.ogg; assuming invalid
+11-10 15:30:07.486  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/BeatPlucker.ogg; assuming invalid
+11-10 15:30:07.487  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/BentleyDubs.ogg; assuming invalid
+11-10 15:30:07.491  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/Big_Easy.ogg; assuming invalid
+11-10 15:30:07.492  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/BirdLoop.ogg; assuming invalid
+11-10 15:30:07.492  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/Bollywood.ogg; assuming invalid
+11-10 15:30:07.493  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/BussaMove.ogg; assuming invalid
+11-10 15:30:07.494  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/CANISMAJOR.ogg; assuming invalid
+11-10 15:30:07.495  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/CASSIOPEIA.ogg; assuming invalid
+11-10 15:30:07.495  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/Cairo.ogg; assuming invalid
+11-10 15:30:07.496  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/Calypso_Steel.ogg; assuming invalid
+11-10 15:30:07.497  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/CanisMajor.ogg; assuming invalid
+11-10 15:30:07.497  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/CaribbeanIce.ogg; assuming invalid
+11-10 15:30:07.498  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/Carina.ogg; assuming invalid
+11-10 15:30:07.499  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/Centaurus.ogg; assuming invalid
+11-10 15:30:07.499  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/Champagne_Edition.ogg; assuming invalid
+11-10 15:30:07.500  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/Club_Cubano.ogg; assuming invalid
+11-10 15:30:07.501  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/CrayonRock.ogg; assuming invalid
+11-10 15:30:07.501  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/CrazyDream.ogg; assuming invalid
+11-10 15:30:07.502  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/CurveBall.ogg; assuming invalid
+11-10 15:30:07.502  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/Cygnus.ogg; assuming invalid
+11-10 15:30:07.503  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/DancinFool.ogg; assuming invalid
+11-10 15:30:07.510  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/Ding.ogg; assuming invalid
+11-10 15:30:07.510  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/DonMessWivIt.ogg; assuming invalid
+11-10 15:30:07.511  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/Draco.ogg; assuming invalid
+11-10 15:30:07.512  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/DreamTheme.ogg; assuming invalid
+11-10 15:30:07.513  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/Eastern_Sky.ogg; assuming invalid
+11-10 15:30:07.514  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/Enter_the_Nexus.ogg; assuming invalid
+11-10 15:30:07.514  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/Eridani.ogg; assuming invalid
+11-10 15:30:07.515  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/EtherShake.ogg; assuming invalid
+11-10 15:30:07.515  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/FreeFlight.ogg; assuming invalid
+11-10 15:30:07.516  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/FriendlyGhost.ogg; assuming invalid
+11-10 15:30:07.516  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/Funk_Yall.ogg; assuming invalid
+11-10 15:30:07.517  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/GameOverGuitar.ogg; assuming invalid
+11-10 15:30:07.517  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/Gimme_Mo_Town.ogg; assuming invalid
+11-10 15:30:07.518  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/Girtab.ogg; assuming invalid
+11-10 15:30:07.519  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/Glacial_Groove.ogg; assuming invalid
+11-10 15:30:07.519  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/Growl.ogg; assuming invalid
+11-10 15:30:07.520  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/HalfwayHome.ogg; assuming invalid
+11-10 15:30:07.520  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/Hydra.ogg; assuming invalid
+11-10 15:30:07.521  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/InsertCoin.ogg; assuming invalid
+11-10 15:30:07.522  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/Kuma.ogg; assuming invalid
+11-10 15:30:07.522  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/LoopyLounge.ogg; assuming invalid
+11-10 15:30:07.523  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/LoveFlute.ogg; assuming invalid
+11-10 15:30:07.523  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/Lyra.ogg; assuming invalid
+11-10 15:30:07.524  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/Machina.ogg; assuming invalid
+11-10 15:30:07.524  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/MidEvilJaunt.ogg; assuming invalid
+11-10 15:30:07.525  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/MildlyAlarming.ogg; assuming invalid
+11-10 15:30:07.526  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/Nairobi.ogg; assuming invalid
+11-10 15:30:07.526  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/Nassau.ogg; assuming invalid
+11-10 15:30:07.527  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/NewPlayer.ogg; assuming invalid
+11-10 15:30:07.527  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/No_Limits.ogg; assuming invalid
+11-10 15:30:07.528  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/Noises1.ogg; assuming invalid
+11-10 15:30:07.529  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/Noises2.ogg; assuming invalid
+11-10 15:30:07.530  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/Noises3.ogg; assuming invalid
+11-10 15:30:07.531  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/OrganDub.ogg; assuming invalid
+11-10 15:30:07.532  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/Orion.ogg; assuming invalid
+11-10 15:30:07.539  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/PERSEUS.ogg; assuming invalid
+11-10 15:30:07.540  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/Paradise_Island.ogg; assuming invalid
+11-10 15:30:07.540  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/Pegasus.ogg; assuming invalid
+11-10 15:30:07.544  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/Perseus.ogg; assuming invalid
+11-10 15:30:07.544  1403  1403 E MetadataRetrieverClient: failed to extract an album art
+11-10 15:30:07.545  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/Playa.ogg; assuming invalid
+11-10 15:30:07.546  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/Pyxis.ogg; assuming invalid
+11-10 15:30:07.547  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/Rasalas.ogg; assuming invalid
+11-10 15:30:07.547  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/Revelation.ogg; assuming invalid
+11-10 15:30:07.548  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/Rigel.ogg; assuming invalid
+11-10 15:30:07.549  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/Ring_Classic_02.ogg; assuming invalid
+11-10 15:30:07.550  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/Ring_Digital_02.ogg; assuming invalid
+11-10 15:30:07.550  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/Ring_Synth_02.ogg; assuming invalid
+11-10 15:30:07.551  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/Ring_Synth_04.ogg; assuming invalid
+11-10 15:30:07.552  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/Road_Trip.ogg; assuming invalid
+11-10 15:30:07.552  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/RomancingTheTone.ogg; assuming invalid
+11-10 15:30:07.553  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/Safari.ogg; assuming invalid
+11-10 15:30:07.553  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/Savannah.ogg; assuming invalid
+11-10 15:30:07.554  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/Scarabaeus.ogg; assuming invalid
+11-10 15:30:07.555  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/Sceptrum.ogg; assuming invalid
+11-10 15:30:07.555  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/Seville.ogg; assuming invalid
+11-10 15:30:07.556  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/Shes_All_That.ogg; assuming invalid
+11-10 15:30:07.556  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/SilkyWay.ogg; assuming invalid
+11-10 15:30:07.557  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/SitarVsSitar.ogg; assuming invalid
+11-10 15:30:07.558  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/Solarium.ogg; assuming invalid
+11-10 15:30:07.558  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/SpringyJalopy.ogg; assuming invalid
+11-10 15:30:07.559  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/Steppin_Out.ogg; assuming invalid
+11-10 15:30:07.559  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/Terminated.ogg; assuming invalid
+11-10 15:30:07.561  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/Testudo.ogg; assuming invalid
+11-10 15:30:07.562  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/Themos.ogg; assuming invalid
+11-10 15:30:07.562  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/Third_Eye.ogg; assuming invalid
+11-10 15:30:07.563  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/Thunderfoot.ogg; assuming invalid
+11-10 15:30:07.569  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/TwirlAway.ogg; assuming invalid
+11-10 15:30:07.570  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/URSAMINOR.ogg; assuming invalid
+11-10 15:30:07.571  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/UrsaMinor.ogg; assuming invalid
+11-10 15:30:07.571  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/VeryAlarmed.ogg; assuming invalid
+11-10 15:30:07.572  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/Vespa.ogg; assuming invalid
+11-10 15:30:07.572  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/World.ogg; assuming invalid
+11-10 15:30:07.573  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/Zeta.ogg; assuming invalid
+11-10 15:30:07.574  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ringtones/hydra.ogg; assuming invalid
+11-10 15:30:07.577  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ui/Dock.ogg; assuming invalid
+11-10 15:30:07.577  1403  1935 E MetadataRetrieverClient: failed to extract an album art
+11-10 15:30:07.578  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ui/Effect_Tick.ogg; assuming invalid
+11-10 15:30:07.579  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ui/KeypressDelete.ogg; assuming invalid
+11-10 15:30:07.580  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ui/KeypressInvalid.ogg; assuming invalid
+11-10 15:30:07.580  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ui/KeypressReturn.ogg; assuming invalid
+11-10 15:30:07.581  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ui/KeypressSpacebar.ogg; assuming invalid
+11-10 15:30:07.582  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ui/KeypressStandard.ogg; assuming invalid
+11-10 15:30:07.583  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ui/Lock.ogg; assuming invalid
+11-10 15:30:07.584  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ui/LowBattery.ogg; assuming invalid
+11-10 15:30:07.584  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ui/Trusted.ogg; assuming invalid
+11-10 15:30:07.585  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ui/Undock.ogg; assuming invalid
+11-10 15:30:07.586  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ui/Unlock.ogg; assuming invalid
+11-10 15:30:07.586  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ui/VideoRecord.ogg; assuming invalid
+11-10 15:30:07.587  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ui/VideoStop.ogg; assuming invalid
+11-10 15:30:07.588  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ui/WirelessChargingStarted.ogg; assuming invalid
+11-10 15:30:07.588  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ui/camera_click.ogg; assuming invalid
+11-10 15:30:07.589  2837  3593 W MediaProvider: Missing volume for /system/media/audio/ui/camera_focus.ogg; assuming invalid
+11-10 15:30:07.602  3054  3054 D MusicLifecycle: com.google.android.music.store.MediaStoreImportService$Receiver generated event: Broadcast received with context android.app.ReceiverRestrictedContext@76e39a2 and intent Intent { act=android.intent.action.MEDIA_SCANNER_FINISHED dat=file:///system/media flg=0x10 cmp=com.google.android.music/.store.MediaStoreImportService$Receiver }
+11-10 15:30:07.605  3054  3054 D MusicLifecycle: com.google.android.music.store.MediaStoreImportService$Receiver generated event: Broadcast received with context android.app.ReceiverRestrictedContext@76e39a2 and intent Intent { act=android.intent.action.MEDIA_SCANNER_STARTED dat=file:///storage/emulated/0 flg=0x10 cmp=com.google.android.music/.store.MediaStoreImportService$Receiver }
+11-10 15:30:07.610  3054  3054 D MusicLifecycle: com.google.android.music.store.MediaStoreImportService generated event: Service created
+11-10 15:30:07.611  3054  3054 D MusicLifecycle: com.google.android.music.store.MediaStoreImportService generated event: Service destroyed
+11-10 15:30:07.663  2837  3593 V MediaScanner: pruneDeadThumbnailFiles... android.content.ContentProviderClient$CursorWrapperInner@47fe267
+11-10 15:30:07.664  2837  3593 V MediaScanner: /pruneDeadThumbnailFiles... android.content.ContentProviderClient$CursorWrapperInner@47fe267
+11-10 15:30:07.668  3054  3054 D MusicLifecycle: com.google.android.music.store.MediaStoreImportService$Receiver generated event: Broadcast received with context android.app.ReceiverRestrictedContext@76e39a2 and intent Intent { act=android.intent.action.MEDIA_SCANNER_FINISHED dat=file:///storage/emulated/0 flg=0x10 cmp=com.google.android.music/.store.MediaStoreImportService$Receiver }
+11-10 15:30:07.671  3054  3054 D MusicLifecycle: com.google.android.music.store.MediaStoreImportService generated event: Service created
+11-10 15:30:07.692  3054  4026 I MediaStoreImporter: Update: incremental Added music: 0 Updated music: 0 Deleted music: 0 Created playlists: 0 Updated playlists: 0 Deleted playlists: 0 Inserted playlist items: 0 Deleted playlist items: 0 Removed orphaned playlist items: 0
+11-10 15:30:07.693  3054  3054 D MusicLifecycle: com.google.android.music.wear.WearBroadcastReceiver generated event: Broadcast received with context android.app.ReceiverRestrictedContext@76e39a2 and intent Intent { act=com.google.android.music.IMPORT_COMPLETE flg=0x10 cmp=com.google.android.music/.wear.WearBroadcastReceiver }
+11-10 15:30:07.694  3054  3054 D MusicLifecycle: com.google.android.music.store.MediaStoreImportService generated event: Service destroyed
+11-10 15:30:07.707  4022  4022 W dex2oat : Before Android 4.1, method double java.util.concurrent.ThreadLocalRandom.internalNextDouble(double, double) would have incorrectly overridden the package-private method in java.util.Random
+11-10 15:30:07.707  4022  4022 W dex2oat : Before Android 4.1, method int java.util.concurrent.ThreadLocalRandom.internalNextInt(int, int) would have incorrectly overridden the package-private method in java.util.Random
+11-10 15:30:07.707  4022  4022 W dex2oat : Before Android 4.1, method long java.util.concurrent.ThreadLocalRandom.internalNextLong(long, long) would have incorrectly overridden the package-private method in java.util.Random
+11-10 15:30:07.709  1766  1766 I Wear_Controller: Wear requires a companion app to be installed.
+11-10 15:30:07.709  1766  1766 I WearableService: onCreate: Wearable Services not starting. Wear is not available on this device.
+11-10 15:30:07.710  1766  2543 W WearableService: onGetService: Wear is not available on this device.
+11-10 15:30:07.711  3054  4027 E GmsUtils: Failed to connect to Google API client: ConnectionResult{statusCode=API_UNAVAILABLE, resolution=null, message=null}
+11-10 15:30:08.248  3950  3950 I chromium: [INFO:CONSOLE(517)] "Uncaught SyntaxError: Unexpected token =", source: https://appassets.androidplatform.net/index.html (517)
+11-10 15:30:08.249  3950  3950 I Choreographer: Skipped 87 frames!  The application may be doing too much work on its main thread.
+11-10 15:30:08.256  3950  3999 E WebViewAssetLoader: Error opening asset path: site/favicon.ico
+11-10 15:30:08.256  3950  3999 E WebViewAssetLoader: java.io.FileNotFoundException: site/favicon.ico
+11-10 15:30:08.256  3950  3999 E WebViewAssetLoader: 	at android.content.res.AssetManager.openAsset(Native Method)
+11-10 15:30:08.256  3950  3999 E WebViewAssetLoader: 	at android.content.res.AssetManager.open(AssetManager.java:347)
+11-10 15:30:08.256  3950  3999 E WebViewAssetLoader: 	at androidx.webkit.internal.AssetHelper.openAsset(AssetHelper.java:121)
+11-10 15:30:08.256  3950  3999 E WebViewAssetLoader: 	at androidx.webkit.WebViewAssetLoader$AssetsPathHandler.handle(WebViewAssetLoader.java:188)
+11-10 15:30:08.256  3950  3999 E WebViewAssetLoader: 	at com.maelstorm.deprematlasi.MainActivity.lambda$onCreate$2(MainActivity.java:124)
+11-10 15:30:08.256  3950  3999 E WebViewAssetLoader: 	at com.maelstorm.deprematlasi.MainActivity$$ExternalSyntheticLambda1.handle(D8$$SyntheticClass:0)
+11-10 15:30:08.256  3950  3999 E WebViewAssetLoader: 	at androidx.webkit.WebViewAssetLoader.shouldInterceptRequest(WebViewAssetLoader.java:570)
+11-10 15:30:08.256  3950  3999 E WebViewAssetLoader: 	at com.maelstorm.deprematlasi.MainActivity.istegiKarsila(MainActivity.java:235)
+11-10 15:30:08.256  3950  3999 E WebViewAssetLoader: 	at com.maelstorm.deprematlasi.MainActivity.-$$Nest$mistegiKarsila(MainActivity.java)
+11-10 15:30:08.256  3950  3999 E WebViewAssetLoader: 	at com.maelstorm.deprematlasi.MainActivity$3.shouldInterceptRequest(MainActivity.java:196)
+11-10 15:30:08.256  3950  3999 E WebViewAssetLoader: 	at xl.a(PG:56)
+11-10 15:30:08.256  3950  3999 E WebViewAssetLoader: 	at aeW.a(PG:9)
+11-10 15:30:08.256  3950  3999 E WebViewAssetLoader: 	at org.chromium.android_webview.AwContentsBackgroundThreadClient.shouldInterceptRequestFromNative(PG:11)
+11-10 15:30:08.260  3950  4012 E eglCodecCommon: glUtilsParamSize: unknow param 0x000085b5
+11-10 15:30:08.280  3950  4012 E eglCodecCommon: glUtilsParamSize: unknow param 0x000085b5
+11-10 15:30:08.288  3950  4012 E eglCodecCommon: glUtilsParamSize: unknow param 0x000085b5
+11-10 15:30:08.300  3950  4012 E eglCodecCommon: glUtilsParamSize: unknow param 0x000085b5
+11-10 15:30:08.318  3950  4012 E eglCodecCommon: glUtilsParamSize: unknow param 0x000085b5
+11-10 15:30:08.333  3950  4012 E eglCodecCommon: glUtilsParamSize: unknow param 0x000085b5
+11-10 15:30:08.350  3950  4012 E eglCodecCommon: glUtilsParamSize: unknow param 0x000085b5
+11-10 15:30:08.365  3950  4012 E eglCodecCommon: glUtilsParamSize: unknow param 0x000085b5
+11-10 15:30:08.384  3950  4012 E eglCodecCommon: glUtilsParamSize: unknow param 0x000085b5
+11-10 15:30:08.399  3950  4012 E eglCodecCommon: glUtilsParamSize: unknow param 0x000085b5
+11-10 15:30:08.417  3950  4012 E eglCodecCommon: glUtilsParamSize: unknow param 0x000085b5
+11-10 15:30:08.434  3950  4012 E eglCodecCommon: glUtilsParamSize: unknow param 0x000085b5
+11-10 15:30:08.449  3950  4012 E eglCodecCommon: glUtilsParamSize: unknow param 0x000085b5
+11-10 15:30:08.467  3950  4012 E eglCodecCommon: glUtilsParamSize: unknow param 0x000085b5
+11-10 15:30:08.483  3950  4012 E eglCodecCommon: glUtilsParamSize: unknow param 0x000085b5
+11-10 15:30:08.500  3950  4012 E eglCodecCommon: glUtilsParamSize: unknow param 0x000085b5
+11-10 15:30:08.517  3950  4012 E eglCodecCommon: glUtilsParamSize: unknow param 0x000085b5
+11-10 15:30:08.533  3950  4012 E eglCodecCommon: glUtilsParamSize: unknow param 0x000085b5
+11-10 15:30:08.868  1643  1749 E TaskPersister: File error accessing recents directory (directory doesn't exist?).
+11-10 15:30:09.004  2298  2750 I CheckinCompat: Done disabling old GoogleServicesFramework version [CONTEXT service_id=130 ]
+11-10 15:30:09.014  3354  3354 D Babel   : RefCountedService(com.google.android.apps.hangouts.requestwriter.RequestWriter) onDestroy (count=0, startId=4 stopped=true)
+11-10 15:30:09.768  4022  4022 I dex2oat : dex2oat took 2.291s (threads: 2) arena alloc=5MB (5981816B) java alloc=6MB (6329800B) native alloc=14MB (14684792B) free=7MB (7859592B)
+11-10 15:30:09.782  4028  4028 W dex2oat : Unexpected CPU variant for X86 using defaults: x86_64
+11-10 15:30:09.782  4028  4028 I dex2oat : /system/bin/dex2oat --dex-file=/data/user_de/0/com.google.android.gms/app_chimera/m/00000005/GoogleCertificates.apk --oat-fd=93 --oat-location=/data/user_de/0/com.google.android.gms/app_chimera/m/00000005/oat/x86_64/GoogleCertificates.dex --compiler-filter=speed
+11-10 15:30:09.824  3354  3373 W Babel   : bcq TOOK TOO LONG! (15037ms > 10000ms)
+11-10 15:30:09.824  3354  3374 W Babel   : bcq TOOK TOO LONG! (15019ms > 10000ms)
+11-10 15:30:09.829  1643  2149 I Telecom : PhoneAccountRegistrar: SimCallManager queried, returning: null: TSI.gSCM@AEk
+11-10 15:30:09.836  3794  4031 I MS_RegisterService: RegisterService intent:Intent { act=register_intent_action flg=0x10 cmp=com.google.android.talk/com.google.android.libraries.matchstick.net.SilentRegisterService } isPeriodic:false
+11-10 15:30:09.836  3354  3354 I Babel_telephony: TeleModule.updateConnectionManagerRegistration, registration preference changed from false to false
+11-10 15:30:09.836  3354  3354 W Babel   : BAM#gBA: invalid account id: -1
+11-10 15:30:09.836  3354  3354 W Babel   : BAM#gBA: invalid account id: -1
+11-10 15:30:09.836  3354  3354 I Babel_telephony: TeleModule.updateIncomingCallRegistration, preferred account for incoming calls changed from: null to null
+11-10 15:30:09.837  1643  1655 I Telecom : PhoneAccountRegistrar: SimCallManager queried, returning: null: TSI.gSCM@AEs
+11-10 15:30:09.839  3794  4031 E GmsNativeLibraryLoader: Unable to locate conscrypt_gmscore_jni in dalvik.system.PathClassLoader[DexPathList[[zip file "/system/framework/com.android.location.provider.jar", zip file "/system/framework/com.android.media.remotedisplay.jar", zip file "/system/priv-app/PrebuiltGmsCore/PrebuiltGmsCore.apk"],nativeLibraryDirectories=[/system/priv-app/PrebuiltGmsCore/lib/x86_64, /system/priv-app/PrebuiltGmsCore/PrebuiltGmsCore.apk!/lib/x86_64, /system/lib, /vendor/lib, /system/lib, /vendor/lib]]]
+11-10 15:30:09.839  3794  4031 E GmsNativeLibraryLoader: java.lang.UnsatisfiedLinkError: dlopen failed: "/system/priv-app/PrebuiltGmsCore/PrebuiltGmsCore.apk!/lib/x86_64/libconscrypt_gmscore_jni.so" is 64-bit instead of 32-bit
+11-10 15:30:09.839  3794  4031 E GmsNativeLibraryLoader: 	at java.lang.Runtime.loadLibrary0(Runtime.java:977)
+11-10 15:30:09.839  3794  4031 E GmsNativeLibraryLoader: 	at java.lang.System.loadLibrary(System.java:1530)
+11-10 15:30:09.839  3794  4031 E GmsNativeLibraryLoader: 	at ssl.b(:com.google.android.gms@202414023@20.24.14 (040800-319035315):63)
+11-10 15:30:09.839  3794  4031 E GmsNativeLibraryLoader: 	at com.google.android.gms.common.security.ProviderInstallerImpl.a(:com.google.android.gms@202414023@20.24.14 (040800-319035315):8)
+11-10 15:30:09.839  3794  4031 E GmsNativeLibraryLoader: 	at com.google.android.gms.common.security.ProviderInstallerImpl.insertProvider(:com.google.android.gms@202414023@20.24.14 (040800-319035315):3)
+11-10 15:30:09.839  3794  4031 E GmsNativeLibraryLoader: 	at java.lang.reflect.Method.invoke(Native Method)
+11-10 15:30:09.839  3794  4031 E GmsNativeLibraryLoader: 	at hnk.a(Unknown Source)
+11-10 15:30:09.839  3794  4031 E GmsNativeLibraryLoader: 	at com.google.android.libraries.matchstick.net.SilentRegisterService.onHandleIntent(SourceFile:216)
+11-10 15:30:09.839  3794  4031 E GmsNativeLibraryLoader: 	at android.app.IntentService$ServiceHandler.handleMessage(IntentService.java:68)
+11-10 15:30:09.839  3794  4031 E GmsNativeLibraryLoader: 	at android.os.Handler.dispatchMessage(Handler.java:102)
+11-10 15:30:09.839  3794  4031 E GmsNativeLibraryLoader: 	at android.os.Looper.loop(Looper.java:154)
+11-10 15:30:09.839  3794  4031 E GmsNativeLibraryLoader: 	at android.os.HandlerThread.run(HandlerThread.java:61)
+11-10 15:30:09.839  3794  4031 E ProviderInstaller: Failed to install provider: null
+11-10 15:30:09.839  3794  4031 E MS_RegisterService: Google play services not available
+11-10 15:30:09.839  3794  4031 E MS_RegisterService: fux
+11-10 15:30:09.839  3794  4031 E MS_RegisterService: 	at hnk.a(Unknown Source)
+11-10 15:30:09.839  3794  4031 E MS_RegisterService: 	at com.google.android.libraries.matchstick.net.SilentRegisterService.onHandleIntent(SourceFile:216)
+11-10 15:30:09.839  3794  4031 E MS_RegisterService: 	at android.app.IntentService$ServiceHandler.handleMessage(IntentService.java:68)
+11-10 15:30:09.839  3794  4031 E MS_RegisterService: 	at android.os.Handler.dispatchMessage(Handler.java:102)
+11-10 15:30:09.839  3794  4031 E MS_RegisterService: 	at android.os.Looper.loop(Looper.java:154)
+11-10 15:30:09.839  3794  4031 E MS_RegisterService: 	at android.os.HandlerThread.run(HandlerThread.java:61)
+11-10 15:30:09.876  4028  4028 I dex2oat : dex2oat took 93.612ms (threads: 2) arena alloc=554KB (567816B) java alloc=249KB (255056B) native alloc=1143KB (1170792B) free=2MB (2499224B)
+11-10 15:30:09.886  4036  4036 W dex2oat : Unexpected CPU variant for X86 using defaults: x86_64
+11-10 15:30:09.886  4036  4036 I dex2oat : /system/bin/dex2oat --dex-file=/data/user_de/0/com.google.android.gms/app_chimera/m/00000007/MeasurementDynamite.apk --oat-fd=93 --oat-location=/data/user_de/0/com.google.android.gms/app_chimera/m/00000007/oat/x86_64/MeasurementDynamite.dex --compiler-filter=speed
+11-10 15:30:09.926  3354  3373 W BabelGcmRegistration: Error registering for GCM
+11-10 15:30:09.934  3354  3373 W BabelGcmRegistration: java.io.IOException: DEPRECATED_ENDPOINT
+11-10 15:30:09.934  3354  3373 W BabelGcmRegistration: 	at gpx.a(Unknown Source)
+11-10 15:30:09.934  3354  3373 W BabelGcmRegistration: 	at hso.a(SourceFile:38)
+11-10 15:30:09.934  3354  3373 W BabelGcmRegistration: 	at eih.a(SourceFile:366)
+11-10 15:30:09.934  3354  3373 W BabelGcmRegistration: 	at eih.doInBackground(SourceFile:361)
+11-10 15:30:09.934  3354  3373 W BabelGcmRegistration: 	at android.os.AsyncTask$2.call(AsyncTask.java:304)
+11-10 15:30:09.934  3354  3373 W BabelGcmRegistration: 	at java.util.concurrent.FutureTask.run(FutureTask.java:237)
+11-10 15:30:09.934  3354  3373 W BabelGcmRegistration: 	at android.os.AsyncTask$SerialExecutor$1.run(AsyncTask.java:243)
+11-10 15:30:09.934  3354  3373 W BabelGcmRegistration: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1133)
+11-10 15:30:09.934  3354  3373 W BabelGcmRegistration: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:607)
+11-10 15:30:09.934  3354  3373 W BabelGcmRegistration: 	at java.lang.Thread.run(Thread.java:761)
+11-10 15:30:09.951  1643  1780 D VoldConnector: SND -> {32 volume mkdirs /storage/emulated/0/Android/media/com.google.android.talk/}
+11-10 15:30:09.951  1643  1690 D VoldConnector: RCV <- {200 32 Command succeeded}
+11-10 15:30:09.954  2837  2837 D MediaScannerReceiver: action: android.intent.action.MEDIA_SCANNER_SCAN_FILE path: /storage/emulated/0/Android/media/com.google.android.talk/Notifications/hangouts_message.ogg
+11-10 15:30:10.095  2837  2837 D MediaScannerReceiver: action: android.intent.action.MEDIA_SCANNER_SCAN_FILE path: /storage/emulated/0/Android/media/com.google.android.talk/Ringtones/hangouts_incoming_call.ogg
+11-10 15:30:10.115  1403  1403 E MetadataRetrieverClient: failed to extract an album art
+11-10 15:30:10.167  1403  1403 E MetadataRetrieverClient: failed to extract an album art
+11-10 15:30:10.196  4036  4036 I dex2oat : dex2oat took 309.560ms (threads: 2) arena alloc=4MB (4303176B) java alloc=750KB (768800B) native alloc=2MB (2223112B) free=4MB (5116920B)
+11-10 15:30:10.217  4042  4042 W dex2oat : Unexpected CPU variant for X86 using defaults: x86_64
+11-10 15:30:10.217  4042  4042 I dex2oat : /system/bin/dex2oat --dex-file=/data/user_de/0/com.google.android.gms/app_chimera/m/00000003/DynamiteModulesA.apk --oat-fd=93 --oat-location=/data/user_de/0/com.google.android.gms/app_chimera/m/00000003/oat/x86_64/DynamiteModulesA.dex --compiler-filter=speed
+11-10 15:30:10.575  4042  4042 I dex2oat : dex2oat took 357.340ms (threads: 2) arena alloc=5MB (5508360B) java alloc=973KB (996880B) native alloc=2MB (2890400B) free=7MB (7595360B)
+11-10 15:30:10.586  4046  4046 W dex2oat : Unexpected CPU variant for X86 using defaults: x86_64
+11-10 15:30:10.586  4046  4046 I dex2oat : /system/bin/dex2oat --dex-file=/data/user_de/0/com.google.android.gms/app_chimera/m/00000001/CronetDynamite.apk --oat-fd=93 --oat-location=/data/user_de/0/com.google.android.gms/app_chimera/m/00000001/oat/x86_64/CronetDynamite.dex --compiler-filter=speed
+11-10 15:30:10.645  1643  3021 I ActivityManager: Killing 3559:com.android.camera2/u0a34 (adj 906): empty #17
+11-10 15:30:10.694  1643  2091 D ActivityManager: cleanUpApplicationRecord -- 3559
+11-10 15:30:10.724  4046  4046 I dex2oat : dex2oat took 138.752ms (threads: 2) arena alloc=964KB (987288B) java alloc=385KB (394960B) native alloc=1274KB (1304936B) free=2MB (2889368B)
+11-10 15:30:11.775  2298  3834 I Vision  : Requesting optional module download of ocr.
+11-10 15:30:11.775  2298  3834 I Vision  : Exceeded maximum feature download tries for ocr
+11-10 15:30:11.775  2298  3834 W Vision  : Request of optional module download of ocr failed.
+11-10 15:30:11.776  2298  3834 I Vision  : Checking for download completion for 70033 -- ocr
+11-10 15:30:12.184  3950  4049 D ProfileInstaller: Installing profile for com.maelstorm.deprematlasi
+11-10 15:30:14.069  1643  3021 I ActivityManager: Killing 3106:com.android.managedprovisioning/u0a21 (adj 906): empty #17
+11-10 15:30:14.071  1643  1655 D ActivityManager: cleanUpApplicationRecord -- 3106
+11-10 15:30:15.157  1643  1686 I InputReader: Reconfiguring input devices.  changes=0x00000010
+11-10 15:30:15.157  1643  1686 I InputReader: Reconfiguring input devices.  changes=0x00000010
+11-10 15:30:15.157  1643  1686 I InputReader: Reconfiguring input devices.  changes=0x00000010
+11-10 15:30:15.158  1643  1686 I InputReader: Reconfiguring input devices.  changes=0x00000010
+11-10 15:30:15.160  1900  1900 D CarrierSvcBindHelper: No carrier app for: 0
+11-10 15:30:15.168  1900  1900 D CarrierSvcBindHelper: No carrier app for: 0
+11-10 15:30:15.172  1900  1900 D CarrierSvcBindHelper: No carrier app for: 0
+11-10 15:30:15.176  1900  1900 D CarrierSvcBindHelper: No carrier app for: 0
+11-10 15:30:15.485  1643  1657 I ActivityManager: Waited long enough for: ServiceRecord{cd03315 u0 com.google.android.calendar/com.android.calendar.alerts.InitAlarmsService}
+11-10 15:30:17.840  1766  2624 W Nearby  : Failed attempt #3 out of 3 for RestoreDeviceName [CONTEXT service_id=49 ]
+11-10 15:30:17.840  1766  2624 W Nearby  : java.lang.IllegalStateException: BluetoothAdapter not ready yet!
+11-10 15:30:17.840  1766  2624 W Nearby  : 	at ajpy.d(:com.google.android.gms@202414023@20.24.14 (040800-319035315):2)
+11-10 15:30:17.840  1766  2624 W Nearby  : 	at ajpx.run(Unknown Source)
+11-10 15:30:17.840  1766  2624 W Nearby  : 	at bwuj.call(Unknown Source)
+11-10 15:30:17.840  1766  2624 W Nearby  : 	at bwuo.a(:com.google.android.gms@202414023@20.24.14 (040800-319035315):2)
+11-10 15:30:17.840  1766  2624 W Nearby  : 	at bwuo.a(:com.google.android.gms@202414023@20.24.14 (040800-319035315):9)
+11-10 15:30:17.840  1766  2624 W Nearby  : 	at ajpw.run(Unknown Source)
+11-10 15:30:17.840  1766  2624 W Nearby  : 	at java.lang.Thread.run(Thread.java:761)
+11-10 15:30:17.840  1766  2624 W Nearby  : 	at sow.run(Unknown Source)
+11-10 15:30:17.840  1766  2624 W Nearby  : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1133)
+11-10 15:30:17.840  1766  2624 W Nearby  : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:607)
+11-10 15:30:17.840  1766  2624 W Nearby  : 	at sux.run(:com.google.android.gms@202414023@20.24.14 (040800-319035315):0)
+11-10 15:30:17.840  1766  2624 W Nearby  : 	at java.lang.Thread.run(Thread.java:761)
+11-10 15:30:20.175  1643  1654 I ActivityManager: Killing 2692:com.google.android.deskclock/u0a64 (adj 906): empty #17
+11-10 15:30:20.175  1643  1654 I ActivityManager: Killing 3620:com.google.android.apps.photos:CameraShortcut/u0a62 (adj 906): empty #18
+11-10 15:30:20.177  1643  2091 D ActivityManager: cleanUpApplicationRecord -- 3620
+11-10 15:30:20.224  1643  1655 D ActivityManager: cleanUpApplicationRecord -- 2692
+11-10 15:30:20.424  1766  2744 W Nearby  : Failed attempt #3 out of 3 for RestoreDeviceName [CONTEXT service_id=49 ]
+11-10 15:30:20.424  1766  2744 W Nearby  : java.lang.IllegalStateException: BluetoothAdapter not ready yet!
+11-10 15:30:20.424  1766  2744 W Nearby  : 	at ajpy.d(:com.google.android.gms@202414023@20.24.14 (040800-319035315):2)
+11-10 15:30:20.424  1766  2744 W Nearby  : 	at ajpx.run(Unknown Source)
+11-10 15:30:20.424  1766  2744 W Nearby  : 	at bwuj.call(Unknown Source)
+11-10 15:30:20.424  1766  2744 W Nearby  : 	at bwuo.a(:com.google.android.gms@202414023@20.24.14 (040800-319035315):2)
+11-10 15:30:20.424  1766  2744 W Nearby  : 	at bwuo.a(:com.google.android.gms@202414023@20.24.14 (040800-319035315):9)
+11-10 15:30:20.424  1766  2744 W Nearby  : 	at ajpw.run(Unknown Source)
+11-10 15:30:20.424  1766  2744 W Nearby  : 	at java.lang.Thread.run(Thread.java:761)
+11-10 15:30:20.424  1766  2744 W Nearby  : 	at sow.run(Unknown Source)
+11-10 15:30:20.424  1766  2744 W Nearby  : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1133)
+11-10 15:30:20.424  1766  2744 W Nearby  : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:607)
+11-10 15:30:20.424  1766  2744 W Nearby  : 	at sux.run(:com.google.android.gms@202414023@20.24.14 (040800-319035315):0)
+11-10 15:30:20.424  1766  2744 W Nearby  : 	at java.lang.Thread.run(Thread.java:761)
+11-10 15:30:21.783  2298  4057 I Vision  : Requesting optional module download of ocr.
+11-10 15:30:21.785  2298  4057 I Vision  : Checking for download completion for 80041 -- ocr
+11-10 15:30:21.787  2298  4056 I Authzen : [DeviceStateSyncManager] Device state updated successfully.
+11-10 15:30:21.790  3794  4055 I MS_RegisterService: RegisterService intent:Intent { act=register_intent_action flg=0x14 cmp=com.google.android.talk/com.google.android.libraries.matchstick.net.SilentRegisterService (has extras) } isPeriodic:false
+11-10 15:30:21.794  3794  4055 E GmsNativeLibraryLoader: Unable to locate conscrypt_gmscore_jni in dalvik.system.PathClassLoader[DexPathList[[zip file "/system/framework/com.android.location.provider.jar", zip file "/system/framework/com.android.media.remotedisplay.jar", zip file "/system/priv-app/PrebuiltGmsCore/PrebuiltGmsCore.apk"],nativeLibraryDirectories=[/system/priv-app/PrebuiltGmsCore/lib/x86_64, /system/priv-app/PrebuiltGmsCore/PrebuiltGmsCore.apk!/lib/x86_64, /system/lib, /vendor/lib, /system/lib, /vendor/lib]]]
+11-10 15:30:21.794  3794  4055 E GmsNativeLibraryLoader: java.lang.UnsatisfiedLinkError: dlopen failed: "/system/priv-app/PrebuiltGmsCore/PrebuiltGmsCore.apk!/lib/x86_64/libconscrypt_gmscore_jni.so" is 64-bit instead of 32-bit
+11-10 15:30:21.794  3794  4055 E GmsNativeLibraryLoader: 	at java.lang.Runtime.loadLibrary0(Runtime.java:977)
+11-10 15:30:21.794  3794  4055 E GmsNativeLibraryLoader: 	at java.lang.System.loadLibrary(System.java:1530)
+11-10 15:30:21.794  3794  4055 E GmsNativeLibraryLoader: 	at ssl.b(:com.google.android.gms@202414023@20.24.14 (040800-319035315):63)
+11-10 15:30:21.794  3794  4055 E GmsNativeLibraryLoader: 	at com.google.android.gms.common.security.ProviderInstallerImpl.a(:com.google.android.gms@202414023@20.24.14 (040800-319035315):8)
+11-10 15:30:21.794  3794  4055 E GmsNativeLibraryLoader: 	at com.google.android.gms.common.security.ProviderInstallerImpl.insertProvider(:com.google.android.gms@202414023@20.24.14 (040800-319035315):3)
+11-10 15:30:21.794  3794  4055 E GmsNativeLibraryLoader: 	at java.lang.reflect.Method.invoke(Native Method)
+11-10 15:30:21.794  3794  4055 E GmsNativeLibraryLoader: 	at hnk.a(Unknown Source)
+11-10 15:30:21.794  3794  4055 E GmsNativeLibraryLoader: 	at com.google.android.libraries.matchstick.net.SilentRegisterService.onHandleIntent(SourceFile:216)
+11-10 15:30:21.794  3794  4055 E GmsNativeLibraryLoader: 	at android.app.IntentService$ServiceHandler.handleMessage(IntentService.java:68)
+11-10 15:30:21.794  3794  4055 E GmsNativeLibraryLoader: 	at android.os.Handler.dispatchMessage(Handler.java:102)
+11-10 15:30:21.794  3794  4055 E GmsNativeLibraryLoader: 	at android.os.Looper.loop(Looper.java:154)
+11-10 15:30:21.794  3794  4055 E GmsNativeLibraryLoader: 	at android.os.HandlerThread.run(HandlerThread.java:61)
+11-10 15:30:21.794  3794  4055 E ProviderInstaller: Failed to install provider: null
+11-10 15:30:21.794  3794  4055 E MS_RegisterService: Google play services not available
+11-10 15:30:21.794  3794  4055 E MS_RegisterService: fux
+11-10 15:30:21.794  3794  4055 E MS_RegisterService: 	at hnk.a(Unknown Source)
+11-10 15:30:21.794  3794  4055 E MS_RegisterService: 	at com.google.android.libraries.matchstick.net.SilentRegisterService.onHandleIntent(SourceFile:216)
+11-10 15:30:21.794  3794  4055 E MS_RegisterService: 	at android.app.IntentService$ServiceHandler.handleMessage(IntentService.java:68)
+11-10 15:30:21.794  3794  4055 E MS_RegisterService: 	at android.os.Handler.dispatchMessage(Handler.java:102)
+11-10 15:30:21.794  3794  4055 E MS_RegisterService: 	at android.os.Looper.loop(Looper.java:154)
+11-10 15:30:21.794  3794  4055 E MS_RegisterService: 	at android.os.HandlerThread.run(HandlerThread.java:61)
+11-10 15:30:21.794  3794  4055 W MS_WakeLockHelper: Call to release wakelock: register_service_start_wakelock, but not held.
+11-10 15:30:21.795  1643  1738 I ActivityManager: Killing 3659:com.google.android.onetimeinitializer/u0a17 (adj 906): empty #17
+11-10 15:30:21.797  1643  1654 D ActivityManager: cleanUpApplicationRecord -- 3659
+11-10 15:30:24.864  3354  3374 W Babel   : bcq TOOK TOO LONG! (15041ms > 10000ms)
+11-10 15:30:28.208  1643  2091 I ActivityManager: Killing 3221:com.google.process.gapps/u0a47 (adj 906): empty #17
+11-10 15:30:28.212  1643  2148 D ActivityManager: cleanUpApplicationRecord -- 3221
+11-10 15:30:31.538  1312  1747 E SurfaceFlinger: ro.sf.lcd_density must be defined as a build property
+11-10 15:30:31.539  1312  1324 D PermissionCache: checking android.permission.READ_FRAME_BUFFER for uid=2000 => granted (212 us)
+11-10 15:30:31.539  1312  1324 D gralloc_ranchu: gralloc_alloc: Creating ashmem region of size 819200
+11-10 15:30:31.541  4068  4068 D         : HostConnection::get() New Host Connection established 0x7a470a42d4e0, tid 4068
+11-10 15:30:31.650  4071  4071 D AndroidRuntime: >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-10 15:30:31.651  4071  4071 D AndroidRuntime: CheckJNI is OFF
+11-10 15:30:31.663  4071  4071 W art     : Unexpected CPU variant for X86 using defaults: x86_64
+11-10 15:30:31.665  4071  4071 D ICU     : No timezone override file found: /data/misc/zoneinfo/current/icu/icu_tzdata.dat
+11-10 15:30:31.673  4071  4071 E memtrack: Couldn't load memtrack module (No such file or directory)
+11-10 15:30:31.673  4071  4071 E android.os.Debug: failed to load memtrack module: -2
+11-10 15:30:31.673  4071  4071 I Radio-JNI: register_android_hardware_Radio DONE
+11-10 15:30:31.676  4071  4071 D AndroidRuntime: Calling main entry com.android.commands.input.Input
+11-10 15:30:31.679  4071  4071 I Input   : injectMotionEvent: MotionEvent { action=ACTION_DOWN, actionButton=0, id[0]=0, x[0]=540.0, y[0]=1500.0, toolType[0]=TOOL_TYPE_UNKNOWN, buttonState=0, metaState=0, flags=0x0, edgeFlags=0x0, pointerCount=1, historySize=0, eventTime=79933, downTime=79933, deviceId=0, source=0x1002 }
+11-10 15:30:31.680  1643  1685 I InputDispatcher: Dropping event because there is no touchable window at (540, 1500).
+11-10 15:30:31.680  1643  1780 W InputManager: Input event injection from pid 4071 failed.
+11-10 15:30:31.680  4071  4071 I Input   : injectMotionEvent: MotionEvent { action=ACTION_UP, actionButton=0, id[0]=0, x[0]=540.0, y[0]=1500.0, toolType[0]=TOOL_TYPE_UNKNOWN, buttonState=0, metaState=0, flags=0x0, edgeFlags=0x0, pointerCount=1, historySize=0, eventTime=79933, downTime=79933, deviceId=0, source=0x1002 }
+11-10 15:30:31.680  1643  1655 W InputManager: Input event injection from pid 4071 failed.
+11-10 15:30:31.680  4071  4071 D AndroidRuntime: Shutting down VM
+11-10 15:30:31.787  2298  4065 I Vision  : Requesting optional module download of ocr.
+11-10 15:30:31.787  2298  4065 I Vision  : Checking for download completion for 90043 -- ocr
+11-10 15:30:37.163  2298  2642 W ChimeraConfigurator: Error syncing flags: qoq: COMMIT_TIMEOUT
+11-10 15:30:37.163  2298  2642 I ChmraDebugLogger: [79] COMMIT_TIMEOUT
+11-10 15:30:37.170  2298  2642 I ChmraDebugLogger: [52] null
+11-10 15:30:37.176  2298  2642 I ChimeraConfigService: Scheduling checkin for one-off execution between [3300,43200] seconds from now (1794324637176)
+11-10 15:30:37.179  2298  2642 I ChimeraConfigurator: Starting update, reason: 4 urgentFeatures: vision.ocr:-1
+11-10 15:30:37.654  2298  4083 I GmscoreIpa: how are you::
+11-10 15:30:37.794  2298  2594 I Icing   : IndexChimeraService.getServiceInterface callingPackage=com.google.android.music componentName=null serviceId=36
+11-10 15:30:37.800  2298  2750 I Icing   : updateResources: need to parse acek{com.google.android.music}
+11-10 15:30:37.858  2298  2750 W Icing   : No valid account for uploading user actions
+11-10 15:30:37.868  2298  2750 I Icing   : Usage reports ok 0, Failed Usage reports 0, indexed 0, rejected 0
+11-10 15:30:37.869  2298  2750 I Icing   : Indexing com.google.android.music-songs from com.google.android.music
+11-10 15:30:37.872  2298  2595 I Icing   : IndexChimeraService.getServiceInterface callingPackage=com.google.android.gms componentName=null serviceId=30
+11-10 15:30:37.877  2298  2595 I Icing   : IndexChimeraService.getServiceInterface callingPackage=com.google.android.music componentName=null serviceId=36
+11-10 15:30:37.885  2298  2595 I Icing   : IndexChimeraService.getServiceInterface callingPackage=com.google.android.music componentName=null serviceId=36
+11-10 15:30:37.893  2298  2750 I Icing   : Indexing done com.google.android.music-songs
+11-10 15:30:37.893  2298  2595 I Icing   : IndexChimeraService.getServiceInterface callingPackage=com.google.android.music componentName=null serviceId=36
+11-10 15:30:37.895  2298  2750 I Icing   : Indexing com.google.android.music-albums from com.google.android.music
+11-10 15:30:37.909  2298  2750 I Icing   : Indexing done com.google.android.music-albums
+11-10 15:30:37.910  2298  2750 I Icing   : Indexing com.google.android.music-artists from com.google.android.music
+11-10 15:30:37.921  2298  2750 I Icing   : Indexing done com.google.android.music-artists
+11-10 15:30:37.922  2298  2750 I Icing   : Indexing com.google.android.music-playlists from com.google.android.music
+11-10 15:30:37.934  2298  2750 I Icing   : Indexing done com.google.android.music-playlists
+11-10 15:30:37.935  2298  2750 W Icing   : No valid account for uploading user actions
+11-10 15:30:37.938  2298  2750 I Icing   : Usage reports ok 0, Failed Usage reports 0, indexed 0, rejected 0
+11-10 15:30:37.938  2298  2750 W Icing   : No valid account for uploading user actions
+11-10 15:30:37.941  2298  2750 I Icing   : Usage reports ok 0, Failed Usage reports 0, indexed 0, rejected 0
+11-10 15:30:37.942  2298  2750 W Icing   : No valid account for uploading user actions
+11-10 15:30:37.944  2298  2750 I Icing   : Usage reports ok 0, Failed Usage reports 0, indexed 0, rejected 0
+11-10 15:30:37.945  2298  2750 W Icing   : No valid account for uploading user actions
+11-10 15:30:37.947  2298  2750 I Icing   : Usage reports ok 0, Failed Usage reports 0, indexed 0, rejected 0
+11-10 15:30:41.714  1312  1747 E SurfaceFlinger: ro.sf.lcd_density must be defined as a build property
+11-10 15:30:41.715  1312  1326 D gralloc_ranchu: gralloc_alloc: Creating ashmem region of size 819200
+11-10 15:30:41.716  4088  4088 D         : HostConnection::get() New Host Connection established 0x73b6b3a2d4e0, tid 4088
+11-10 15:30:41.792  3794  4099 I MS_RegisterService: RegisterService intent:Intent { act=register_intent_action flg=0x14 cmp=com.google.android.talk/com.google.android.libraries.matchstick.net.SilentRegisterService (has extras) } isPeriodic:false
+11-10 15:30:41.795  2298  4083 I Vision  : Requesting optional module download of ocr.
+11-10 15:30:41.795  2298  4083 I Vision  : Checking for download completion for 100052 -- ocr
